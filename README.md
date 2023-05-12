@@ -1,2 +1,2 @@
 # cloud-dev-dashboards
-Grafana dashboards for the dev STFC Cloud
+Repository for Grafana Dashboards for the STFC Cloud
