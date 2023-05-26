@@ -24,11 +24,15 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 1,
+    "id": 3,
     "links": [],
     "liveNow": false,
     "panels": [
       {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "LgLZzxPVz"
+        },
         "gridPos": {
           "h": 3,
           "w": 24,
@@ -42,7 +46,7 @@
             "showLineNumbers": false,
             "showMiniMap": false
           },
-          "content": "# ${Instance} Cloud Service - Current Availability\n",
+          "content": "# ${Instance} Cloud Service - Availability for ${__url_time_range}\n",
           "mode": "markdown"
         },
         "pluginVersion": "9.4.7",
@@ -72,34 +76,29 @@
             "color": {
               "mode": "thresholds"
             },
-            "mappings": [
-              {
-                "options": {
-                  "1": {
-                    "index": 0,
-                    "text": "True"
-                  }
-                },
-                "type": "value"
-              }
-            ],
+            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "red",
+                  "color": "blue",
                   "value": null
                 },
                 {
-                  "color": "yellow",
-                  "value": 0.7
+                  "color": "red",
+                  "value": 0.5
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 0.9
                 },
                 {
                   "color": "green",
-                  "value": 1
+                  "value": 0.95
                 }
               ]
-            }
+            },
+            "unit": "percentunit"
           },
           "overrides": []
         },
@@ -113,16 +112,16 @@
         "options": {
           "colorMode": "background",
           "graphMode": "none",
-          "justifyMode": "center",
+          "justifyMode": "auto",
           "orientation": "auto",
           "reduceOptions": {
             "calcs": [
-              "lastNotNull"
+              "mean"
             ],
             "fields": "",
             "values": false
           },
-          "textMode": "value"
+          "textMode": "auto"
         },
         "pluginVersion": "9.4.7",
         "targets": [
@@ -131,7 +130,7 @@
               "type": "influxdb",
               "uid": "tnwIJayVz"
             },
-            "query": "SELECT mean(\"success\") FROM \"VMTasks-boot_runcommand_delete\" WHERE (\"instance\" =~  /$Instance$/ AND \"network\" != 'MonitoringPrivate') AND $timeFilter GROUP BY time($interval) fill(null)",
+            "query": "SELECT mean(\"success\") FROM \"VMTasks-boot_runcommand_delete\" WHERE (\"instance\" =~  /$Instance$/ AND \"network\" != 'MonitoringPrivate') AND $timeFilter GROUP BY time($interval)",
             "rawQuery": true,
             "refId": "A",
             "resultFormat": "time_series"
@@ -151,34 +150,29 @@
             "color": {
               "mode": "thresholds"
             },
-            "mappings": [
-              {
-                "options": {
-                  "1": {
-                    "index": 0,
-                    "text": "True"
-                  }
-                },
-                "type": "value"
-              }
-            ],
+            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "red",
+                  "color": "blue",
                   "value": null
                 },
                 {
+                  "color": "red",
+                  "value": 0.5
+                },
+                {
                   "color": "#EAB839",
-                  "value": 0.7
+                  "value": 0.9
                 },
                 {
                   "color": "green",
-                  "value": 1
+                  "value": 0.95
                 }
               ]
-            }
+            },
+            "unit": "percentunit"
           },
           "overrides": []
         },
@@ -210,7 +204,7 @@
               "type": "influxdb",
               "uid": "tnwIJayVz"
             },
-            "query": "SELECT mean(\"success\") FROM \"VMTasks-boot_runcommand_delete\" WHERE (\"instance\" =~  /$Instance$/ AND \"network\" = 'MonitoringPrivate') AND  $timeFilter GROUP BY time($interval)",
+            "query": "SELECT mean(\"success\") FROM \"VMTasks-boot_runcommand_delete\" WHERE (\"instance\" =~  /$Instance$/ AND \"network\" = 'MonitoringPrivate') AND $timeFilter GROUP BY time($interval) fill(null)",
             "rawQuery": true,
             "refId": "A",
             "resultFormat": "time_series"
@@ -242,34 +236,29 @@
             "color": {
               "mode": "thresholds"
             },
-            "mappings": [
-              {
-                "options": {
-                  "1": {
-                    "index": 0,
-                    "text": "True"
-                  }
-                },
-                "type": "value"
-              }
-            ],
+            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "red",
+                  "color": "blue",
                   "value": null
                 },
                 {
+                  "color": "red",
+                  "value": 0.5
+                },
+                {
                   "color": "#EAB839",
-                  "value": 0.7
+                  "value": 0.9
                 },
                 {
                   "color": "green",
-                  "value": 1
+                  "value": 0.95
                 }
               ]
-            }
+            },
+            "unit": "percentunit"
           },
           "overrides": []
         },
@@ -301,7 +290,7 @@
               "type": "influxdb",
               "uid": "tnwIJayVz"
             },
-            "query": "SELECT last(\"success\") FROM \"KeystoneBasic-create_tenant_with_users\" WHERE (\"instance\" =~  /$Instance$/) AND  $timeFilter GROUP BY time($interval)",
+            "query": "SELECT last(\"success\") FROM \"KeystoneBasic-create_tenant_with_users\" WHERE (\"instance\" =~  /$Instance$/) AND $timeFilter GROUP BY time($interval)",
             "rawQuery": true,
             "refId": "A",
             "resultFormat": "time_series"
@@ -320,34 +309,29 @@
             "color": {
               "mode": "thresholds"
             },
-            "mappings": [
-              {
-                "options": {
-                  "1": {
-                    "index": 0,
-                    "text": "True"
-                  }
-                },
-                "type": "value"
-              }
-            ],
+            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "red",
+                  "color": "blue",
                   "value": null
                 },
                 {
-                  "color": "yellow",
+                  "color": "red",
                   "value": 0.5
                 },
                 {
+                  "color": "#EAB839",
+                  "value": 0.9
+                },
+                {
                   "color": "green",
-                  "value": 1
+                  "value": 0.95
                 }
               ]
-            }
+            },
+            "unit": "percentunit"
           },
           "overrides": []
         },
@@ -379,7 +363,7 @@
               "type": "influxdb",
               "uid": "tnwIJayVz"
             },
-            "query": "SELECT last(\"success\") FROM \"NeutronSecurityGroup-create_and_delete_security_groups\" WHERE (\"instance\" =~  /$Instance$/) AND  $timeFilter GROUP BY time($interval)",
+            "query": "SELECT last(\"success\") FROM \"NeutronSecurityGroup-create_and_delete_security_groups\" WHERE (\"instance\" =~  /$Instance$/) AND $timeFilter GROUP BY time($interval) fill(null)",
             "rawQuery": true,
             "refId": "A",
             "resultFormat": "time_series"
@@ -398,34 +382,29 @@
             "color": {
               "mode": "thresholds"
             },
-            "mappings": [
-              {
-                "options": {
-                  "1": {
-                    "index": 0,
-                    "text": "True"
-                  }
-                },
-                "type": "value"
-              }
-            ],
+            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "red",
+                  "color": "blue",
                   "value": null
                 },
                 {
-                  "color": "yellow",
+                  "color": "red",
                   "value": 0.5
                 },
                 {
+                  "color": "#EAB839",
+                  "value": 0.9
+                },
+                {
                   "color": "green",
-                  "value": 1
+                  "value": 0.95
                 }
               ]
-            }
+            },
+            "unit": "percentunit"
           },
           "overrides": []
         },
@@ -457,7 +436,7 @@
               "type": "influxdb",
               "uid": "tnwIJayVz"
             },
-            "query": "SELECT last(\"success\") FROM \"GlanceImages-create_and_list_image\" WHERE (\"instance\" =~  /$Instance$/) AND $timeFilter GROUP BY time(30s) fill(null)",
+            "query": "SELECT last(\"success\") FROM \"GlanceImages-create_and_list_image\" WHERE (\"instance\" =~  /$Instance$/) AND $timeFilter GROUP BY time($interval) fill(null)",
             "rawQuery": true,
             "refId": "A",
             "resultFormat": "time_series"
@@ -476,34 +455,29 @@
             "color": {
               "mode": "thresholds"
             },
-            "mappings": [
-              {
-                "options": {
-                  "1": {
-                    "index": 0,
-                    "text": "True"
-                  }
-                },
-                "type": "value"
-              }
-            ],
+            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "red",
+                  "color": "blue",
                   "value": null
                 },
                 {
-                  "color": "#EAB839",
+                  "color": "red",
                   "value": 0.5
                 },
                 {
+                  "color": "#EAB839",
+                  "value": 0.9
+                },
+                {
                   "color": "green",
-                  "value": 1
+                  "value": 0.95
                 }
               ]
-            }
+            },
+            "unit": "percentunit"
           },
           "overrides": []
         },
@@ -535,7 +509,7 @@
               "type": "influxdb",
               "uid": "tnwIJayVz"
             },
-            "query": "SELECT last(\"success\") FROM \"NovaServers-list_servers\" WHERE (\"instance\" =~  /$Instance$/) AND $timeFilter GROUP BY time(30s) fill(null)",
+            "query": "SELECT last(\"success\") FROM \"NovaServers-list_servers\" WHERE (\"instance\" =~  /$Instance$/) AND $timeFilter GROUP BY time($interval) fill(null)",
             "rawQuery": true,
             "refId": "A",
             "resultFormat": "time_series"
@@ -554,34 +528,29 @@
             "color": {
               "mode": "thresholds"
             },
-            "mappings": [
-              {
-                "options": {
-                  "1": {
-                    "index": 0,
-                    "text": "True"
-                  }
-                },
-                "type": "value"
-              }
-            ],
+            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "red",
+                  "color": "blue",
                   "value": null
                 },
                 {
-                  "color": "#EAB839",
+                  "color": "red",
                   "value": 0.5
                 },
                 {
+                  "color": "#EAB839",
+                  "value": 0.9
+                },
+                {
                   "color": "green",
-                  "value": 1
+                  "value": 0.95
                 }
               ]
-            }
+            },
+            "unit": "percentunit"
           },
           "overrides": []
         },
@@ -620,34 +589,29 @@
             "color": {
               "mode": "thresholds"
             },
-            "mappings": [
-              {
-                "options": {
-                  "1": {
-                    "index": 0,
-                    "text": "True"
-                  }
-                },
-                "type": "value"
-              }
-            ],
+            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "red",
+                  "color": "blue",
                   "value": null
                 },
                 {
+                  "color": "red",
+                  "value": 0.4999
+                },
+                {
                   "color": "#EAB839",
-                  "value": 0.5
+                  "value": 0.9
                 },
                 {
                   "color": "green",
-                  "value": 1
+                  "value": 0.95
                 }
               ]
-            }
+            },
+            "unit": "percentunit"
           },
           "overrides": []
         },
@@ -655,6 +619,67 @@
           "h": 3,
           "w": 6,
           "x": 12,
+          "y": 11
+        },
+        "id": 16,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.4.7",
+        "title": "Private Network",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "influxdb",
+          "uid": "tnwIJayVz"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "blue",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 0.5
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 0.9
+                },
+                {
+                  "color": "green",
+                  "value": 0.95
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 6,
+          "x": 18,
           "y": 11
         },
         "id": 14,
@@ -686,250 +711,37 @@
             "color": {
               "mode": "thresholds"
             },
-            "mappings": [
-              {
-                "options": {
-                  "1": {
-                    "index": 0,
-                    "text": "True"
-                  }
-                },
-                "type": "value"
-              }
-            ],
+            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "red",
+                  "color": "blue",
                   "value": null
                 },
                 {
-                  "color": "#EAB839",
+                  "color": "red",
                   "value": 0.5
                 },
                 {
+                  "color": "#EAB839",
+                  "value": 0.9
+                },
+                {
                   "color": "green",
-                  "value": 1
+                  "value": 0.95
                 }
               ]
-            }
+            },
+            "unit": "percentunit"
           },
           "overrides": []
         },
         "gridPos": {
           "h": 3,
           "w": 6,
-          "x": 18,
-          "y": 11
-        },
-        "id": 16,
-        "options": {
-          "colorMode": "background",
-          "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "textMode": "auto"
-        },
-        "pluginVersion": "9.4.7",
-        "title": "Private Network",
-        "type": "stat"
-      },
-      {
-        "gridPos": {
-          "h": 1,
-          "w": 24,
           "x": 0,
           "y": 14
-        },
-        "id": 40,
-        "type": "mxswat-separator-panel"
-      },
-      {
-        "datasource": {
-          "type": "influxdb",
-          "uid": "tnwIJayVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [
-              {
-                "options": {
-                  "1": {
-                    "index": 0,
-                    "text": "True"
-                  }
-                },
-                "type": "value"
-              }
-            ],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "#EAB839",
-                  "value": 0.5
-                },
-                {
-                  "color": "green",
-                  "value": 1
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 2,
-          "w": 12,
-          "x": 0,
-          "y": 15
-        },
-        "id": 18,
-        "options": {
-          "colorMode": "background",
-          "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "mean"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "textMode": "auto"
-        },
-        "pluginVersion": "9.4.7",
-        "title": "Storage Overview",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "influxdb",
-          "uid": "tnwIJayVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [
-              {
-                "options": {
-                  "1": {
-                    "index": 0,
-                    "text": "True"
-                  }
-                },
-                "type": "value"
-              }
-            ],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "#EAB839",
-                  "value": 0.5
-                },
-                {
-                  "color": "green",
-                  "value": 1
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 2,
-          "w": 12,
-          "x": 12,
-          "y": 15
-        },
-        "id": 24,
-        "options": {
-          "colorMode": "background",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "mean"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "textMode": "auto"
-        },
-        "pluginVersion": "9.4.7",
-        "title": "Web UI",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "influxdb",
-          "uid": "tnwIJayVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [
-              {
-                "options": {
-                  "1": {
-                    "index": 0,
-                    "text": "True"
-                  }
-                },
-                "type": "value"
-              }
-            ],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "yellow",
-                  "value": 0.5
-                },
-                {
-                  "color": "green",
-                  "value": 1
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 3,
-          "w": 6,
-          "x": 0,
-          "y": 17
         },
         "id": 20,
         "options": {
@@ -953,7 +765,7 @@
               "type": "influxdb",
               "uid": "tnwIJayVz"
             },
-            "query": "SELECT last(\"success\") FROM \"CinderVolumes-create_and_delete_volume\" WHERE (\"instance\" =~  /$Instance$/) AND $timeFilter GROUP BY time(30s) fill(null)",
+            "query": "SELECT last(\"success\") FROM \"CinderVolumes-create_and_delete_volume\" WHERE (\"instance\" =~  /$Instance$/) AND $timeFilter GROUP BY time($interval) fill(null)",
             "rawQuery": true,
             "refId": "A",
             "resultFormat": "time_series"
@@ -972,34 +784,29 @@
             "color": {
               "mode": "thresholds"
             },
-            "mappings": [
-              {
-                "options": {
-                  "1": {
-                    "index": 0,
-                    "text": "True"
-                  }
-                },
-                "type": "value"
-              }
-            ],
+            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "red",
+                  "color": "blue",
                   "value": null
                 },
                 {
-                  "color": "#EAB839",
+                  "color": "red",
                   "value": 0.5
                 },
                 {
+                  "color": "#EAB839",
+                  "value": 0.9
+                },
+                {
                   "color": "green",
-                  "value": 1
+                  "value": 0.95
                 }
               ]
-            }
+            },
+            "unit": "percentunit"
           },
           "overrides": []
         },
@@ -1007,7 +814,7 @@
           "h": 3,
           "w": 6,
           "x": 6,
-          "y": 17
+          "y": 14
         },
         "id": 22,
         "options": {
@@ -1038,34 +845,29 @@
             "color": {
               "mode": "thresholds"
             },
-            "mappings": [
-              {
-                "options": {
-                  "1": {
-                    "index": 0,
-                    "text": "True"
-                  }
-                },
-                "type": "value"
-              }
-            ],
+            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "red",
+                  "color": "blue",
                   "value": null
                 },
                 {
-                  "color": "#EAB839",
+                  "color": "red",
                   "value": 0.5
                 },
                 {
+                  "color": "#EAB839",
+                  "value": 0.9
+                },
+                {
                   "color": "green",
-                  "value": 1
+                  "value": 0.95
                 }
               ]
-            }
+            },
+            "unit": "percentunit"
           },
           "overrides": []
         },
@@ -1073,7 +875,7 @@
           "h": 3,
           "w": 6,
           "x": 12,
-          "y": 17
+          "y": 14
         },
         "id": 26,
         "options": {
@@ -1104,34 +906,29 @@
             "color": {
               "mode": "thresholds"
             },
-            "mappings": [
-              {
-                "options": {
-                  "1": {
-                    "index": 0,
-                    "text": "True"
-                  }
-                },
-                "type": "value"
-              }
-            ],
+            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "red",
+                  "color": "blue",
                   "value": null
                 },
                 {
-                  "color": "#EAB839",
+                  "color": "red",
                   "value": 0.5
                 },
                 {
+                  "color": "#EAB839",
+                  "value": 0.9
+                },
+                {
                   "color": "green",
-                  "value": 1
+                  "value": 0.95
                 }
               ]
-            }
+            },
+            "unit": "percentunit"
           },
           "overrides": []
         },
@@ -1139,7 +936,7 @@
           "h": 3,
           "w": 6,
           "x": 18,
-          "y": 17
+          "y": 14
         },
         "id": 28,
         "options": {
@@ -1161,16 +958,6 @@
         "type": "stat"
       },
       {
-        "gridPos": {
-          "h": 1,
-          "w": 24,
-          "x": 0,
-          "y": 20
-        },
-        "id": 41,
-        "type": "mxswat-separator-panel"
-      },
-      {
         "datasource": {
           "type": "influxdb",
           "uid": "tnwIJayVz"
@@ -1180,34 +967,29 @@
             "color": {
               "mode": "thresholds"
             },
-            "mappings": [
-              {
-                "options": {
-                  "1": {
-                    "index": 0,
-                    "text": "True"
-                  }
-                },
-                "type": "value"
-              }
-            ],
+            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "red",
+                  "color": "blue",
                   "value": null
                 },
                 {
-                  "color": "#EAB839",
+                  "color": "red",
                   "value": 0.5
                 },
                 {
+                  "color": "#EAB839",
+                  "value": 0.9
+                },
+                {
                   "color": "green",
-                  "value": 1
+                  "value": 0.95
                 }
               ]
-            }
+            },
+            "unit": "percentunit"
           },
           "overrides": []
         },
@@ -1215,7 +997,7 @@
           "h": 3,
           "w": 12,
           "x": 0,
-          "y": 21
+          "y": 17
         },
         "id": 36,
         "options": {
@@ -1246,34 +1028,29 @@
             "color": {
               "mode": "thresholds"
             },
-            "mappings": [
-              {
-                "options": {
-                  "1": {
-                    "index": 0,
-                    "text": "True"
-                  }
-                },
-                "type": "value"
-              }
-            ],
+            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "red",
+                  "color": "blue",
                   "value": null
                 },
                 {
-                  "color": "#EAB839",
+                  "color": "red",
                   "value": 0.5
                 },
                 {
+                  "color": "#EAB839",
+                  "value": 0.9
+                },
+                {
                   "color": "green",
-                  "value": 1
+                  "value": 0.95
                 }
               ]
-            }
+            },
+            "unit": "percentunit"
           },
           "overrides": []
         },
@@ -1281,7 +1058,7 @@
           "h": 3,
           "w": 12,
           "x": 12,
-          "y": 21
+          "y": 17
         },
         "id": 38,
         "options": {
@@ -1305,7 +1082,7 @@
               "type": "influxdb",
               "uid": "tnwIJayVz"
             },
-            "query": "SELECT last(\"success\") FROM \"HeatStacks-create_and_list_stack\" WHERE (\"instance\" =~  /$Instance$/) AND $timeFilter GROUP BY time(30s) fill(null)",
+            "query": "SELECT last(\"success\") FROM \"HeatStacks-create_and_list_stack\" WHERE (\"instance\" =~  /$Instance$/) AND $timeFilter GROUP BY time($interval) fill(null)",
             "rawQuery": true,
             "refId": "A",
             "resultFormat": "time_series"
@@ -1358,8 +1135,8 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "Cloud Service Availability",
-    "uid": "JifV7GyVz",
-    "version": 47,
+    "title": "Cloud Availability Over Time",
+    "uid": "JifVfqa7",
+    "version": 8,
     "weekStart": ""
   }
