@@ -69,7 +69,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "tnwIJayVz"
+        "uid": "openstack_grafana"
       },
       "fieldConfig": {
         "defaults": {
@@ -137,7 +137,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "tnwIJayVz"
+            "uid": "openstack_grafana"
           },
           "query": "SELECT mean(\"success\") FROM \"VMTasks-boot_runcommand_delete\" WHERE (\"instance\" =~  /^$Instance$/ AND \"network\" != 'MonitoringPrivate') AND $timeFilter GROUP BY time($interval) fill(null)",
           "rawQuery": true,
@@ -151,7 +151,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "tnwIJayVz"
+        "uid": "openstack_grafana"
       },
       "description": "",
       "fieldConfig": {
@@ -220,7 +220,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "tnwIJayVz"
+            "uid": "openstack_grafana"
           },
           "query": "SELECT mean(\"success\") FROM \"VMTasks-boot_runcommand_delete\" WHERE (\"instance\" =~  /$Instance$/ AND \"network\" = 'MonitoringPrivate') AND  $timeFilter GROUP BY time($interval)",
           "rawQuery": true,
@@ -247,7 +247,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "tnwIJayVz"
+        "uid": "openstack_grafana"
       },
       "fieldConfig": {
         "defaults": {
@@ -315,7 +315,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "tnwIJayVz"
+            "uid": "openstack_grafana"
           },
           "query": "SELECT last(\"success\") FROM \"KeystoneBasic-create_tenant_with_users\" WHERE (\"instance\" =~  /^$Instance$/) AND  $timeFilter GROUP BY time($__interval) fill(null)",
           "rawQuery": true,
@@ -329,7 +329,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "tnwIJayVz"
+        "uid": "openstack_grafana"
       },
       "fieldConfig": {
         "defaults": {
@@ -397,7 +397,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "tnwIJayVz"
+            "uid": "openstack_grafana"
           },
           "query": "SELECT last(\"success\") FROM \"NeutronSecurityGroup-create_and_delete_security_groups\" WHERE (\"instance\" =~  /^$Instance$/) AND  $timeFilter GROUP BY time($interval)",
           "rawQuery": true,
@@ -411,7 +411,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "tnwIJayVz"
+        "uid": "openstack_grafana"
       },
       "fieldConfig": {
         "defaults": {
@@ -479,7 +479,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "tnwIJayVz"
+            "uid": "openstack_grafana"
           },
           "query": "SELECT last(\"success\") FROM \"GlanceImages-create_and_list_image\" WHERE (\"instance\" =~  /^$Instance$/) AND $timeFilter GROUP BY time(30s) fill(null)",
           "rawQuery": true,
@@ -493,7 +493,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "tnwIJayVz"
+        "uid": "openstack_grafana"
       },
       "fieldConfig": {
         "defaults": {
@@ -561,7 +561,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "tnwIJayVz"
+            "uid": "openstack_grafana"
           },
           "query": "SELECT last(\"success\") FROM \"NovaServers-list_servers\" WHERE (\"instance\" =~  /^$Instance$/) AND $timeFilter GROUP BY time(30s) fill(null)",
           "rawQuery": true,
@@ -575,7 +575,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "tnwIJayVz"
+        "uid": "openstack_grafana"
       },
       "fieldConfig": {
         "defaults": {
@@ -645,7 +645,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "tnwIJayVz"
+        "uid": "openstack_grafana"
       },
       "fieldConfig": {
         "defaults": {
@@ -715,7 +715,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "tnwIJayVz"
+        "uid": "openstack_grafana"
       },
       "fieldConfig": {
         "defaults": {
@@ -799,7 +799,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "tnwIJayVz"
+        "uid": "openstack_grafana"
       },
       "fieldConfig": {
         "defaults": {
@@ -869,7 +869,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "tnwIJayVz"
+        "uid": "openstack_grafana"
       },
       "fieldConfig": {
         "defaults": {
@@ -939,7 +939,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "tnwIJayVz"
+        "uid": "openstack_grafana"
       },
       "fieldConfig": {
         "defaults": {
@@ -1007,7 +1007,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "tnwIJayVz"
+            "uid": "openstack_grafana"
           },
           "query": "SELECT last(\"success\") FROM \"CinderVolumes-create_and_delete_volume\" WHERE (\"instance\" =~  /^$Instance$/) AND $timeFilter GROUP BY time(30s) fill(null)",
           "rawQuery": true,
@@ -1021,7 +1021,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "tnwIJayVz"
+        "uid": "openstack_grafana"
       },
       "fieldConfig": {
         "defaults": {
@@ -1091,7 +1091,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "tnwIJayVz"
+        "uid": "openstack_grafana"
       },
       "fieldConfig": {
         "defaults": {
@@ -1161,7 +1161,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "tnwIJayVz"
+        "uid": "openstack_grafana"
       },
       "fieldConfig": {
         "defaults": {
@@ -1245,7 +1245,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "tnwIJayVz"
+        "uid": "openstack_grafana"
       },
       "fieldConfig": {
         "defaults": {
@@ -1315,7 +1315,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "tnwIJayVz"
+        "uid": "openstack_grafana"
       },
       "fieldConfig": {
         "defaults": {
@@ -1383,7 +1383,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "tnwIJayVz"
+            "uid": "openstack_grafana"
           },
           "query": "SELECT last(\"success\") FROM \"HeatStacks-create_and_list_stack\" WHERE (\"instance\" =~  /^$Instance$/) AND $timeFilter GROUP BY time(30s) fill(null)",
           "rawQuery": true,
