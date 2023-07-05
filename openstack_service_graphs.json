@@ -2543,7 +2543,7 @@
             "type": "influxdb",
             "uid": "openstack_grafana"
           },
-          "query": "SELECT mean(\"duration\") AS \"Test Duration\", mean(\"nova-boot_server\") AS \"Create VM\", mean(\"nova-delete_server\") AS \"Delete VM\", mean(\"vm-run_command_over_ssh\") AS \"Run Command\", mean(\"vm-wait_for_ping\") AS \"Wait for Ping\", mean(\"vm-wait_for_ssh\") AS \"Wait for SSH\", mean(\"nova-get_console_output_server\") AS \"Get Console Output\" FROM \"VMTasks-boot_runcommand_delete\" WHERE (\"instance\" =~ /^Prod$/ AND \"network\" != 'MonitoringPrivate') AND $timeFilter GROUP BY time(5s) fill(null)",
+          "query": "SELECT mean(\"duration\") AS \"Test Duration\", mean(\"nova-boot_server\") AS \"Create VM\", mean(\"nova-delete_server\") AS \"Delete VM\", mean(\"vm-run_command_over_ssh\") AS \"Run Command\", mean(\"vm-wait_for_ping\") AS \"Wait for Ping\", mean(\"vm-wait_for_ssh\") AS \"Wait for SSH\", mean(\"nova-get_console_output_server\") AS \"Get Console Output\" FROM \"VMTasks-boot_runcommand_delete\" WHERE (\"instance\" =~ /^$Instance$/ AND \"network\" != 'MonitoringPrivate') AND $timeFilter GROUP BY time(5s) fill(null)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series"
@@ -4243,8 +4243,8 @@
       {
         "current": {
           "selected": true,
-          "text": "Prod",
-          "value": "Prod"
+          "text": "PreProd",
+          "value": "PreProd"
         },
         "description": "",
         "hide": 0,
@@ -4253,12 +4253,12 @@
         "name": "Instance",
         "options": [
           {
-            "selected": true,
+            "selected": false,
             "text": "Prod",
             "value": "Prod"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "PreProd",
             "value": "PreProd"
           }
@@ -4278,6 +4278,6 @@
   "timezone": "",
   "title": "OpenStack Services Graphs",
   "uid": "services_graph",
-  "version": 10,
+  "version": 11,
   "weekStart": ""
 }
