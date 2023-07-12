@@ -23,7 +23,7 @@ Examples of summary of changes:
 
 Have you:
 
-* [ ] Checked the latest commit runs on a Grafana instance using the aq personality `openstack_grafana`?
+* [ ] Checked the latest commit runs on a Grafana instance using the aq personality `openstack-grafana`?
   
 * [ ] Dashboards have clearly labelled panels, and are easy to read?
 
@@ -32,7 +32,7 @@ Have you:
 
 As part of reviewing this PR the changes must be tested on a Grafana instance. To do this:
 
-* [ ] Spin up a machine with the aq personality `openstack_grafana`
+* [ ] Spin up a machine with the aq personality `openstack-grafana`
 
 * [ ] Open Grafana and navigate to browse dashboard
 
