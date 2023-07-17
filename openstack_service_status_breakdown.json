@@ -72,7 +72,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "$service",
+        "content": "************\r\n\r\n\r\n\r\n# $service \r\n\r\n\r\n\r\n************",
         "mode": "markdown"
       },
       "pluginVersion": "10.0.2",
@@ -86,109 +86,6 @@
         }
       ],
       "type": "text"
-    },
-    {
-      "datasource": {
-        "uid": "openstack_grafana"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "text",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 3,
-        "y": 1
-      },
-      "id": 1,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "10.0.2",
-      "targets": [
-        {
-          "datasource": {
-            "uid": "openstack_grafana"
-          },
-          "dsType": "influxdb",
-          "groupBy": [
-            {
-              "params": [
-                "$interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "ServiceStatus",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "agent"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "sum"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "Instance",
-              "operator": "=~",
-              "value": "/^$Instance$/"
-            },
-            {
-              "condition": "AND",
-              "key": "service",
-              "operator": "=~",
-              "value": "/^$service$/"
-            }
-          ]
-        }
-      ],
-      "title": "Agents",
-      "type": "stat"
     },
     {
       "datasource": {
@@ -229,7 +126,7 @@
       "gridPos": {
         "h": 3,
         "w": 3,
-        "x": 6,
+        "x": 4,
         "y": 1
       },
       "id": 2,
@@ -292,9 +189,9 @@
           ],
           "tags": [
             {
-              "key": "Instance",
+              "key": "instance",
               "operator": "=~",
-              "value": "/^$Instance$/"
+              "value": "/^$instance$/"
             },
             {
               "condition": "AND",
@@ -351,7 +248,7 @@
       "gridPos": {
         "h": 3,
         "w": 3,
-        "x": 9,
+        "x": 7,
         "y": 1
       },
       "id": 91,
@@ -413,9 +310,9 @@
           ],
           "tags": [
             {
-              "key": "Instance",
+              "key": "instance",
               "operator": "=~",
-              "value": "/^$Instance$/"
+              "value": "/^$instance$/"
             },
             {
               "condition": "AND",
@@ -473,7 +370,7 @@
       "gridPos": {
         "h": 3,
         "w": 3,
-        "x": 12,
+        "x": 10,
         "y": 1
       },
       "id": 88,
@@ -535,9 +432,9 @@
           ],
           "tags": [
             {
-              "key": "Instance",
+              "key": "instance",
               "operator": "=~",
-              "value": "/^$Instance$/"
+              "value": "/^$instance$/"
             },
             {
               "condition": "AND",
@@ -589,7 +486,7 @@
       "gridPos": {
         "h": 3,
         "w": 3,
-        "x": 15,
+        "x": 13,
         "y": 1
       },
       "id": 92,
@@ -651,9 +548,9 @@
           ],
           "tags": [
             {
-              "key": "Instance",
+              "key": "instance",
               "operator": "=~",
-              "value": "/^$Instance$/"
+              "value": "/^$instance$/"
             },
             {
               "condition": "AND",
@@ -717,8 +614,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 6,
-        "x": 18,
+        "w": 7,
+        "x": 17,
         "y": 1
       },
       "id": 90,
@@ -780,9 +677,9 @@
           ],
           "tags": [
             {
-              "key": "Instance",
+              "key": "instance",
               "operator": "=~",
-              "value": "/^$Instance$/"
+              "value": "/^$instance$/"
             },
             {
               "condition": "AND",
@@ -806,6 +703,109 @@
         }
       ],
       "title": "Up and Enabled",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "uid": "openstack_grafana"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 0,
+        "y": 4
+      },
+      "id": 1,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "uid": "openstack_grafana"
+          },
+          "dsType": "influxdb",
+          "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "ServiceStatus",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "agent"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "sum"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "instance",
+              "operator": "=~",
+              "value": "/^$instance$/"
+            },
+            {
+              "condition": "AND",
+              "key": "service",
+              "operator": "=~",
+              "value": "/^$service$/"
+            }
+          ]
+        }
+      ],
+      "title": "Agents",
       "type": "stat"
     },
     {
@@ -847,7 +847,7 @@
       "gridPos": {
         "h": 3,
         "w": 3,
-        "x": 6,
+        "x": 4,
         "y": 4
       },
       "id": 393,
@@ -890,7 +890,7 @@
           "measurement": "ServiceStatus",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT sum(\"state\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"Instance\" =~ /^$Instance$/ AND \"service\" =~ /^$service$/) AND $timeFilter GROUP BY time(15m) fill(null)\n",
+          "query": "SELECT sum(\"state\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"instance\" =~ /^$instance$/ AND \"service\" =~ /^$service$/) AND $timeFilter GROUP BY time(15m) fill(null)\n",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -910,9 +910,9 @@
           ],
           "tags": [
             {
-              "key": "Instance",
+              "key": "instance",
               "operator": "=~",
-              "value": "/^$Instance$/"
+              "value": "/^$instance$/"
             },
             {
               "condition": "AND",
@@ -951,7 +951,7 @@
           "measurement": "ServiceStatus",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT sum(\"agent\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"Instance\" =~ /^$Instance$/ AND \"service\" =~ /^$service$/) AND $timeFilter GROUP BY time(15m) fill(null)",
+          "query": "SELECT sum(\"agent\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"instance\" =~ /^$instance$/ AND \"service\" =~ /^$service$/) AND $timeFilter GROUP BY time(15m) fill(null)",
           "rawQuery": false,
           "refId": "B",
           "resultFormat": "time_series",
@@ -971,9 +971,9 @@
           ],
           "tags": [
             {
-              "key": "Instance",
+              "key": "instance",
               "operator": "=~",
-              "value": "/^$Instance$/"
+              "value": "/^$instance$/"
             },
             {
               "condition": "AND",
@@ -1037,7 +1037,7 @@
       "gridPos": {
         "h": 3,
         "w": 3,
-        "x": 9,
+        "x": 7,
         "y": 4
       },
       "id": 394,
@@ -1080,7 +1080,7 @@
           "measurement": "ServiceStatus",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT sum(\"state\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"Instance\" =~ /^$Instance$/ AND \"service\" =~ /^$service$/) AND $timeFilter GROUP BY time(15m) fill(null)\n",
+          "query": "SELECT sum(\"state\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"instance\" =~ /^$instance$/ AND \"service\" =~ /^$service$/) AND $timeFilter GROUP BY time(15m) fill(null)\n",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1100,9 +1100,9 @@
           ],
           "tags": [
             {
-              "key": "Instance",
+              "key": "instance",
               "operator": "=~",
-              "value": "/^$Instance$/"
+              "value": "/^$instance$/"
             },
             {
               "condition": "AND",
@@ -1141,7 +1141,7 @@
           "measurement": "ServiceStatus",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT sum(\"agent\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"Instance\" =~ /^$Instance$/ AND \"service\" =~ /^$service$/) AND $timeFilter GROUP BY time(15m) fill(null)",
+          "query": "SELECT sum(\"agent\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"instance\" =~ /^$instance$/ AND \"service\" =~ /^$service$/) AND $timeFilter GROUP BY time(15m) fill(null)",
           "rawQuery": false,
           "refId": "B",
           "resultFormat": "time_series",
@@ -1161,9 +1161,9 @@
           ],
           "tags": [
             {
-              "key": "Instance",
+              "key": "instance",
               "operator": "=~",
-              "value": "/^$Instance$/"
+              "value": "/^$instance$/"
             },
             {
               "condition": "AND",
@@ -1227,7 +1227,7 @@
       "gridPos": {
         "h": 3,
         "w": 3,
-        "x": 12,
+        "x": 10,
         "y": 4
       },
       "id": 395,
@@ -1270,7 +1270,7 @@
           "measurement": "ServiceStatus",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT sum(\"agent\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"Instance\" =~ /^$Instance$/ AND \"service\" =~ /^$service$/ AND \"statustext\" = '\"Enabled\"') AND $timeFilter GROUP BY time(15m) fill(null)",
+          "query": "SELECT sum(\"agent\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"instance\" =~ /^$instance$/ AND \"service\" =~ /^$service$/ AND \"statustext\" = '\"Enabled\"') AND $timeFilter GROUP BY time(15m) fill(null)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1290,9 +1290,9 @@
           ],
           "tags": [
             {
-              "key": "Instance",
+              "key": "instance",
               "operator": "=~",
-              "value": "/^$Instance$/"
+              "value": "/^$instance$/"
             },
             {
               "condition": "AND",
@@ -1331,7 +1331,7 @@
           "measurement": "ServiceStatus",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT sum(\"agent\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"Instance\" =~ /^$Instance$/ AND \"service\" =~ /^$service$/) AND $timeFilter GROUP BY time(15m) fill(null)",
+          "query": "SELECT sum(\"agent\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"instance\" =~ /^$instance$/ AND \"service\" =~ /^$service$/) AND $timeFilter GROUP BY time(15m) fill(null)",
           "rawQuery": false,
           "refId": "B",
           "resultFormat": "time_series",
@@ -1351,9 +1351,9 @@
           ],
           "tags": [
             {
-              "key": "Instance",
+              "key": "instance",
               "operator": "=~",
-              "value": "/^$Instance$/"
+              "value": "/^$instance$/"
             },
             {
               "condition": "AND",
@@ -1417,7 +1417,7 @@
       "gridPos": {
         "h": 3,
         "w": 3,
-        "x": 15,
+        "x": 13,
         "y": 4
       },
       "id": 396,
@@ -1460,7 +1460,7 @@
           "measurement": "ServiceStatus",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT sum(\"agent\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"Instance\" =~ /^$Instance$/ AND \"service\" =~ /^$service$/ AND \"statustext\" = '\"Disabled\"') AND $timeFilter GROUP BY time(15m) fill(null)",
+          "query": "SELECT sum(\"agent\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"instance\" =~ /^$instance$/ AND \"service\" =~ /^$service$/ AND \"statustext\" = '\"Disabled\"') AND $timeFilter GROUP BY time(15m) fill(null)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1480,9 +1480,9 @@
           ],
           "tags": [
             {
-              "key": "Instance",
+              "key": "instance",
               "operator": "=~",
-              "value": "/^$Instance$/"
+              "value": "/^$instance$/"
             },
             {
               "condition": "AND",
@@ -1521,7 +1521,7 @@
           "measurement": "ServiceStatus",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT sum(\"agent\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"Instance\" =~ /^$Instance$/ AND \"service\" =~ /^$service$/) AND $timeFilter GROUP BY time(15m) fill(null)",
+          "query": "SELECT sum(\"agent\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"instance\" =~ /^$instance$/ AND \"service\" =~ /^$service$/) AND $timeFilter GROUP BY time(15m) fill(null)",
           "rawQuery": false,
           "refId": "B",
           "resultFormat": "time_series",
@@ -1541,9 +1541,9 @@
           ],
           "tags": [
             {
-              "key": "Instance",
+              "key": "instance",
               "operator": "=~",
-              "value": "/^$Instance$/"
+              "value": "/^$instance$/"
             },
             {
               "condition": "AND",
@@ -1606,8 +1606,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 6,
-        "x": 18,
+        "w": 7,
+        "x": 17,
         "y": 4
       },
       "id": 397,
@@ -1650,7 +1650,7 @@
           "measurement": "ServiceStatus",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT sum(\"state\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"Instance\" =~ /^$Instance$/ AND \"service\" =~ /^$service$/) AND $timeFilter GROUP BY time(15m) fill(null)\n",
+          "query": "SELECT sum(\"state\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"instance\" =~ /^$instance$/ AND \"service\" =~ /^$service$/) AND $timeFilter GROUP BY time(15m) fill(null)\n",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1670,9 +1670,9 @@
           ],
           "tags": [
             {
-              "key": "Instance",
+              "key": "instance",
               "operator": "=~",
-              "value": "/^$Instance$/"
+              "value": "/^$instance$/"
             },
             {
               "condition": "AND",
@@ -1717,7 +1717,7 @@
           "measurement": "ServiceStatus",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT sum(\"agent\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"Instance\" =~ /^$Instance$/ AND \"service\" =~ /^$service$/) AND $timeFilter GROUP BY time(15m) fill(null)",
+          "query": "SELECT sum(\"agent\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"instance\" =~ /^$instance$/ AND \"service\" =~ /^$service$/) AND $timeFilter GROUP BY time(15m) fill(null)",
           "rawQuery": false,
           "refId": "B",
           "resultFormat": "time_series",
@@ -1737,9 +1737,9 @@
           ],
           "tags": [
             {
-              "key": "Instance",
+              "key": "instance",
               "operator": "=~",
-              "value": "/^$Instance$/"
+              "value": "/^$instance$/"
             },
             {
               "condition": "AND",
@@ -1791,7 +1791,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "Prod",
           "value": "Prod"
         },
@@ -1803,9 +1803,9 @@
         "hide": 0,
         "includeAll": false,
         "multi": false,
-        "name": "Instance",
+        "name": "instance",
         "options": [],
-        "query": "show tag values from \"ServiceStatus\" with key=Instance",
+        "query": "show tag values from \"ServiceStatus\" with key=instance",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -1815,13 +1815,9 @@
       },
       {
         "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": {
           "type": "influxdb",
@@ -1843,13 +1839,9 @@
       },
       {
         "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": {
           "type": "influxdb",
@@ -1902,6 +1894,6 @@
   "timezone": "browser",
   "title": "OpenStack Service Status Breakdown",
   "uid": "openstack_service_breakdown",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }
