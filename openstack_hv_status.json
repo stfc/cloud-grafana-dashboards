@@ -872,11 +872,11 @@
               },
               {
                 "color": "dark-orange",
-                "value": 10
+                "value": 8
               },
               {
                 "color": "green",
-                "value": 20
+                "value": 16
               }
             ]
           }
@@ -1036,13 +1036,9 @@
       },
       {
         "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": {
           "type": "influxdb",
@@ -1120,6 +1116,6 @@
   "timezone": "browser",
   "title": "OpenStack Hypervisor Status",
   "uid": "prod_hv_status",
-  "version": 6,
+  "version": 7,
   "weekStart": ""
 }
