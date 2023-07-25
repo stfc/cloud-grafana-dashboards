@@ -49,7 +49,7 @@
         "content": "# OpenStack Services: ${Instance}\n\nGraphs of service availability",
         "mode": "markdown"
       },
-      "pluginVersion": "10.0.1",
+      "pluginVersion": "10.0.2",
       "title": "OpenStack Services",
       "type": "text"
     },
@@ -1074,8 +1074,8 @@
           "measurement": "SwiftObjects-create_container_and_object_then_download_object",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "",
-          "rawQuery": false,
+          "query": "SELECT last(\"success\") FROM \"autogen\".\"SwiftObjects-create_container_and_object_then_download_object\" WHERE (\"instance\"::tag =~ /^$Instance$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -2197,8 +2197,8 @@
           "measurement": "Octavia-create_and_update_pools",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "",
-          "rawQuery": false,
+          "query": "SELECT last(\"success\") FROM \"autogen\".\"SwiftObjects-create_container_and_object_then_download_object\" WHERE (\"instance\"::tag =~ /^$Instance$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -4282,13 +4282,13 @@
     ]
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "OpenStack Services Graphs",
   "uid": "services_graph",
-  "version": 2,
+  "version": 5,
   "weekStart": ""
 }
