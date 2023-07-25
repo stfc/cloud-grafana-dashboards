@@ -9,3 +9,4 @@ Current Dashboards:
 - OpenStack Hypervisor Status: Shows the Hypervisor status in Prod.
 - OpenStack Service Status: Shows the Status of services in Prod or PreProd.
 - OpenStack Service Status Breakdown: Breakdown of service statuses.
+- OpenStack GPU Usage: GPU Usage on Prod
