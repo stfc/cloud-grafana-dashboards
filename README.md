@@ -9,3 +9,4 @@ Current Dashboards:
 - OpenStack Hypervisor Status: Shows the Hypervisor status in Prod.
 - OpenStack Service Status: Shows the Status of services in Prod or PreProd.
 - OpenStack Service Status Breakdown: Breakdown of service statuses.
+- [DRAFT DASHBOARD] Cloud VMs Overview: Shows the states of VMs across the Cloud 
