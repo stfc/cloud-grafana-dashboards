@@ -168,6 +168,34 @@
                 ],
                 "type": "alias"
               }
+            ],
+            [
+              {
+                "params": [
+                  "enabledSlots"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [
+                  "Enabled"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "SlotsAvailable"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [
+                  "Available"
+                ],
+                "type": "alias"
+              }
             ]
           ],
           "tags": [
@@ -209,7 +237,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-green",
+                "color": "text",
                 "value": null
               }
             ]
@@ -306,12 +334,25 @@
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [],
+          "mappings": [
+            {
+              "options": {
+                "from": -999,
+                "result": {
+                  "color": "dark-red",
+                  "index": 0,
+                  "text": "ERR"
+                },
+                "to": -1
+              },
+              "type": "range"
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "semi-dark-red",
+                "color": "text",
                 "value": null
               }
             ]
@@ -320,7 +361,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 4,
         "w": 3,
         "x": 13,
         "y": 1
@@ -361,6 +402,7 @@
               "type": "fill"
             }
           ],
+          "hide": false,
           "measurement": "SlotsAvailable",
           "orderByTime": "ASC",
           "policy": "default",
@@ -413,7 +455,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-green",
+                "color": "text",
                 "value": null
               }
             ]
@@ -422,7 +464,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 4,
         "w": 3,
         "x": 16,
         "y": 1
@@ -515,7 +557,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-purple",
+                "color": "text",
                 "value": null
               }
             ]
@@ -601,9 +643,252 @@
       ],
       "title": "GPUs Total",
       "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "openstack_grafana"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "from": -999,
+                "result": {
+                  "color": "dark-red",
+                  "index": 0,
+                  "text": "ERR"
+                },
+                "to": -1
+              },
+              "type": "range"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 13,
+        "y": 5
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "openstack_grafana"
+          },
+          "hide": true,
+          "query": "SELECT last(\"maxSlotsAvailable\") FROM \"autogen\".\"SlotsAvailable\" WHERE (\"instance\" = 'Prod' AND \"flavor\" =~ /^$flavor$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "openstack_grafana"
+          },
+          "hide": true,
+          "query": "\nSELECT last(\"SlotsAvailable\") FROM \"autogen\".\"SlotsAvailable\" WHERE (\"instance\" = 'Prod' AND \"flavor\" =~ /^$flavor$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": true,
+          "refId": "B",
+          "resultFormat": "time_series"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "openstack_grafana"
+          },
+          "hide": true,
+          "query": "\nSELECT last(\"enabledSlots\") FROM \"autogen\".\"SlotsAvailable\" WHERE (\"instance\" = 'Prod' AND \"flavor\" =~ /^$flavor$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": true,
+          "refId": "C",
+          "resultFormat": "time_series"
+        },
+        {
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "$A - $C",
+          "hide": true,
+          "refId": "D",
+          "type": "math"
+        },
+        {
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "$A - $B - $D",
+          "hide": false,
+          "refId": "E",
+          "type": "math"
+        }
+      ],
+      "title": "Calculated Used",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "openstack_grafana"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 16,
+        "y": 5
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "openstack_grafana"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": true,
+          "measurement": "SlotsAvailable",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "enabledSlots"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "instance",
+              "operator": "=",
+              "value": "Prod"
+            },
+            {
+              "condition": "AND",
+              "key": "flavor",
+              "operator": "=~",
+              "value": "/^$flavor$/"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "openstack_grafana"
+          },
+          "hide": true,
+          "query": "SELECT last(\"maxSlotsAvailable\") FROM \"autogen\".\"SlotsAvailable\" WHERE (\"instance\" = 'Prod' AND \"flavor\" =~ /^$flavor$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": true,
+          "refId": "C",
+          "resultFormat": "time_series"
+        },
+        {
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "$C - $A",
+          "hide": false,
+          "refId": "B",
+          "type": "math"
+        }
+      ],
+      "title": "GPUs Disabled",
+      "type": "stat"
     }
   ],
-  "refresh": "",
+  "refresh": "1m",
   "revision": 1,
   "schemaVersion": 38,
   "style": "dark",
@@ -659,6 +944,6 @@
   "timezone": "",
   "title": "OpenStack GPU Usage",
   "uid": "gpu_usage",
-  "version": 2,
+  "version": 4,
   "weekStart": ""
 }
