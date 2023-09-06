@@ -1230,7 +1230,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "GPU Pool Availability",
+  "title": "Kiosk - GPU Pool Availability",
   "uid": "gpu_pool_availability",
   "version": 8,
   "weekStart": ""
