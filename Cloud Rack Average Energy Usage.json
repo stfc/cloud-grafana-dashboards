@@ -1,0 +1,5313 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 12,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "displayName": "cloud rack 181",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 0,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": false,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv100.nubes.rl.ac.uk\" or hostname:\"hv101.nubes.rl.ac.uk\" or hostname:\"hv102.nubes.rl.ac.uk\" or hostname:\"hv103.nubes.rl.ac.uk\" or hostname:\"hv104.nubes.rl.ac.uk\" or hostname:\"hv105.nubes.rl.ac.uk\" or hostname:\"hv106.nubes.rl.ac.uk\" or hostname:\"hv59.nubes.rl.ac.uk\" or hostname:\"hv60.nubes.rl.ac.uk\" or hostname:\"hv61.nubes.rl.ac.uk\" or hostname:\"hv62.nubes.rl.ac.uk\" or hostname:\"hv63.nubes.rl.ac.uk\" or hostname:\"hv64.nubes.rl.ac.uk\" or hostname:\"hv65.nubes.rl.ac.uk\" or hostname:\"hv66.nubes.rl.ac.uk\" or hostname:\"hv67.nubes.rl.ac.uk\" or hostname:\"hv68.nubes.rl.ac.uk\" or hostname:\"hv69.nubes.rl.ac.uk\" or hostname:\"hv70.nubes.rl.ac.uk\" or hostname:\"hv71.nubes.rl.ac.uk\" or hostname:\"hv72.nubes.rl.ac.uk\" or hostname:\"hv73.nubes.rl.ac.uk\" or hostname:\"hv74.nubes.rl.ac.uk\" or hostname:\"hv75.nubes.rl.ac.uk\" or hostname:\"hv76.nubes.rl.ac.uk\" or hostname:\"hv77.nubes.rl.ac.uk\" or hostname:\"hv78.nubes.rl.ac.uk\" or hostname:\"hv79.nubes.rl.ac.uk\" or hostname:\"hv80.nubes.rl.ac.uk\" or hostname:\"hv81.nubes.rl.ac.uk\" or hostname:\"hv82.nubes.rl.ac.uk\" or hostname:\"hv83.nubes.rl.ac.uk\" or hostname:\"hv84.nubes.rl.ac.uk\" or hostname:\"hv85.nubes.rl.ac.uk\" or hostname:\"hv86.nubes.rl.ac.uk\" or hostname:\"hv87.nubes.rl.ac.uk\" or hostname:\"hv88.nubes.rl.ac.uk\" or hostname:\"hv89.nubes.rl.ac.uk\" or hostname:\"hv90.nubes.rl.ac.uk\" or hostname:\"hv91.nubes.rl.ac.uk\" or hostname:\"hv92.nubes.rl.ac.uk\" or hostname:\"hv93.nubes.rl.ac.uk\" or hostname:\"hv94.nubes.rl.ac.uk\" or hostname:\"hv95.nubes.rl.ac.uk\" or hostname:\"hv96.nubes.rl.ac.uk\" or hostname:\"hv97.nubes.rl.ac.uk\" or rack:\"r89/hpd/rack/181\" or rack:\"R89/HPD/RACK/181\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "displayName": "‎",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 1,
+        "x": 5,
+        "y": 0
+      },
+      "id": 22,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": false,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv100.nubes.rl.ac.uk\" or hostname:\"hv101.nubes.rl.ac.uk\" or hostname:\"hv102.nubes.rl.ac.uk\" or hostname:\"hv103.nubes.rl.ac.uk\" or hostname:\"hv104.nubes.rl.ac.uk\" or hostname:\"hv105.nubes.rl.ac.uk\" or hostname:\"hv106.nubes.rl.ac.uk\" or hostname:\"hv59.nubes.rl.ac.uk\" or hostname:\"hv60.nubes.rl.ac.uk\" or hostname:\"hv61.nubes.rl.ac.uk\" or hostname:\"hv62.nubes.rl.ac.uk\" or hostname:\"hv63.nubes.rl.ac.uk\" or hostname:\"hv64.nubes.rl.ac.uk\" or hostname:\"hv65.nubes.rl.ac.uk\" or hostname:\"hv66.nubes.rl.ac.uk\" or hostname:\"hv67.nubes.rl.ac.uk\" or hostname:\"hv68.nubes.rl.ac.uk\" or hostname:\"hv69.nubes.rl.ac.uk\" or hostname:\"hv70.nubes.rl.ac.uk\" or hostname:\"hv71.nubes.rl.ac.uk\" or hostname:\"hv72.nubes.rl.ac.uk\" or hostname:\"hv73.nubes.rl.ac.uk\" or hostname:\"hv74.nubes.rl.ac.uk\" or hostname:\"hv75.nubes.rl.ac.uk\" or hostname:\"hv76.nubes.rl.ac.uk\" or hostname:\"hv77.nubes.rl.ac.uk\" or hostname:\"hv78.nubes.rl.ac.uk\" or hostname:\"hv79.nubes.rl.ac.uk\" or hostname:\"hv80.nubes.rl.ac.uk\" or hostname:\"hv81.nubes.rl.ac.uk\" or hostname:\"hv82.nubes.rl.ac.uk\" or hostname:\"hv83.nubes.rl.ac.uk\" or hostname:\"hv84.nubes.rl.ac.uk\" or hostname:\"hv85.nubes.rl.ac.uk\" or hostname:\"hv86.nubes.rl.ac.uk\" or hostname:\"hv87.nubes.rl.ac.uk\" or hostname:\"hv88.nubes.rl.ac.uk\" or hostname:\"hv89.nubes.rl.ac.uk\" or hostname:\"hv90.nubes.rl.ac.uk\" or hostname:\"hv91.nubes.rl.ac.uk\" or hostname:\"hv92.nubes.rl.ac.uk\" or hostname:\"hv93.nubes.rl.ac.uk\" or hostname:\"hv94.nubes.rl.ac.uk\" or hostname:\"hv95.nubes.rl.ac.uk\" or hostname:\"hv96.nubes.rl.ac.uk\" or hostname:\"hv97.nubes.rl.ac.uk\" or rack:\"r89/hpd/rack/181\" or rack:\"R89/HPD/RACK/181\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "displayName": "cloud rack 192",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 6,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv-a100-01.nubes.rl.ac.uk\" or hostname:\"hv-a100-02.nubes.rl.ac.uk\" or hostname:\"hv-a100-03.nubes.rl.ac.uk\" or hostname:\"hv-a100-04.nubes.rl.ac.uk\" or hostname:\"hv-a100-05.nubes.rl.ac.uk\" or hostname:\"hv-a100-06.nubes.rl.ac.uk\" or hostname:\"hv-a100-07.nubes.rl.ac.uk\" or hostname:\"hv-a100-08.nubes.rl.ac.uk\" or  rack:\"*rack192\" or rack:\"*RACK192\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "displayName": "‎",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 1,
+        "x": 11,
+        "y": 0
+      },
+      "id": 23,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": false,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv-a100-01.nubes.rl.ac.uk\" or hostname:\"hv-a100-02.nubes.rl.ac.uk\" or hostname:\"hv-a100-03.nubes.rl.ac.uk\" or hostname:\"hv-a100-04.nubes.rl.ac.uk\" or hostname:\"hv-a100-05.nubes.rl.ac.uk\" or hostname:\"hv-a100-06.nubes.rl.ac.uk\" or hostname:\"hv-a100-07.nubes.rl.ac.uk\" or hostname:\"hv-a100-08.nubes.rl.ac.uk\" or  rack:\"*rack192\" or rack:\"*RACK192\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "displayName": "cloud rack 194",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 12,
+        "y": 0
+      },
+      "id": 5,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv-a100-09.nubes.rl.ac.uk\" or hostname:\"hv-a100-10.nubes.rl.ac.uk\" or hostname:\"hv-a100-12.nubes.rl.ac.uk\" or hostname:\"hv-a100-13.nubes.rl.ac.uk\" or hostname:\"hv-a100-14.nubes.rl.ac.uk\" or hostname:\"hv-a100-15.nubes.rl.ac.uk\" or hostname:\"hv-a100-16.nubes.rl.ac.uk\" or hostname:\"hv-a100-11.nubes.rl.ac.uk\" or  rack:\"*rack194\" or rack:\"*RACK194\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "displayName": "‎",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 1,
+        "x": 17,
+        "y": 0
+      },
+      "id": 24,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": false,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv-a100-09.nubes.rl.ac.uk\" or hostname:\"hv-a100-10.nubes.rl.ac.uk\" or hostname:\"hv-a100-12.nubes.rl.ac.uk\" or hostname:\"hv-a100-13.nubes.rl.ac.uk\" or hostname:\"hv-a100-14.nubes.rl.ac.uk\" or hostname:\"hv-a100-15.nubes.rl.ac.uk\" or hostname:\"hv-a100-16.nubes.rl.ac.uk\" or hostname:\"hv-a100-11.nubes.rl.ac.uk\" or  rack:\"*rack194\" or rack:\"*RACK194\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "displayName": "cloud rack 215",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 18,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": " hostname:\"hv-rtx4000-24.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-27.nubes.rl.ac.uk\" or hostname:\"hv-a100-17.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-17.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-19.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-20.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-21.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-23.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-25.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-29.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-18.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-22.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-26.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-30.nubes.rl.ac.uk\" or  rack:\"*rack215\" or rack:\"*RACK215\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "displayName": "‎",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 1,
+        "x": 23,
+        "y": 0
+      },
+      "id": 25,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": false,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": " hostname:\"hv-rtx4000-24.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-27.nubes.rl.ac.uk\" or hostname:\"hv-a100-17.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-17.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-19.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-20.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-21.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-23.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-25.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-29.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-18.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-22.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-26.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-30.nubes.rl.ac.uk\" or  rack:\"*rack215\" or rack:\"*RACK215\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "displayName": "cloud rack 216",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 0,
+        "y": 3
+      },
+      "id": 9,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv-rtx4000-01.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-02.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-05.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-07.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-09.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-10.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-13.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-14.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-15.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-16.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-03.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-04.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-06.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-08.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-11.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-12.nubes.rl.ac.uk\" or rack:\"*rack216\" or rack:\"*RACK216\" or rack:\"*216\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Unique Count hostname.keyword"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "‎"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 1,
+        "x": 5,
+        "y": 3
+      },
+      "id": 26,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": false,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv-rtx4000-01.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-02.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-05.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-07.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-09.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-10.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-13.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-14.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-15.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-16.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-03.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-04.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-06.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-08.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-11.nubes.rl.ac.uk\" or hostname:\"hv-rtx4000-12.nubes.rl.ac.uk\" or rack:\"*rack216\" or rack:\"*RACK216\" or rack:\"*216\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "displayName": "cloud rack 240",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 6,
+        "y": 3
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv107.nubes.rl.ac.uk\" or hostname:\"hv108.nubes.rl.ac.uk\" or hostname:\"hv109.nubes.rl.ac.uk\" or hostname:\"hv110.nubes.rl.ac.uk\" or hostname:\"hv111.nubes.rl.ac.uk\" or hostname:\"hv112.nubes.rl.ac.uk\" or hostname:\"hv113.nubes.rl.ac.uk\" or hostname:\"hv114.nubes.rl.ac.uk\" or hostname:\"hv115.nubes.rl.ac.uk\" or hostname:\"hv116.nubes.rl.ac.uk\" or hostname:\"hv117.nubes.rl.ac.uk\" or hostname:\"hv118.nubes.rl.ac.uk\" or hostname:\"hv119.nubes.rl.ac.uk\" or hostname:\"hv120.nubes.rl.ac.uk\" or hostname:\"hv121.nubes.rl.ac.uk\" or hostname:\"hv122.nubes.rl.ac.uk\" or hostname:\"hv123.nubes.rl.ac.uk\" or hostname:\"hv124.nubes.rl.ac.uk\" or hostname:\"hv125.nubes.rl.ac.uk\" or hostname:\"hv126.nubes.rl.ac.uk\" or hostname:\"hv127.nubes.rl.ac.uk\" or hostname:\"hv128.nubes.rl.ac.uk\" or hostname:\"hv129.nubes.rl.ac.uk\" or hostname:\"hv130.nubes.rl.ac.uk\" or hostname:\"hv131.nubes.rl.ac.uk\" or hostname:\"hv132.nubes.rl.ac.uk\" or hostname:\"hv133.nubes.rl.ac.uk\" or hostname:\"hv134.nubes.rl.ac.uk\" or hostname:\"hv135.nubes.rl.ac.uk\" or hostname:\"hv136.nubes.rl.ac.uk\" or hostname:\"hv137.nubes.rl.ac.uk\" or hostname:\"hv138.nubes.rl.ac.uk\" or hostname:\"hv139.nubes.rl.ac.uk\" or hostname:\"hv140.nubes.rl.ac.uk\" or hostname:\"hv141.nubes.rl.ac.uk\" or hostname:\"hv142.nubes.rl.ac.uk\" or hostname:\"hv143.nubes.rl.ac.uk\" or hostname:\"hv144.nubes.rl.ac.uk\" or hostname:\"hv145.nubes.rl.ac.uk\" or hostname:\"hv146.nubes.rl.ac.uk\" or hostname:\"hv147.nubes.rl.ac.uk\" or hostname:\"hv148.nubes.rl.ac.uk\" or hostname:\"hv149.nubes.rl.ac.uk\" or hostname:\"hv150.nubes.rl.ac.uk\" or hostname:\"hv151.nubes.rl.ac.uk\" or  hostname:\"hv152.nubes.rl.ac.uk\" or hostname:\"hv153.nubes.rl.ac.uk\" or hostname:\"hv154.nubes.rl.ac.uk\" or rack:\"*240\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "displayName": "‎",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 1,
+        "x": 11,
+        "y": 3
+      },
+      "id": 27,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": false,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv107.nubes.rl.ac.uk\" or hostname:\"hv108.nubes.rl.ac.uk\" or hostname:\"hv109.nubes.rl.ac.uk\" or hostname:\"hv110.nubes.rl.ac.uk\" or hostname:\"hv111.nubes.rl.ac.uk\" or hostname:\"hv112.nubes.rl.ac.uk\" or hostname:\"hv113.nubes.rl.ac.uk\" or hostname:\"hv114.nubes.rl.ac.uk\" or hostname:\"hv115.nubes.rl.ac.uk\" or hostname:\"hv116.nubes.rl.ac.uk\" or hostname:\"hv117.nubes.rl.ac.uk\" or hostname:\"hv118.nubes.rl.ac.uk\" or hostname:\"hv119.nubes.rl.ac.uk\" or hostname:\"hv120.nubes.rl.ac.uk\" or hostname:\"hv121.nubes.rl.ac.uk\" or hostname:\"hv122.nubes.rl.ac.uk\" or hostname:\"hv123.nubes.rl.ac.uk\" or hostname:\"hv124.nubes.rl.ac.uk\" or hostname:\"hv125.nubes.rl.ac.uk\" or hostname:\"hv126.nubes.rl.ac.uk\" or hostname:\"hv127.nubes.rl.ac.uk\" or hostname:\"hv128.nubes.rl.ac.uk\" or hostname:\"hv129.nubes.rl.ac.uk\" or hostname:\"hv130.nubes.rl.ac.uk\" or hostname:\"hv131.nubes.rl.ac.uk\" or hostname:\"hv132.nubes.rl.ac.uk\" or hostname:\"hv133.nubes.rl.ac.uk\" or hostname:\"hv134.nubes.rl.ac.uk\" or hostname:\"hv135.nubes.rl.ac.uk\" or hostname:\"hv136.nubes.rl.ac.uk\" or hostname:\"hv137.nubes.rl.ac.uk\" or hostname:\"hv138.nubes.rl.ac.uk\" or hostname:\"hv139.nubes.rl.ac.uk\" or hostname:\"hv140.nubes.rl.ac.uk\" or hostname:\"hv141.nubes.rl.ac.uk\" or hostname:\"hv142.nubes.rl.ac.uk\" or hostname:\"hv143.nubes.rl.ac.uk\" or hostname:\"hv144.nubes.rl.ac.uk\" or hostname:\"hv145.nubes.rl.ac.uk\" or hostname:\"hv146.nubes.rl.ac.uk\" or hostname:\"hv147.nubes.rl.ac.uk\" or hostname:\"hv148.nubes.rl.ac.uk\" or hostname:\"hv149.nubes.rl.ac.uk\" or hostname:\"hv150.nubes.rl.ac.uk\" or hostname:\"hv151.nubes.rl.ac.uk\" or  hostname:\"hv152.nubes.rl.ac.uk\" or hostname:\"hv153.nubes.rl.ac.uk\" or hostname:\"hv154.nubes.rl.ac.uk\" or rack:\"*240\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "displayName": "cloud rack 241",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 12,
+        "y": 3
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv-fpga-xilinx-u200-1.nubes.rl.ac.uk\"\n  or rack:\"*rack241\" or rack:\"*RACK241\" or rack:\"*241\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "displayName": "‎",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 1,
+        "x": 17,
+        "y": 3
+      },
+      "id": 28,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": false,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv-fpga-xilinx-u200-1.nubes.rl.ac.uk\"\n  or rack:\"*rack241\" or rack:\"*RACK241\" or rack:\"*241\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "displayName": "cloud rack 401",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 18,
+        "y": 3
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv244.nubes.rl.ac.uk\" or hostname:\"hv245.nubes.rl.ac.uk\" or hostname:\"hv246.nubes.rl.ac.uk\" or hostname:\"hv247.nubes.rl.ac.uk\" or hostname:\"hv-p4000-5.nubes.rl.ac.uk\" or hostname:\"hv-p4000-7.nubes.rl.ac.uk\" or hostname:\"hv-v100-1.nubes.rl.ac.uk\" or hostname:\"hv-v100-2.nubes.rl.ac.uk\" or hostname:\"hv-v100-3.nubes.rl.ac.uk\" or hostname:\"hv-p4000-6.nubes.rl.ac.uk\" or hostname:\"hv-p4000-9.nubes.rl.ac.uk\" or hostname:\"hv243.nubes.rl.ac.uk\" or hostname:\"hv-p4000-4.nubes.rl.ac.uk\" or hostname:\"hv-p4000-8.nubes.rl.ac.uk\"\n or rack:\"*rack401\" or rack:\"*RACK401\" or rack:\"*401\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "displayName": "‎",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 1,
+        "x": 23,
+        "y": 3
+      },
+      "id": 29,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": false,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv244.nubes.rl.ac.uk\" or hostname:\"hv245.nubes.rl.ac.uk\" or hostname:\"hv246.nubes.rl.ac.uk\" or hostname:\"hv247.nubes.rl.ac.uk\" or hostname:\"hv-p4000-5.nubes.rl.ac.uk\" or hostname:\"hv-p4000-7.nubes.rl.ac.uk\" or hostname:\"hv-v100-1.nubes.rl.ac.uk\" or hostname:\"hv-v100-2.nubes.rl.ac.uk\" or hostname:\"hv-v100-3.nubes.rl.ac.uk\" or hostname:\"hv-p4000-6.nubes.rl.ac.uk\" or hostname:\"hv-p4000-9.nubes.rl.ac.uk\" or hostname:\"hv243.nubes.rl.ac.uk\" or hostname:\"hv-p4000-4.nubes.rl.ac.uk\" or hostname:\"hv-p4000-8.nubes.rl.ac.uk\"\n or rack:\"*rack401\" or rack:\"*RACK401\" or rack:\"*401\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "displayName": "cloud rack 402",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 0,
+        "y": 6
+      },
+      "id": 10,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv167.nubes.rl.ac.uk\" or hostname:\"hv168.nubes.rl.ac.uk\" or hostname:\"hv169.nubes.rl.ac.uk\" or hostname:\"hv170.nubes.rl.ac.uk\" or hostname:\"hv171.nubes.rl.ac.uk\" or hostname:\"hv172.nubes.rl.ac.uk\" or hostname:\"hv173.nubes.rl.ac.uk\" or hostname:\"hv174.nubes.rl.ac.uk\" or hostname:\"hv175.nubes.rl.ac.uk\" or hostname:\"hv176.nubes.rl.ac.uk\" or hostname:\"hv177.nubes.rl.ac.uk\" or hostname:\"hv178.nubes.rl.ac.uk\" or hostname:\"hv179.nubes.rl.ac.uk\" or hostname:\"hv181.nubes.rl.ac.uk\" or hostname:\"hv182.nubes.rl.ac.uk\" or hostname:\"hv183.nubes.rl.ac.uk\" or hostname:\"hv184.nubes.rl.ac.uk\" or hostname:\"hv185.nubes.rl.ac.uk\" or hostname:\"hv186.nubes.rl.ac.uk\" or hostname:\"hv187.nubes.rl.ac.uk\" or hostname:\"hv188.nubes.rl.ac.uk\" or hostname:\"hv189.nubes.rl.ac.uk\" or hostname:\"hv190.nubes.rl.ac.uk\" or hostname:\"hv191.nubes.rl.ac.uk\" or hostname:\"hv192.nubes.rl.ac.uk\" or hostname:\"hv193.nubes.rl.ac.uk\" or hostname:\"hv194.nubes.rl.ac.uk\" or hostname:\"hv195.nubes.rl.ac.uk\" or hostname:\"hv196.nubes.rl.ac.uk\" or hostname:\"hv197.nubes.rl.ac.uk\" or hostname:\"hv198.nubes.rl.ac.uk\" or hostname:\"hv199.nubes.rl.ac.uk\" or hostname:\"hv200.nubes.rl.ac.uk\" or hostname:\"hv201.nubes.rl.ac.uk\" or hostname:\"hv202.nubes.rl.ac.uk\" or hostname:\"hv203.nubes.rl.ac.uk\" or hostname:\"hv204.nubes.rl.ac.uk\" or hostname:\"hv205.nubes.rl.ac.uk\" or hostname:\"hv206.nubes.rl.ac.uk\" or hostname:\"hv207.nubes.rl.ac.uk\" or hostname:\"hv208.nubes.rl.ac.uk\" or hostname:\"hv209.nubes.rl.ac.uk\" or hostname:\"hv210.nubes.rl.ac.uk\" or hostname:\"hv211.nubes.rl.ac.uk\" or hostname:\"hv212.nubes.rl.ac.uk\" or hostname:\"hv213.nubes.rl.ac.uk\" or hostname:\"hv214.nubes.rl.ac.uk\" or hostname:\"hv215.nubes.rl.ac.uk\" or hostname:\"hv216.nubes.rl.ac.uk\" or hostname:\"hv217.nubes.rl.ac.uk\" or hostname:\"hv218.nubes.rl.ac.uk\" or hostname:\"hv219.nubes.rl.ac.uk\" or hostname:\"hv220.nubes.rl.ac.uk\" or hostname:\"hv221.nubes.rl.ac.uk\" or hostname:\"hv222.nubes.rl.ac.uk\" or hostname:\"hv180.nubes.rl.ac.uk\" or hostname:\"hv224.nubes.rl.ac.uk\" or hostname:\"hv225.nubes.rl.ac.uk\" or hostname:\"hv226.nubes.rl.ac.uk\" or hostname:\"hv227.nubes.rl.ac.uk\" or hostname:\"hv228.nubes.rl.ac.uk\" or hostname:\"hv229.nubes.rl.ac.uk\" or hostname:\"hv230.nubes.rl.ac.uk\" or hostname:\"hv231.nubes.rl.ac.uk\" or hostname:\"hv232.nubes.rl.ac.uk\" or hostname:\"hv233.nubes.rl.ac.uk\" or hostname:\"hv234.nubes.rl.ac.uk\" or hostname:\"hv235.nubes.rl.ac.uk\" or hostname:\"hv236.nubes.rl.ac.uk\" or hostname:\"hv238.nubes.rl.ac.uk\" or hostname:\"hv239.nubes.rl.ac.uk\" or hostname:\"hv240.nubes.rl.ac.uk\" or hostname:\"hv237.nubes.rl.ac.uk\" or hostname:\"hv303.nubes.rl.ac.uk\" or hostname:\"hv304.nubes.rl.ac.uk\" or hostname:\"hv306.nubes.rl.ac.uk\" or hostname:\"hv307.nubes.rl.ac.uk\" or hostname:\"hv310.nubes.rl.ac.uk\" or hostname:\"hv314.nubes.rl.ac.uk\" or hostname:\"hv315.nubes.rl.ac.uk\" or hostname:\"hv223.nubes.rl.ac.uk\" or hostname:\"hv300.nubes.rl.ac.uk\" or hostname:\"hv302.nubes.rl.ac.uk\" or hostname:\"hv305.nubes.rl.ac.uk\" or hostname:\"hv308.nubes.rl.ac.uk\" or hostname:\"hv309.nubes.rl.ac.uk\" or hostname:\"hv311.nubes.rl.ac.uk\" or hostname:\"hv312.nubes.rl.ac.uk\" or hostname:\"hv313.nubes.rl.ac.uk\" or hostname:\"hv-vhf-01.nubes.rl.ac.uk\" or hostname:\"hv-vhf-02.nubes.rl.ac.uk\" or hostname:\"hv-vhf-03.nubes.rl.ac.uk\"  or rack:\"*rack402\" or rack:\"*RACK402\" or rack:\"*402\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Unique Count hostname.keyword"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "‎"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 1,
+        "x": 5,
+        "y": 6
+      },
+      "id": 39,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": false,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv167.nubes.rl.ac.uk\" or hostname:\"hv168.nubes.rl.ac.uk\" or hostname:\"hv169.nubes.rl.ac.uk\" or hostname:\"hv170.nubes.rl.ac.uk\" or hostname:\"hv171.nubes.rl.ac.uk\" or hostname:\"hv172.nubes.rl.ac.uk\" or hostname:\"hv173.nubes.rl.ac.uk\" or hostname:\"hv174.nubes.rl.ac.uk\" or hostname:\"hv175.nubes.rl.ac.uk\" or hostname:\"hv176.nubes.rl.ac.uk\" or hostname:\"hv177.nubes.rl.ac.uk\" or hostname:\"hv178.nubes.rl.ac.uk\" or hostname:\"hv179.nubes.rl.ac.uk\" or hostname:\"hv181.nubes.rl.ac.uk\" or hostname:\"hv182.nubes.rl.ac.uk\" or hostname:\"hv183.nubes.rl.ac.uk\" or hostname:\"hv184.nubes.rl.ac.uk\" or hostname:\"hv185.nubes.rl.ac.uk\" or hostname:\"hv186.nubes.rl.ac.uk\" or hostname:\"hv187.nubes.rl.ac.uk\" or hostname:\"hv188.nubes.rl.ac.uk\" or hostname:\"hv189.nubes.rl.ac.uk\" or hostname:\"hv190.nubes.rl.ac.uk\" or hostname:\"hv191.nubes.rl.ac.uk\" or hostname:\"hv192.nubes.rl.ac.uk\" or hostname:\"hv193.nubes.rl.ac.uk\" or hostname:\"hv194.nubes.rl.ac.uk\" or hostname:\"hv195.nubes.rl.ac.uk\" or hostname:\"hv196.nubes.rl.ac.uk\" or hostname:\"hv197.nubes.rl.ac.uk\" or hostname:\"hv198.nubes.rl.ac.uk\" or hostname:\"hv199.nubes.rl.ac.uk\" or hostname:\"hv200.nubes.rl.ac.uk\" or hostname:\"hv201.nubes.rl.ac.uk\" or hostname:\"hv202.nubes.rl.ac.uk\" or hostname:\"hv203.nubes.rl.ac.uk\" or hostname:\"hv204.nubes.rl.ac.uk\" or hostname:\"hv205.nubes.rl.ac.uk\" or hostname:\"hv206.nubes.rl.ac.uk\" or hostname:\"hv207.nubes.rl.ac.uk\" or hostname:\"hv208.nubes.rl.ac.uk\" or hostname:\"hv209.nubes.rl.ac.uk\" or hostname:\"hv210.nubes.rl.ac.uk\" or hostname:\"hv211.nubes.rl.ac.uk\" or hostname:\"hv212.nubes.rl.ac.uk\" or hostname:\"hv213.nubes.rl.ac.uk\" or hostname:\"hv214.nubes.rl.ac.uk\" or hostname:\"hv215.nubes.rl.ac.uk\" or hostname:\"hv216.nubes.rl.ac.uk\" or hostname:\"hv217.nubes.rl.ac.uk\" or hostname:\"hv218.nubes.rl.ac.uk\" or hostname:\"hv219.nubes.rl.ac.uk\" or hostname:\"hv220.nubes.rl.ac.uk\" or hostname:\"hv221.nubes.rl.ac.uk\" or hostname:\"hv222.nubes.rl.ac.uk\" or hostname:\"hv180.nubes.rl.ac.uk\" or hostname:\"hv224.nubes.rl.ac.uk\" or hostname:\"hv225.nubes.rl.ac.uk\" or hostname:\"hv226.nubes.rl.ac.uk\" or hostname:\"hv227.nubes.rl.ac.uk\" or hostname:\"hv228.nubes.rl.ac.uk\" or hostname:\"hv229.nubes.rl.ac.uk\" or hostname:\"hv230.nubes.rl.ac.uk\" or hostname:\"hv231.nubes.rl.ac.uk\" or hostname:\"hv232.nubes.rl.ac.uk\" or hostname:\"hv233.nubes.rl.ac.uk\" or hostname:\"hv234.nubes.rl.ac.uk\" or hostname:\"hv235.nubes.rl.ac.uk\" or hostname:\"hv236.nubes.rl.ac.uk\" or hostname:\"hv238.nubes.rl.ac.uk\" or hostname:\"hv239.nubes.rl.ac.uk\" or hostname:\"hv240.nubes.rl.ac.uk\" or hostname:\"hv237.nubes.rl.ac.uk\" or hostname:\"hv303.nubes.rl.ac.uk\" or hostname:\"hv304.nubes.rl.ac.uk\" or hostname:\"hv306.nubes.rl.ac.uk\" or hostname:\"hv307.nubes.rl.ac.uk\" or hostname:\"hv310.nubes.rl.ac.uk\" or hostname:\"hv314.nubes.rl.ac.uk\" or hostname:\"hv315.nubes.rl.ac.uk\" or hostname:\"hv223.nubes.rl.ac.uk\" or hostname:\"hv300.nubes.rl.ac.uk\" or hostname:\"hv302.nubes.rl.ac.uk\" or hostname:\"hv305.nubes.rl.ac.uk\" or hostname:\"hv308.nubes.rl.ac.uk\" or hostname:\"hv309.nubes.rl.ac.uk\" or hostname:\"hv311.nubes.rl.ac.uk\" or hostname:\"hv312.nubes.rl.ac.uk\" or hostname:\"hv313.nubes.rl.ac.uk\" or hostname:\"hv-vhf-01.nubes.rl.ac.uk\" or hostname:\"hv-vhf-02.nubes.rl.ac.uk\" or hostname:\"hv-vhf-03.nubes.rl.ac.uk\"  or rack:\"*rack402\" or rack:\"*RACK402\" or rack:\"*402\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "displayName": "cloud rack 404",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 6,
+        "y": 6
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv317.nubes.rl.ac.uk\" or hostname:\"hv319.nubes.rl.ac.uk\" or hostname:\"hv321.nubes.rl.ac.uk\" or hostname:\"hv327.nubes.rl.ac.uk\" or hostname:\"hv328.nubes.rl.ac.uk\" or hostname:\"hv331.nubes.rl.ac.uk\" or hostname:\"hv333.nubes.rl.ac.uk\" or hostname:\"hv336.nubes.rl.ac.uk\" or hostname:\"hv337.nubes.rl.ac.uk\" or hostname:\"hv340.nubes.rl.ac.uk\" or hostname:\"hv341.nubes.rl.ac.uk\" or hostname:\"hv342.nubes.rl.ac.uk\" or hostname:\"hv343.nubes.rl.ac.uk\" or hostname:\"hv344.nubes.rl.ac.uk\" or hostname:\"hv346.nubes.rl.ac.uk\" or hostname:\"hv347.nubes.rl.ac.uk\" or hostname:\"hv349.nubes.rl.ac.uk\" or hostname:\"hv351.nubes.rl.ac.uk\" or hostname:\"hv352.nubes.rl.ac.uk\" or hostname:\"hv353.nubes.rl.ac.uk\" or hostname:\"hv354.nubes.rl.ac.uk\" or hostname:\"hv355.nubes.rl.ac.uk\" or hostname:\"hv357.nubes.rl.ac.uk\" or hostname:\"hv360.nubes.rl.ac.uk\" or hostname:\"hv362.nubes.rl.ac.uk\" or hostname:\"hv363.nubes.rl.ac.uk\" or hostname:\"hv316.nubes.rl.ac.uk\" or hostname:\"hv318.nubes.rl.ac.uk\" or hostname:\"hv320.nubes.rl.ac.uk\" or hostname:\"hv322.nubes.rl.ac.uk\" or hostname:\"hv323.nubes.rl.ac.uk\" or hostname:\"hv324.nubes.rl.ac.uk\" or hostname:\"hv325.nubes.rl.ac.uk\" or hostname:\"hv329.nubes.rl.ac.uk\" or hostname:\"hv330.nubes.rl.ac.uk\" or hostname:\"hv332.nubes.rl.ac.uk\" or hostname:\"hv334.nubes.rl.ac.uk\" or hostname:\"hv335.nubes.rl.ac.uk\" or hostname:\"hv338.nubes.rl.ac.uk\" or hostname:\"hv339.nubes.rl.ac.uk\" or hostname:\"hv345.nubes.rl.ac.uk\" or hostname:\"hv348.nubes.rl.ac.uk\" or hostname:\"hv350.nubes.rl.ac.uk\" or hostname:\"hv356.nubes.rl.ac.uk\" or hostname:\"hv358.nubes.rl.ac.uk\" or hostname:\"hv359.nubes.rl.ac.uk\" or hostname:\"hv361.nubes.rl.ac.uk\" or hostname:\"hv326.nubes.rl.ac.uk\"  or rack:\"*rack404\" or rack:\"*RACK404\" or rack:\"*404\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "displayName": "‎",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 1,
+        "x": 11,
+        "y": 6
+      },
+      "id": 36,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": false,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv317.nubes.rl.ac.uk\" or hostname:\"hv319.nubes.rl.ac.uk\" or hostname:\"hv321.nubes.rl.ac.uk\" or hostname:\"hv327.nubes.rl.ac.uk\" or hostname:\"hv328.nubes.rl.ac.uk\" or hostname:\"hv331.nubes.rl.ac.uk\" or hostname:\"hv333.nubes.rl.ac.uk\" or hostname:\"hv336.nubes.rl.ac.uk\" or hostname:\"hv337.nubes.rl.ac.uk\" or hostname:\"hv340.nubes.rl.ac.uk\" or hostname:\"hv341.nubes.rl.ac.uk\" or hostname:\"hv342.nubes.rl.ac.uk\" or hostname:\"hv343.nubes.rl.ac.uk\" or hostname:\"hv344.nubes.rl.ac.uk\" or hostname:\"hv346.nubes.rl.ac.uk\" or hostname:\"hv347.nubes.rl.ac.uk\" or hostname:\"hv349.nubes.rl.ac.uk\" or hostname:\"hv351.nubes.rl.ac.uk\" or hostname:\"hv352.nubes.rl.ac.uk\" or hostname:\"hv353.nubes.rl.ac.uk\" or hostname:\"hv354.nubes.rl.ac.uk\" or hostname:\"hv355.nubes.rl.ac.uk\" or hostname:\"hv357.nubes.rl.ac.uk\" or hostname:\"hv360.nubes.rl.ac.uk\" or hostname:\"hv362.nubes.rl.ac.uk\" or hostname:\"hv363.nubes.rl.ac.uk\" or hostname:\"hv316.nubes.rl.ac.uk\" or hostname:\"hv318.nubes.rl.ac.uk\" or hostname:\"hv320.nubes.rl.ac.uk\" or hostname:\"hv322.nubes.rl.ac.uk\" or hostname:\"hv323.nubes.rl.ac.uk\" or hostname:\"hv324.nubes.rl.ac.uk\" or hostname:\"hv325.nubes.rl.ac.uk\" or hostname:\"hv329.nubes.rl.ac.uk\" or hostname:\"hv330.nubes.rl.ac.uk\" or hostname:\"hv332.nubes.rl.ac.uk\" or hostname:\"hv334.nubes.rl.ac.uk\" or hostname:\"hv335.nubes.rl.ac.uk\" or hostname:\"hv338.nubes.rl.ac.uk\" or hostname:\"hv339.nubes.rl.ac.uk\" or hostname:\"hv345.nubes.rl.ac.uk\" or hostname:\"hv348.nubes.rl.ac.uk\" or hostname:\"hv350.nubes.rl.ac.uk\" or hostname:\"hv356.nubes.rl.ac.uk\" or hostname:\"hv358.nubes.rl.ac.uk\" or hostname:\"hv359.nubes.rl.ac.uk\" or hostname:\"hv361.nubes.rl.ac.uk\" or hostname:\"hv326.nubes.rl.ac.uk\"  or rack:\"*rack404\" or rack:\"*RACK404\" or rack:\"*404\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "displayName": "cloud rack 405",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 12,
+        "y": 6
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv368.nubes.rl.ac.uk\" or hostname:\"hv371.nubes.rl.ac.uk\" or hostname:\"hv372.nubes.rl.ac.uk\" or hostname:\"hv374.nubes.rl.ac.uk\" or hostname:\"hv375.nubes.rl.ac.uk\" or hostname:\"hv378.nubes.rl.ac.uk\" or hostname:\"hv379.nubes.rl.ac.uk\" or hostname:\"hv381.nubes.rl.ac.uk\" or hostname:\"hv382.nubes.rl.ac.uk\" or hostname:\"hv384.nubes.rl.ac.uk\" or hostname:\"hv385.nubes.rl.ac.uk\" or hostname:\"hv386.nubes.rl.ac.uk\" or hostname:\"hv389.nubes.rl.ac.uk\" or hostname:\"hv391.nubes.rl.ac.uk\" or hostname:\"hv394.nubes.rl.ac.uk\" or hostname:\"hv395.nubes.rl.ac.uk\" or hostname:\"hv397.nubes.rl.ac.uk\" or hostname:\"hv398.nubes.rl.ac.uk\" or hostname:\"hv400.nubes.rl.ac.uk\" or hostname:\"hv401.nubes.rl.ac.uk\" or hostname:\"hv404.nubes.rl.ac.uk\" or hostname:\"hv405.nubes.rl.ac.uk\" or hostname:\"hv407.nubes.rl.ac.uk\" or hostname:\"hv408.nubes.rl.ac.uk\" or hostname:\"hv409.nubes.rl.ac.uk\" or hostname:\"hv410.nubes.rl.ac.uk\" or hostname:\"hv364.nubes.rl.ac.uk\" or hostname:\"hv365.nubes.rl.ac.uk\" or hostname:\"hv366.nubes.rl.ac.uk\" or hostname:\"hv367.nubes.rl.ac.uk\" or hostname:\"hv369.nubes.rl.ac.uk\" or hostname:\"hv370.nubes.rl.ac.uk\" or hostname:\"hv373.nubes.rl.ac.uk\" or hostname:\"hv376.nubes.rl.ac.uk\" or hostname:\"hv377.nubes.rl.ac.uk\" or hostname:\"hv380.nubes.rl.ac.uk\" or hostname:\"hv383.nubes.rl.ac.uk\" or hostname:\"hv387.nubes.rl.ac.uk\" or hostname:\"hv388.nubes.rl.ac.uk\" or hostname:\"hv390.nubes.rl.ac.uk\" or hostname:\"hv392.nubes.rl.ac.uk\" or hostname:\"hv393.nubes.rl.ac.uk\" or hostname:\"hv396.nubes.rl.ac.uk\" or hostname:\"hv399.nubes.rl.ac.uk\" or hostname:\"hv402.nubes.rl.ac.uk\" or hostname:\"hv403.nubes.rl.ac.uk\" or hostname:\"hv406.nubes.rl.ac.uk\" or hostname:\"hv411.nubes.rl.ac.uk\"  or rack:\"*rack405\" or rack:\"*RACK405\" or rack:\"*405\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "displayName": "‎",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 1,
+        "x": 17,
+        "y": 6
+      },
+      "id": 33,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": false,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv368.nubes.rl.ac.uk\" or hostname:\"hv371.nubes.rl.ac.uk\" or hostname:\"hv372.nubes.rl.ac.uk\" or hostname:\"hv374.nubes.rl.ac.uk\" or hostname:\"hv375.nubes.rl.ac.uk\" or hostname:\"hv378.nubes.rl.ac.uk\" or hostname:\"hv379.nubes.rl.ac.uk\" or hostname:\"hv381.nubes.rl.ac.uk\" or hostname:\"hv382.nubes.rl.ac.uk\" or hostname:\"hv384.nubes.rl.ac.uk\" or hostname:\"hv385.nubes.rl.ac.uk\" or hostname:\"hv386.nubes.rl.ac.uk\" or hostname:\"hv389.nubes.rl.ac.uk\" or hostname:\"hv391.nubes.rl.ac.uk\" or hostname:\"hv394.nubes.rl.ac.uk\" or hostname:\"hv395.nubes.rl.ac.uk\" or hostname:\"hv397.nubes.rl.ac.uk\" or hostname:\"hv398.nubes.rl.ac.uk\" or hostname:\"hv400.nubes.rl.ac.uk\" or hostname:\"hv401.nubes.rl.ac.uk\" or hostname:\"hv404.nubes.rl.ac.uk\" or hostname:\"hv405.nubes.rl.ac.uk\" or hostname:\"hv407.nubes.rl.ac.uk\" or hostname:\"hv408.nubes.rl.ac.uk\" or hostname:\"hv409.nubes.rl.ac.uk\" or hostname:\"hv410.nubes.rl.ac.uk\" or hostname:\"hv364.nubes.rl.ac.uk\" or hostname:\"hv365.nubes.rl.ac.uk\" or hostname:\"hv366.nubes.rl.ac.uk\" or hostname:\"hv367.nubes.rl.ac.uk\" or hostname:\"hv369.nubes.rl.ac.uk\" or hostname:\"hv370.nubes.rl.ac.uk\" or hostname:\"hv373.nubes.rl.ac.uk\" or hostname:\"hv376.nubes.rl.ac.uk\" or hostname:\"hv377.nubes.rl.ac.uk\" or hostname:\"hv380.nubes.rl.ac.uk\" or hostname:\"hv383.nubes.rl.ac.uk\" or hostname:\"hv387.nubes.rl.ac.uk\" or hostname:\"hv388.nubes.rl.ac.uk\" or hostname:\"hv390.nubes.rl.ac.uk\" or hostname:\"hv392.nubes.rl.ac.uk\" or hostname:\"hv393.nubes.rl.ac.uk\" or hostname:\"hv396.nubes.rl.ac.uk\" or hostname:\"hv399.nubes.rl.ac.uk\" or hostname:\"hv402.nubes.rl.ac.uk\" or hostname:\"hv403.nubes.rl.ac.uk\" or hostname:\"hv406.nubes.rl.ac.uk\" or hostname:\"hv411.nubes.rl.ac.uk\"  or rack:\"*rack405\" or rack:\"*RACK405\" or rack:\"*405\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "displayName": "cloud rack 408",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 18,
+        "y": 6
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv-p4000-11.nubes.rl.ac.uk\" or hostname:\"hv-p4000-12.nubes.rl.ac.uk\" or hostname:\"hv-p4000-14.nubes.rl.ac.uk\" or hostname:\"hv-p4000-15.nubes.rl.ac.uk\" or hostname:\"hv-p4000-16.nubes.rl.ac.uk\" or hostname:\"hv-p4000-18.nubes.rl.ac.uk\" or hostname:\"hv-p4000-19.nubes.rl.ac.uk\" or hostname:\"hv-p4000-21.nubes.rl.ac.uk\" or hostname:\"hv-p4000-22.nubes.rl.ac.uk\" or hostname:\"hv-p4000-23.nubes.rl.ac.uk\" or hostname:\"hv-p4000-24.nubes.rl.ac.uk\" or hostname:\"hv-p4000-26.nubes.rl.ac.uk\" or hostname:\"hv-p4000-27.nubes.rl.ac.uk\" or hostname:\"hv-p4000-28.nubes.rl.ac.uk\" or hostname:\"hv-p4000-29.nubes.rl.ac.uk\" or hostname:\"hv-p4000-10.nubes.rl.ac.uk\" or hostname:\"hv-p4000-13.nubes.rl.ac.uk\" or hostname:\"hv-p4000-17.nubes.rl.ac.uk\" or hostname:\"hv-p4000-20.nubes.rl.ac.uk\" or hostname:\"hv-p4000-25.nubes.rl.ac.uk\"  or rack:\"*rack408\" or rack:\"*RACK408\" or rack:\"*408\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "displayName": "‎",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 1,
+        "x": 23,
+        "y": 6
+      },
+      "id": 30,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": false,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv-p4000-11.nubes.rl.ac.uk\" or hostname:\"hv-p4000-12.nubes.rl.ac.uk\" or hostname:\"hv-p4000-14.nubes.rl.ac.uk\" or hostname:\"hv-p4000-15.nubes.rl.ac.uk\" or hostname:\"hv-p4000-16.nubes.rl.ac.uk\" or hostname:\"hv-p4000-18.nubes.rl.ac.uk\" or hostname:\"hv-p4000-19.nubes.rl.ac.uk\" or hostname:\"hv-p4000-21.nubes.rl.ac.uk\" or hostname:\"hv-p4000-22.nubes.rl.ac.uk\" or hostname:\"hv-p4000-23.nubes.rl.ac.uk\" or hostname:\"hv-p4000-24.nubes.rl.ac.uk\" or hostname:\"hv-p4000-26.nubes.rl.ac.uk\" or hostname:\"hv-p4000-27.nubes.rl.ac.uk\" or hostname:\"hv-p4000-28.nubes.rl.ac.uk\" or hostname:\"hv-p4000-29.nubes.rl.ac.uk\" or hostname:\"hv-p4000-10.nubes.rl.ac.uk\" or hostname:\"hv-p4000-13.nubes.rl.ac.uk\" or hostname:\"hv-p4000-17.nubes.rl.ac.uk\" or hostname:\"hv-p4000-20.nubes.rl.ac.uk\" or hostname:\"hv-p4000-25.nubes.rl.ac.uk\"  or rack:\"*rack408\" or rack:\"*RACK408\" or rack:\"*408\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "displayName": "cloud rack 409",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 0,
+        "y": 9
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv-v100-10.nubes.rl.ac.uk\" or hostname:\"hv-v100-11.nubes.rl.ac.uk\" or hostname:\"hv-v100-12.nubes.rl.ac.uk\" or hostname:\"hv-v100-14.nubes.rl.ac.uk\" or hostname:\"hv-v100-15.nubes.rl.ac.uk\" or hostname:\"hv-v100-16.nubes.rl.ac.uk\" or hostname:\"hv-v100-17.nubes.rl.ac.uk\" or hostname:\"hv-v100-4.nubes.rl.ac.uk\" or hostname:\"hv-v100-5.nubes.rl.ac.uk\" or hostname:\"hv-v100-9.nubes.rl.ac.uk\" or hostname:\"hv-v100-13.nubes.rl.ac.uk\" or hostname:\"hv-v100-6.nubes.rl.ac.uk\" or hostname:\"hv-v100-7.nubes.rl.ac.uk\" or hostname:\"hv-v100-8.nubes.rl.ac.uk\"  or rack:\"*rack409\" or rack:\"*RACK409\" or rack:\"*409\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Unique Count hostname.keyword"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "‎"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 1,
+        "x": 5,
+        "y": 9
+      },
+      "id": 40,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": false,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv-v100-10.nubes.rl.ac.uk\" or hostname:\"hv-v100-11.nubes.rl.ac.uk\" or hostname:\"hv-v100-12.nubes.rl.ac.uk\" or hostname:\"hv-v100-14.nubes.rl.ac.uk\" or hostname:\"hv-v100-15.nubes.rl.ac.uk\" or hostname:\"hv-v100-16.nubes.rl.ac.uk\" or hostname:\"hv-v100-17.nubes.rl.ac.uk\" or hostname:\"hv-v100-4.nubes.rl.ac.uk\" or hostname:\"hv-v100-5.nubes.rl.ac.uk\" or hostname:\"hv-v100-9.nubes.rl.ac.uk\" or hostname:\"hv-v100-13.nubes.rl.ac.uk\" or hostname:\"hv-v100-6.nubes.rl.ac.uk\" or hostname:\"hv-v100-7.nubes.rl.ac.uk\" or hostname:\"hv-v100-8.nubes.rl.ac.uk\"  or rack:\"*rack409\" or rack:\"*RACK409\" or rack:\"*409\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "displayName": "cloud rack 410",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 6,
+        "y": 9
+      },
+      "id": 16,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv412.nubes.rl.ac.uk\" or hostname:\"hv413.nubes.rl.ac.uk\" or hostname:\"hv414.nubes.rl.ac.uk\" or hostname:\"hv415.nubes.rl.ac.uk\" or hostname:\"hv416.nubes.rl.ac.uk\" or hostname:\"hv417.nubes.rl.ac.uk\" or hostname:\"hv418.nubes.rl.ac.uk\" or hostname:\"hv419.nubes.rl.ac.uk\" or hostname:\"hv420.nubes.rl.ac.uk\" or hostname:\"hv421.nubes.rl.ac.uk\" or hostname:\"hv422.nubes.rl.ac.uk\" or hostname:\"hv423.nubes.rl.ac.uk\" or hostname:\"hv424.nubes.rl.ac.uk\" or hostname:\"hv425.nubes.rl.ac.uk\" or hostname:\"hv426.nubes.rl.ac.uk\" or hostname:\"hv427.nubes.rl.ac.uk\" or hostname:\"hv428.nubes.rl.ac.uk\" or hostname:\"hv429.nubes.rl.ac.uk\" or hostname:\"hv430.nubes.rl.ac.uk\" or hostname:\"hv431.nubes.rl.ac.uk\" or hostname:\"hv432.nubes.rl.ac.uk\" or hostname:\"hv433.nubes.rl.ac.uk\" or hostname:\"hv434.nubes.rl.ac.uk\" or hostname:\"hv435.nubes.rl.ac.uk\" or hostname:\"hv436.nubes.rl.ac.uk\" or hostname:\"hv437.nubes.rl.ac.uk\" or hostname:\"hv438.nubes.rl.ac.uk\" or hostname:\"hv439.nubes.rl.ac.uk\" or hostname:\"hv513.nubes.rl.ac.uk\" or hostname:\"hv514.nubes.rl.ac.uk\" or hostname:\"hv500.nubes.rl.ac.uk\" or hostname:\"hv502.nubes.rl.ac.uk\" or hostname:\"hv503.nubes.rl.ac.uk\" or hostname:\"hv505.nubes.rl.ac.uk\" or hostname:\"hv506.nubes.rl.ac.uk\" or hostname:\"hv507.nubes.rl.ac.uk\" or hostname:\"hv508.nubes.rl.ac.uk\" or hostname:\"hv509.nubes.rl.ac.uk\" or hostname:\"hv510.nubes.rl.ac.uk\" or hostname:\"hv511.nubes.rl.ac.uk\" or hostname:\"hv515.nubes.rl.ac.uk\" or hostname:\"hv-vhf-04.nubes.rl.ac.uk\" or hostname:\"hv-vhf-05.nubes.rl.ac.uk\" or hostname:\"hv501.nubes.rl.ac.uk\" or hostname:\"hv504.nubes.rl.ac.uk\" or hostname:\"hv512.nubes.rl.ac.uk\"  or rack:\"*rack410\" or rack:\"*RACK410\" or rack:\"*410\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "displayName": "‎",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 1,
+        "x": 11,
+        "y": 9
+      },
+      "id": 37,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": false,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv412.nubes.rl.ac.uk\" or hostname:\"hv413.nubes.rl.ac.uk\" or hostname:\"hv414.nubes.rl.ac.uk\" or hostname:\"hv415.nubes.rl.ac.uk\" or hostname:\"hv416.nubes.rl.ac.uk\" or hostname:\"hv417.nubes.rl.ac.uk\" or hostname:\"hv418.nubes.rl.ac.uk\" or hostname:\"hv419.nubes.rl.ac.uk\" or hostname:\"hv420.nubes.rl.ac.uk\" or hostname:\"hv421.nubes.rl.ac.uk\" or hostname:\"hv422.nubes.rl.ac.uk\" or hostname:\"hv423.nubes.rl.ac.uk\" or hostname:\"hv424.nubes.rl.ac.uk\" or hostname:\"hv425.nubes.rl.ac.uk\" or hostname:\"hv426.nubes.rl.ac.uk\" or hostname:\"hv427.nubes.rl.ac.uk\" or hostname:\"hv428.nubes.rl.ac.uk\" or hostname:\"hv429.nubes.rl.ac.uk\" or hostname:\"hv430.nubes.rl.ac.uk\" or hostname:\"hv431.nubes.rl.ac.uk\" or hostname:\"hv432.nubes.rl.ac.uk\" or hostname:\"hv433.nubes.rl.ac.uk\" or hostname:\"hv434.nubes.rl.ac.uk\" or hostname:\"hv435.nubes.rl.ac.uk\" or hostname:\"hv436.nubes.rl.ac.uk\" or hostname:\"hv437.nubes.rl.ac.uk\" or hostname:\"hv438.nubes.rl.ac.uk\" or hostname:\"hv439.nubes.rl.ac.uk\" or hostname:\"hv513.nubes.rl.ac.uk\" or hostname:\"hv514.nubes.rl.ac.uk\" or hostname:\"hv500.nubes.rl.ac.uk\" or hostname:\"hv502.nubes.rl.ac.uk\" or hostname:\"hv503.nubes.rl.ac.uk\" or hostname:\"hv505.nubes.rl.ac.uk\" or hostname:\"hv506.nubes.rl.ac.uk\" or hostname:\"hv507.nubes.rl.ac.uk\" or hostname:\"hv508.nubes.rl.ac.uk\" or hostname:\"hv509.nubes.rl.ac.uk\" or hostname:\"hv510.nubes.rl.ac.uk\" or hostname:\"hv511.nubes.rl.ac.uk\" or hostname:\"hv515.nubes.rl.ac.uk\" or hostname:\"hv-vhf-04.nubes.rl.ac.uk\" or hostname:\"hv-vhf-05.nubes.rl.ac.uk\" or hostname:\"hv501.nubes.rl.ac.uk\" or hostname:\"hv504.nubes.rl.ac.uk\" or hostname:\"hv512.nubes.rl.ac.uk\"  or rack:\"*rack410\" or rack:\"*RACK410\" or rack:\"*410\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "displayName": "cloud rack 411",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 12,
+        "y": 9
+      },
+      "id": 15,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv517.nubes.rl.ac.uk\" or hostname:\"hv537.nubes.rl.ac.uk\" or hostname:\"hv544.nubes.rl.ac.uk\" or hostname:\"hv547.nubes.rl.ac.uk\" or hostname:\"hv551.nubes.rl.ac.uk\" or hostname:\"hv560.nubes.rl.ac.uk\" or hostname:\"hv561.nubes.rl.ac.uk\" or hostname:\"hv562.nubes.rl.ac.uk\" or hostname:\"hv563.nubes.rl.ac.uk\" or hostname:\"hv516.nubes.rl.ac.uk\" or hostname:\"hv518.nubes.rl.ac.uk\" or hostname:\"hv519.nubes.rl.ac.uk\" or hostname:\"hv520.nubes.rl.ac.uk\" or hostname:\"hv521.nubes.rl.ac.uk\" or hostname:\"hv522.nubes.rl.ac.uk\" or hostname:\"hv524.nubes.rl.ac.uk\" or hostname:\"hv525.nubes.rl.ac.uk\" or hostname:\"hv526.nubes.rl.ac.uk\" or hostname:\"hv527.nubes.rl.ac.uk\" or hostname:\"hv528.nubes.rl.ac.uk\" or hostname:\"hv529.nubes.rl.ac.uk\" or hostname:\"hv530.nubes.rl.ac.uk\" or hostname:\"hv531.nubes.rl.ac.uk\" or hostname:\"hv532.nubes.rl.ac.uk\" or hostname:\"hv533.nubes.rl.ac.uk\" or hostname:\"hv534.nubes.rl.ac.uk\" or hostname:\"hv536.nubes.rl.ac.uk\" or hostname:\"hv538.nubes.rl.ac.uk\" or hostname:\"hv539.nubes.rl.ac.uk\" or hostname:\"hv540.nubes.rl.ac.uk\" or hostname:\"hv541.nubes.rl.ac.uk\" or hostname:\"hv542.nubes.rl.ac.uk\" or hostname:\"hv543.nubes.rl.ac.uk\" or hostname:\"hv545.nubes.rl.ac.uk\" or hostname:\"hv546.nubes.rl.ac.uk\" or hostname:\"hv548.nubes.rl.ac.uk\" or hostname:\"hv549.nubes.rl.ac.uk\" or hostname:\"hv550.nubes.rl.ac.uk\" or hostname:\"hv555.nubes.rl.ac.uk\" or hostname:\"hv557.nubes.rl.ac.uk\" or hostname:\"hv558.nubes.rl.ac.uk\" or hostname:\"hv559.nubes.rl.ac.uk\" or hostname:\"hv523.nubes.rl.ac.uk\" or hostname:\"hv535.nubes.rl.ac.uk\" or hostname:\"hv552.nubes.rl.ac.uk\" or hostname:\"hv553.nubes.rl.ac.uk\" or hostname:\"hv554.nubes.rl.ac.uk\" or hostname:\"hv556.nubes.rl.ac.uk\"  or rack:\"*rack411\" or rack:\"*RACK411\" or rack:\"*411\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "displayName": "‎",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 1,
+        "x": 17,
+        "y": 9
+      },
+      "id": 34,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": false,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv517.nubes.rl.ac.uk\" or hostname:\"hv537.nubes.rl.ac.uk\" or hostname:\"hv544.nubes.rl.ac.uk\" or hostname:\"hv547.nubes.rl.ac.uk\" or hostname:\"hv551.nubes.rl.ac.uk\" or hostname:\"hv560.nubes.rl.ac.uk\" or hostname:\"hv561.nubes.rl.ac.uk\" or hostname:\"hv562.nubes.rl.ac.uk\" or hostname:\"hv563.nubes.rl.ac.uk\" or hostname:\"hv516.nubes.rl.ac.uk\" or hostname:\"hv518.nubes.rl.ac.uk\" or hostname:\"hv519.nubes.rl.ac.uk\" or hostname:\"hv520.nubes.rl.ac.uk\" or hostname:\"hv521.nubes.rl.ac.uk\" or hostname:\"hv522.nubes.rl.ac.uk\" or hostname:\"hv524.nubes.rl.ac.uk\" or hostname:\"hv525.nubes.rl.ac.uk\" or hostname:\"hv526.nubes.rl.ac.uk\" or hostname:\"hv527.nubes.rl.ac.uk\" or hostname:\"hv528.nubes.rl.ac.uk\" or hostname:\"hv529.nubes.rl.ac.uk\" or hostname:\"hv530.nubes.rl.ac.uk\" or hostname:\"hv531.nubes.rl.ac.uk\" or hostname:\"hv532.nubes.rl.ac.uk\" or hostname:\"hv533.nubes.rl.ac.uk\" or hostname:\"hv534.nubes.rl.ac.uk\" or hostname:\"hv536.nubes.rl.ac.uk\" or hostname:\"hv538.nubes.rl.ac.uk\" or hostname:\"hv539.nubes.rl.ac.uk\" or hostname:\"hv540.nubes.rl.ac.uk\" or hostname:\"hv541.nubes.rl.ac.uk\" or hostname:\"hv542.nubes.rl.ac.uk\" or hostname:\"hv543.nubes.rl.ac.uk\" or hostname:\"hv545.nubes.rl.ac.uk\" or hostname:\"hv546.nubes.rl.ac.uk\" or hostname:\"hv548.nubes.rl.ac.uk\" or hostname:\"hv549.nubes.rl.ac.uk\" or hostname:\"hv550.nubes.rl.ac.uk\" or hostname:\"hv555.nubes.rl.ac.uk\" or hostname:\"hv557.nubes.rl.ac.uk\" or hostname:\"hv558.nubes.rl.ac.uk\" or hostname:\"hv559.nubes.rl.ac.uk\" or hostname:\"hv523.nubes.rl.ac.uk\" or hostname:\"hv535.nubes.rl.ac.uk\" or hostname:\"hv552.nubes.rl.ac.uk\" or hostname:\"hv553.nubes.rl.ac.uk\" or hostname:\"hv554.nubes.rl.ac.uk\" or hostname:\"hv556.nubes.rl.ac.uk\"  or rack:\"*rack411\" or rack:\"*RACK411\" or rack:\"*411\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "displayName": "cloud rack 412",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 18,
+        "y": 9
+      },
+      "id": 17,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv586.nubes.rl.ac.uk\" or hostname:\"hv589.nubes.rl.ac.uk\" or hostname:\"hv609.nubes.rl.ac.uk\" or hostname:\"hv564.nubes.rl.ac.uk\" or hostname:\"hv566.nubes.rl.ac.uk\" or hostname:\"hv567.nubes.rl.ac.uk\" or hostname:\"hv568.nubes.rl.ac.uk\" or hostname:\"hv569.nubes.rl.ac.uk\" or hostname:\"hv570.nubes.rl.ac.uk\" or hostname:\"hv572.nubes.rl.ac.uk\" or hostname:\"hv573.nubes.rl.ac.uk\" or hostname:\"hv574.nubes.rl.ac.uk\" or hostname:\"hv575.nubes.rl.ac.uk\" or hostname:\"hv576.nubes.rl.ac.uk\" or hostname:\"hv578.nubes.rl.ac.uk\" or hostname:\"hv579.nubes.rl.ac.uk\" or hostname:\"hv580.nubes.rl.ac.uk\" or hostname:\"hv581.nubes.rl.ac.uk\" or hostname:\"hv582.nubes.rl.ac.uk\" or hostname:\"hv583.nubes.rl.ac.uk\" or hostname:\"hv584.nubes.rl.ac.uk\" or hostname:\"hv585.nubes.rl.ac.uk\" or hostname:\"hv587.nubes.rl.ac.uk\" or hostname:\"hv588.nubes.rl.ac.uk\" or hostname:\"hv590.nubes.rl.ac.uk\" or hostname:\"hv591.nubes.rl.ac.uk\" or hostname:\"hv592.nubes.rl.ac.uk\" or hostname:\"hv593.nubes.rl.ac.uk\" or hostname:\"hv594.nubes.rl.ac.uk\" or hostname:\"hv595.nubes.rl.ac.uk\" or hostname:\"hv596.nubes.rl.ac.uk\" or hostname:\"hv597.nubes.rl.ac.uk\" or hostname:\"hv598.nubes.rl.ac.uk\" or hostname:\"hv599.nubes.rl.ac.uk\" or hostname:\"hv600.nubes.rl.ac.uk\" or hostname:\"hv601.nubes.rl.ac.uk\" or hostname:\"hv602.nubes.rl.ac.uk\" or hostname:\"hv603.nubes.rl.ac.uk\" or hostname:\"hv604.nubes.rl.ac.uk\" or hostname:\"hv605.nubes.rl.ac.uk\" or hostname:\"hv606.nubes.rl.ac.uk\" or hostname:\"hv607.nubes.rl.ac.uk\" or hostname:\"hv608.nubes.rl.ac.uk\" or hostname:\"hv610.nubes.rl.ac.uk\" or hostname:\"hv611.nubes.rl.ac.uk\" or hostname:\"hv565.nubes.rl.ac.uk\" or hostname:\"hv571.nubes.rl.ac.uk\" or hostname:\"hv577.nubes.rl.ac.uk\"\n  or rack:\"*rack412\" or rack:\"*RACK412\" or rack:\"*412\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "displayName": "‎",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 1,
+        "x": 23,
+        "y": 9
+      },
+      "id": 31,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": false,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv586.nubes.rl.ac.uk\" or hostname:\"hv589.nubes.rl.ac.uk\" or hostname:\"hv609.nubes.rl.ac.uk\" or hostname:\"hv564.nubes.rl.ac.uk\" or hostname:\"hv566.nubes.rl.ac.uk\" or hostname:\"hv567.nubes.rl.ac.uk\" or hostname:\"hv568.nubes.rl.ac.uk\" or hostname:\"hv569.nubes.rl.ac.uk\" or hostname:\"hv570.nubes.rl.ac.uk\" or hostname:\"hv572.nubes.rl.ac.uk\" or hostname:\"hv573.nubes.rl.ac.uk\" or hostname:\"hv574.nubes.rl.ac.uk\" or hostname:\"hv575.nubes.rl.ac.uk\" or hostname:\"hv576.nubes.rl.ac.uk\" or hostname:\"hv578.nubes.rl.ac.uk\" or hostname:\"hv579.nubes.rl.ac.uk\" or hostname:\"hv580.nubes.rl.ac.uk\" or hostname:\"hv581.nubes.rl.ac.uk\" or hostname:\"hv582.nubes.rl.ac.uk\" or hostname:\"hv583.nubes.rl.ac.uk\" or hostname:\"hv584.nubes.rl.ac.uk\" or hostname:\"hv585.nubes.rl.ac.uk\" or hostname:\"hv587.nubes.rl.ac.uk\" or hostname:\"hv588.nubes.rl.ac.uk\" or hostname:\"hv590.nubes.rl.ac.uk\" or hostname:\"hv591.nubes.rl.ac.uk\" or hostname:\"hv592.nubes.rl.ac.uk\" or hostname:\"hv593.nubes.rl.ac.uk\" or hostname:\"hv594.nubes.rl.ac.uk\" or hostname:\"hv595.nubes.rl.ac.uk\" or hostname:\"hv596.nubes.rl.ac.uk\" or hostname:\"hv597.nubes.rl.ac.uk\" or hostname:\"hv598.nubes.rl.ac.uk\" or hostname:\"hv599.nubes.rl.ac.uk\" or hostname:\"hv600.nubes.rl.ac.uk\" or hostname:\"hv601.nubes.rl.ac.uk\" or hostname:\"hv602.nubes.rl.ac.uk\" or hostname:\"hv603.nubes.rl.ac.uk\" or hostname:\"hv604.nubes.rl.ac.uk\" or hostname:\"hv605.nubes.rl.ac.uk\" or hostname:\"hv606.nubes.rl.ac.uk\" or hostname:\"hv607.nubes.rl.ac.uk\" or hostname:\"hv608.nubes.rl.ac.uk\" or hostname:\"hv610.nubes.rl.ac.uk\" or hostname:\"hv611.nubes.rl.ac.uk\" or hostname:\"hv565.nubes.rl.ac.uk\" or hostname:\"hv571.nubes.rl.ac.uk\" or hostname:\"hv577.nubes.rl.ac.uk\"\n  or rack:\"*rack412\" or rack:\"*RACK412\" or rack:\"*412\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "displayName": "cloud rack 413",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 0,
+        "y": 12
+      },
+      "id": 18,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv614.nubes.rl.ac.uk\" or hostname:\"hv615.nubes.rl.ac.uk\" or hostname:\"hv627.nubes.rl.ac.uk\" or hostname:\"hv643.nubes.rl.ac.uk\" or hostname:\"hv659.nubes.rl.ac.uk\" or hostname:\"hv613.nubes.rl.ac.uk\" or hostname:\"hv616.nubes.rl.ac.uk\" or hostname:\"hv617.nubes.rl.ac.uk\" or hostname:\"hv618.nubes.rl.ac.uk\" or hostname:\"hv619.nubes.rl.ac.uk\" or hostname:\"hv620.nubes.rl.ac.uk\" or hostname:\"hv621.nubes.rl.ac.uk\" or hostname:\"hv623.nubes.rl.ac.uk\" or hostname:\"hv624.nubes.rl.ac.uk\" or hostname:\"hv625.nubes.rl.ac.uk\" or hostname:\"hv626.nubes.rl.ac.uk\" or hostname:\"hv628.nubes.rl.ac.uk\" or hostname:\"hv629.nubes.rl.ac.uk\" or hostname:\"hv630.nubes.rl.ac.uk\" or hostname:\"hv631.nubes.rl.ac.uk\" or hostname:\"hv633.nubes.rl.ac.uk\" or hostname:\"hv634.nubes.rl.ac.uk\" or hostname:\"hv635.nubes.rl.ac.uk\" or hostname:\"hv636.nubes.rl.ac.uk\" or hostname:\"hv637.nubes.rl.ac.uk\" or hostname:\"hv638.nubes.rl.ac.uk\" or hostname:\"hv639.nubes.rl.ac.uk\" or hostname:\"hv640.nubes.rl.ac.uk\" or hostname:\"hv641.nubes.rl.ac.uk\" or hostname:\"hv642.nubes.rl.ac.uk\" or hostname:\"hv644.nubes.rl.ac.uk\" or hostname:\"hv645.nubes.rl.ac.uk\" or hostname:\"hv646.nubes.rl.ac.uk\" or hostname:\"hv647.nubes.rl.ac.uk\" or hostname:\"hv648.nubes.rl.ac.uk\" or hostname:\"hv649.nubes.rl.ac.uk\" or hostname:\"hv650.nubes.rl.ac.uk\" or hostname:\"hv653.nubes.rl.ac.uk\" or hostname:\"hv654.nubes.rl.ac.uk\" or hostname:\"hv655.nubes.rl.ac.uk\" or hostname:\"hv656.nubes.rl.ac.uk\" or hostname:\"hv632.nubes.rl.ac.uk\" or hostname:\"hv652.nubes.rl.ac.uk\" or hostname:\"hv657.nubes.rl.ac.uk\" or hostname:\"hv658.nubes.rl.ac.uk\"  or rack:\"*rack413\" or rack:\"*RACK413\" or rack:\"*413\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Unique Count hostname.keyword"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "‎"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 1,
+        "x": 5,
+        "y": 12
+      },
+      "id": 41,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": false,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv614.nubes.rl.ac.uk\" or hostname:\"hv615.nubes.rl.ac.uk\" or hostname:\"hv627.nubes.rl.ac.uk\" or hostname:\"hv643.nubes.rl.ac.uk\" or hostname:\"hv659.nubes.rl.ac.uk\" or hostname:\"hv613.nubes.rl.ac.uk\" or hostname:\"hv616.nubes.rl.ac.uk\" or hostname:\"hv617.nubes.rl.ac.uk\" or hostname:\"hv618.nubes.rl.ac.uk\" or hostname:\"hv619.nubes.rl.ac.uk\" or hostname:\"hv620.nubes.rl.ac.uk\" or hostname:\"hv621.nubes.rl.ac.uk\" or hostname:\"hv623.nubes.rl.ac.uk\" or hostname:\"hv624.nubes.rl.ac.uk\" or hostname:\"hv625.nubes.rl.ac.uk\" or hostname:\"hv626.nubes.rl.ac.uk\" or hostname:\"hv628.nubes.rl.ac.uk\" or hostname:\"hv629.nubes.rl.ac.uk\" or hostname:\"hv630.nubes.rl.ac.uk\" or hostname:\"hv631.nubes.rl.ac.uk\" or hostname:\"hv633.nubes.rl.ac.uk\" or hostname:\"hv634.nubes.rl.ac.uk\" or hostname:\"hv635.nubes.rl.ac.uk\" or hostname:\"hv636.nubes.rl.ac.uk\" or hostname:\"hv637.nubes.rl.ac.uk\" or hostname:\"hv638.nubes.rl.ac.uk\" or hostname:\"hv639.nubes.rl.ac.uk\" or hostname:\"hv640.nubes.rl.ac.uk\" or hostname:\"hv641.nubes.rl.ac.uk\" or hostname:\"hv642.nubes.rl.ac.uk\" or hostname:\"hv644.nubes.rl.ac.uk\" or hostname:\"hv645.nubes.rl.ac.uk\" or hostname:\"hv646.nubes.rl.ac.uk\" or hostname:\"hv647.nubes.rl.ac.uk\" or hostname:\"hv648.nubes.rl.ac.uk\" or hostname:\"hv649.nubes.rl.ac.uk\" or hostname:\"hv650.nubes.rl.ac.uk\" or hostname:\"hv653.nubes.rl.ac.uk\" or hostname:\"hv654.nubes.rl.ac.uk\" or hostname:\"hv655.nubes.rl.ac.uk\" or hostname:\"hv656.nubes.rl.ac.uk\" or hostname:\"hv632.nubes.rl.ac.uk\" or hostname:\"hv652.nubes.rl.ac.uk\" or hostname:\"hv657.nubes.rl.ac.uk\" or hostname:\"hv658.nubes.rl.ac.uk\"  or rack:\"*rack413\" or rack:\"*RACK413\" or rack:\"*413\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "displayName": "cloud rack 414",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 6,
+        "y": 12
+      },
+      "id": 19,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv682.nubes.rl.ac.uk\" or hostname:\"hv688.nubes.rl.ac.uk\" or hostname:\"hv690.nubes.rl.ac.uk\" or hostname:\"hv695.nubes.rl.ac.uk\" or hostname:\"hv704.nubes.rl.ac.uk\" or hostname:\"hv705.nubes.rl.ac.uk\" or hostname:\"hv660.nubes.rl.ac.uk\" or hostname:\"hv661.nubes.rl.ac.uk\" or hostname:\"hv662.nubes.rl.ac.uk\" or hostname:\"hv663.nubes.rl.ac.uk\" or hostname:\"hv664.nubes.rl.ac.uk\" or hostname:\"hv665.nubes.rl.ac.uk\" or hostname:\"hv666.nubes.rl.ac.uk\" or hostname:\"hv667.nubes.rl.ac.uk\" or hostname:\"hv669.nubes.rl.ac.uk\" or hostname:\"hv670.nubes.rl.ac.uk\" or hostname:\"hv671.nubes.rl.ac.uk\" or hostname:\"hv673.nubes.rl.ac.uk\" or hostname:\"hv674.nubes.rl.ac.uk\" or hostname:\"hv675.nubes.rl.ac.uk\" or hostname:\"hv676.nubes.rl.ac.uk\" or hostname:\"hv677.nubes.rl.ac.uk\" or hostname:\"hv678.nubes.rl.ac.uk\" or hostname:\"hv679.nubes.rl.ac.uk\" or hostname:\"hv681.nubes.rl.ac.uk\" or hostname:\"hv683.nubes.rl.ac.uk\" or hostname:\"hv684.nubes.rl.ac.uk\" or hostname:\"hv685.nubes.rl.ac.uk\" or hostname:\"hv686.nubes.rl.ac.uk\" or hostname:\"hv687.nubes.rl.ac.uk\" or hostname:\"hv689.nubes.rl.ac.uk\" or hostname:\"hv691.nubes.rl.ac.uk\" or hostname:\"hv692.nubes.rl.ac.uk\" or hostname:\"hv693.nubes.rl.ac.uk\" or hostname:\"hv694.nubes.rl.ac.uk\" or hostname:\"hv696.nubes.rl.ac.uk\" or hostname:\"hv697.nubes.rl.ac.uk\" or hostname:\"hv698.nubes.rl.ac.uk\" or hostname:\"hv699.nubes.rl.ac.uk\" or hostname:\"hv700.nubes.rl.ac.uk\" or hostname:\"hv701.nubes.rl.ac.uk\" or hostname:\"hv702.nubes.rl.ac.uk\" or hostname:\"hv703.nubes.rl.ac.uk\" or hostname:\"hv707.nubes.rl.ac.uk\" or hostname:\"hv668.nubes.rl.ac.uk\" or hostname:\"hv672.nubes.rl.ac.uk\" or hostname:\"hv680.nubes.rl.ac.uk\" or hostname:\"hv706.nubes.rl.ac.uk\"  or rack:\"*rack414\" or rack:\"*RACK414\" or rack:\"*414\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "displayName": "‎",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 1,
+        "x": 11,
+        "y": 12
+      },
+      "id": 38,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": false,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv682.nubes.rl.ac.uk\" or hostname:\"hv688.nubes.rl.ac.uk\" or hostname:\"hv690.nubes.rl.ac.uk\" or hostname:\"hv695.nubes.rl.ac.uk\" or hostname:\"hv704.nubes.rl.ac.uk\" or hostname:\"hv705.nubes.rl.ac.uk\" or hostname:\"hv660.nubes.rl.ac.uk\" or hostname:\"hv661.nubes.rl.ac.uk\" or hostname:\"hv662.nubes.rl.ac.uk\" or hostname:\"hv663.nubes.rl.ac.uk\" or hostname:\"hv664.nubes.rl.ac.uk\" or hostname:\"hv665.nubes.rl.ac.uk\" or hostname:\"hv666.nubes.rl.ac.uk\" or hostname:\"hv667.nubes.rl.ac.uk\" or hostname:\"hv669.nubes.rl.ac.uk\" or hostname:\"hv670.nubes.rl.ac.uk\" or hostname:\"hv671.nubes.rl.ac.uk\" or hostname:\"hv673.nubes.rl.ac.uk\" or hostname:\"hv674.nubes.rl.ac.uk\" or hostname:\"hv675.nubes.rl.ac.uk\" or hostname:\"hv676.nubes.rl.ac.uk\" or hostname:\"hv677.nubes.rl.ac.uk\" or hostname:\"hv678.nubes.rl.ac.uk\" or hostname:\"hv679.nubes.rl.ac.uk\" or hostname:\"hv681.nubes.rl.ac.uk\" or hostname:\"hv683.nubes.rl.ac.uk\" or hostname:\"hv684.nubes.rl.ac.uk\" or hostname:\"hv685.nubes.rl.ac.uk\" or hostname:\"hv686.nubes.rl.ac.uk\" or hostname:\"hv687.nubes.rl.ac.uk\" or hostname:\"hv689.nubes.rl.ac.uk\" or hostname:\"hv691.nubes.rl.ac.uk\" or hostname:\"hv692.nubes.rl.ac.uk\" or hostname:\"hv693.nubes.rl.ac.uk\" or hostname:\"hv694.nubes.rl.ac.uk\" or hostname:\"hv696.nubes.rl.ac.uk\" or hostname:\"hv697.nubes.rl.ac.uk\" or hostname:\"hv698.nubes.rl.ac.uk\" or hostname:\"hv699.nubes.rl.ac.uk\" or hostname:\"hv700.nubes.rl.ac.uk\" or hostname:\"hv701.nubes.rl.ac.uk\" or hostname:\"hv702.nubes.rl.ac.uk\" or hostname:\"hv703.nubes.rl.ac.uk\" or hostname:\"hv707.nubes.rl.ac.uk\" or hostname:\"hv668.nubes.rl.ac.uk\" or hostname:\"hv672.nubes.rl.ac.uk\" or hostname:\"hv680.nubes.rl.ac.uk\" or hostname:\"hv706.nubes.rl.ac.uk\"  or rack:\"*rack414\" or rack:\"*RACK414\" or rack:\"*414\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "displayName": "cloud rack 415",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 12,
+        "y": 12
+      },
+      "id": 20,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv709.nubes.rl.ac.uk\" or hostname:\"hv710.nubes.rl.ac.uk\" or hostname:\"hv748.nubes.rl.ac.uk\" or hostname:\"hv749.nubes.rl.ac.uk\" or hostname:\"hv750.nubes.rl.ac.uk\" or hostname:\"hv751.nubes.rl.ac.uk\" or hostname:\"hv708.nubes.rl.ac.uk\" or hostname:\"hv711.nubes.rl.ac.uk\" or hostname:\"hv712.nubes.rl.ac.uk\" or hostname:\"hv713.nubes.rl.ac.uk\" or hostname:\"hv714.nubes.rl.ac.uk\" or hostname:\"hv715.nubes.rl.ac.uk\" or hostname:\"hv716.nubes.rl.ac.uk\" or hostname:\"hv717.nubes.rl.ac.uk\" or hostname:\"hv718.nubes.rl.ac.uk\" or hostname:\"hv719.nubes.rl.ac.uk\" or hostname:\"hv720.nubes.rl.ac.uk\" or hostname:\"hv721.nubes.rl.ac.uk\" or hostname:\"hv722.nubes.rl.ac.uk\" or hostname:\"hv723.nubes.rl.ac.uk\" or hostname:\"hv724.nubes.rl.ac.uk\" or hostname:\"hv725.nubes.rl.ac.uk\" or hostname:\"hv726.nubes.rl.ac.uk\" or hostname:\"hv727.nubes.rl.ac.uk\" or hostname:\"hv728.nubes.rl.ac.uk\" or hostname:\"hv729.nubes.rl.ac.uk\" or hostname:\"hv730.nubes.rl.ac.uk\" or hostname:\"hv731.nubes.rl.ac.uk\" or hostname:\"hv732.nubes.rl.ac.uk\" or hostname:\"hv733.nubes.rl.ac.uk\" or hostname:\"hv734.nubes.rl.ac.uk\" or hostname:\"hv735.nubes.rl.ac.uk\" or hostname:\"hv736.nubes.rl.ac.uk\" or hostname:\"hv737.nubes.rl.ac.uk\" or hostname:\"hv738.nubes.rl.ac.uk\"  or rack:\"*rack415\" or rack:\"*RACK415\" or rack:\"*415\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "displayName": "‎",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 1,
+        "x": 17,
+        "y": 12
+      },
+      "id": 35,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": false,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv709.nubes.rl.ac.uk\" or hostname:\"hv710.nubes.rl.ac.uk\" or hostname:\"hv748.nubes.rl.ac.uk\" or hostname:\"hv749.nubes.rl.ac.uk\" or hostname:\"hv750.nubes.rl.ac.uk\" or hostname:\"hv751.nubes.rl.ac.uk\" or hostname:\"hv708.nubes.rl.ac.uk\" or hostname:\"hv711.nubes.rl.ac.uk\" or hostname:\"hv712.nubes.rl.ac.uk\" or hostname:\"hv713.nubes.rl.ac.uk\" or hostname:\"hv714.nubes.rl.ac.uk\" or hostname:\"hv715.nubes.rl.ac.uk\" or hostname:\"hv716.nubes.rl.ac.uk\" or hostname:\"hv717.nubes.rl.ac.uk\" or hostname:\"hv718.nubes.rl.ac.uk\" or hostname:\"hv719.nubes.rl.ac.uk\" or hostname:\"hv720.nubes.rl.ac.uk\" or hostname:\"hv721.nubes.rl.ac.uk\" or hostname:\"hv722.nubes.rl.ac.uk\" or hostname:\"hv723.nubes.rl.ac.uk\" or hostname:\"hv724.nubes.rl.ac.uk\" or hostname:\"hv725.nubes.rl.ac.uk\" or hostname:\"hv726.nubes.rl.ac.uk\" or hostname:\"hv727.nubes.rl.ac.uk\" or hostname:\"hv728.nubes.rl.ac.uk\" or hostname:\"hv729.nubes.rl.ac.uk\" or hostname:\"hv730.nubes.rl.ac.uk\" or hostname:\"hv731.nubes.rl.ac.uk\" or hostname:\"hv732.nubes.rl.ac.uk\" or hostname:\"hv733.nubes.rl.ac.uk\" or hostname:\"hv734.nubes.rl.ac.uk\" or hostname:\"hv735.nubes.rl.ac.uk\" or hostname:\"hv736.nubes.rl.ac.uk\" or hostname:\"hv737.nubes.rl.ac.uk\" or hostname:\"hv738.nubes.rl.ac.uk\"  or rack:\"*rack415\" or rack:\"*RACK415\" or rack:\"*415\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "displayName": "cloud rack 416",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 18,
+        "y": 12
+      },
+      "id": 21,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv-v100-19.nubes.rl.ac.uk\" or hostname:\"hv-v100-20.nubes.rl.ac.uk\" or hostname:\"hv-v100-22.nubes.rl.ac.uk\" or hostname:\"hv-v100-23.nubes.rl.ac.uk\" or hostname:\"hv-v100-27.nubes.rl.ac.uk\" or hostname:\"hv-v100-28.nubes.rl.ac.uk\" or hostname:\"hv-v100-29.nubes.rl.ac.uk\" or hostname:\"hv-v100-30.nubes.rl.ac.uk\" or hostname:\"hv-v100-31.nubes.rl.ac.uk\" or hostname:\"hv-v100-21.nubes.rl.ac.uk\" or hostname:\"hv-v100-25.nubes.rl.ac.uk\" or hostname:\"hv-v100-26.nubes.rl.ac.uk\" or hostname:\"hv-v100-18.nubes.rl.ac.uk\" or hostname:\"hv-v100-24.nubes.rl.ac.uk\"  or rack:\"*rack416\" or rack:\"*RACK416\" or rack:\"*416\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "displayName": "‎",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 1,
+        "x": 23,
+        "y": 12
+      },
+      "id": 32,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": false,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "hostname:\"hv-v100-19.nubes.rl.ac.uk\" or hostname:\"hv-v100-20.nubes.rl.ac.uk\" or hostname:\"hv-v100-22.nubes.rl.ac.uk\" or hostname:\"hv-v100-23.nubes.rl.ac.uk\" or hostname:\"hv-v100-27.nubes.rl.ac.uk\" or hostname:\"hv-v100-28.nubes.rl.ac.uk\" or hostname:\"hv-v100-29.nubes.rl.ac.uk\" or hostname:\"hv-v100-30.nubes.rl.ac.uk\" or hostname:\"hv-v100-31.nubes.rl.ac.uk\" or hostname:\"hv-v100-21.nubes.rl.ac.uk\" or hostname:\"hv-v100-25.nubes.rl.ac.uk\" or hostname:\"hv-v100-26.nubes.rl.ac.uk\" or hostname:\"hv-v100-18.nubes.rl.ac.uk\" or hostname:\"hv-v100-24.nubes.rl.ac.uk\"  or rack:\"*rack416\" or rack:\"*RACK416\" or rack:\"*416\"",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "displayName": "total watts",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 15
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Unique Count hostname.keyword"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "‎"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 1,
+        "x": 6,
+        "y": 15
+      },
+      "id": 42,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "limit": 1,
+          "values": true
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": true,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": false,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-opensearch-datasource",
+        "uid": "opensearch-grafana"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 100,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 17,
+        "x": 7,
+        "y": 15
+      },
+      "id": 43,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "grafana-opensearch-datasource",
+            "uid": "opensearch-grafana"
+          },
+          "format": "table",
+          "metrics": [
+            {
+              "field": "watts",
+              "hide": false,
+              "id": "1",
+              "settings": {},
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "hide": true,
+              "id": "3",
+              "type": "cumulative_sum"
+            },
+            {
+              "field": "hostname.keyword",
+              "hide": true,
+              "id": "4",
+              "type": "cardinality"
+            },
+            {
+              "hide": true,
+              "id": "5",
+              "pipelineVariables": [
+                {
+                  "name": "total_watt_hours",
+                  "pipelineAgg": "3"
+                },
+                {
+                  "name": "sum_hosts",
+                  "pipelineAgg": "4"
+                }
+              ],
+              "settings": {
+                "script": "params.sum_hosts * (params.total_watt_hours / 1000)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "",
+          "queryType": "lucene",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "transformations": [],
+      "type": "timeseries"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "2023-09-03T23:00:00.000Z",
+    "to": "2023-09-07T22:59:59.000Z"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Cloud Rack Average Energy Usage",
+  "uid": "b27089fa-2236-43f7-8040-ef7faf6f6314",
+  "version": 47,
+  "weekStart": ""
+}
