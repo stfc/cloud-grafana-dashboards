@@ -12,5 +12,5 @@ Current Dashboards:
 - OpenStack GPU Usage: GPU Usage on Prod across all GPU flavors.
 - GPU Pool Availability: Availability of flavors across GPU Pools.
 - Cloud Rack Energy Usage: Shows the energy usage across each rack.
-- Cloud VM Overview: Overview of the current number of VMs in different states.
-- Cloud VM Details: Dashboard of the number of VMs over time.
+- **[WIP]** Cloud VM Overview: Overview of the current number of VMs in different states.
+- **[WIP]** Cloud VM Details: Dashboard of the number of VMs over time.
