@@ -25,7 +25,7 @@
     {
       "datasource": {
         "type": "grafana-opensearch-datasource",
-        "uid": "c849de2f-7276-43b5-be99-ac36a467f59f"
+        "uid": "grafana-power-metrics"
       },
       "gridPos": {
         "h": 3,
@@ -59,7 +59,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "c849de2f-7276-43b5-be99-ac36a467f59f"
+            "uid": "grafana-power-metrics"
           },
           "format": "table",
           "luceneQueryType": "Traces",
@@ -81,7 +81,7 @@
     {
       "datasource": {
         "type": "grafana-opensearch-datasource",
-        "uid": "c849de2f-7276-43b5-be99-ac36a467f59f"
+        "uid": "grafana-power-metrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -150,7 +150,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "c849de2f-7276-43b5-be99-ac36a467f59f"
+            "uid": "grafana-power-metrics"
           },
           "format": "table",
           "metrics": [
@@ -172,7 +172,7 @@
     {
       "datasource": {
         "type": "grafana-opensearch-datasource",
-        "uid": "c849de2f-7276-43b5-be99-ac36a467f59f"
+        "uid": "grafana-power-metrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -232,7 +232,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "c849de2f-7276-43b5-be99-ac36a467f59f"
+            "uid": "grafana-power-metrics"
           },
           "format": "table",
           "metrics": [
@@ -253,7 +253,7 @@
     {
       "datasource": {
         "type": "grafana-opensearch-datasource",
-        "uid": "c849de2f-7276-43b5-be99-ac36a467f59f"
+        "uid": "grafana-power-metrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -322,7 +322,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "c849de2f-7276-43b5-be99-ac36a467f59f"
+            "uid": "grafana-power-metrics"
           },
           "format": "table",
           "metrics": [
@@ -344,7 +344,7 @@
     {
       "datasource": {
         "type": "grafana-opensearch-datasource",
-        "uid": "c849de2f-7276-43b5-be99-ac36a467f59f"
+        "uid": "grafana-power-metrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -415,7 +415,7 @@
           ],
           "datasource": {
             "type": "grafana-opensearch-datasource",
-            "uid": "c849de2f-7276-43b5-be99-ac36a467f59f"
+            "uid": "grafana-power-metrics"
           },
           "format": "table",
           "metrics": [
@@ -452,7 +452,7 @@
         },
         "datasource": {
           "type": "grafana-opensearch-datasource",
-          "uid": "c849de2f-7276-43b5-be99-ac36a467f59f"
+          "uid": "grafana-power-metrics"
         },
         "definition": "{\"find\": \"terms\", \"field\": \"hostname.keyword\", \"size\": 3000}",
         "hide": 0,
