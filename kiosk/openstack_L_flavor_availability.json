@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 22,
+  "id": 3,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -50,7 +50,8 @@
                 "value": 20
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": []
       },
@@ -73,10 +74,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.0.2",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "alias": "$tag_flavor",
@@ -95,6 +98,8 @@
           "measurement": "SlotsAvailable",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT last(\"SlotsAvailable\") FROM \"SlotsAvailable\" WHERE (\"instance\" =~  /^$Instance$/  AND \"flavor\" !~ /.*test.*/ AND \"flavor\" !~ /.*temp.*/ AND \"flavor\" =~ /^l.*/) AND $timeFilter GROUP BY \"flavor\"",
+          "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -137,11 +142,39 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 39,
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "Prod",
+          "value": "Prod"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "",
+        "multi": false,
+        "name": "Instance",
+        "options": [
+          {
+            "selected": true,
+            "text": "Prod",
+            "value": "Prod"
+          },
+          {
+            "selected": false,
+            "text": "Preprod",
+            "value": "Preprod"
+          }
+        ],
+        "query": "Prod, Preprod",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
   },
   "time": {
     "from": "now-6h",
@@ -151,6 +184,6 @@
   "timezone": "",
   "title": "Kiosk - OpenStack Slots Available: L* Flavors",
   "uid": "openstack_l_flavor_availability",
-  "version": 2,
+  "version": 6,
   "weekStart": ""
 }
