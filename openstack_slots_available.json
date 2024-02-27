@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 17,
+  "id": 9,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -63,7 +63,8 @@
                 "value": 20
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": []
       },
@@ -86,10 +87,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.0.2",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "alias": "$tag_flavor",
@@ -108,6 +111,8 @@
           "measurement": "SlotsAvailable",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT last(\"SlotsAvailable\") FROM \"SlotsAvailable\" WHERE (\"instance\" =~  /^$Instance$/  AND \"flavor\" !~ /.*test.*/ AND \"flavor\" !~ /.*temp.*/ AND \"flavor\" =~ /^l.*/) AND $timeFilter GROUP BY \"flavor\"",
+          "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -189,7 +194,8 @@
                 "value": 20
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": []
       },
@@ -212,10 +218,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.0.2",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "alias": "$tag_flavor",
@@ -234,6 +242,8 @@
           "measurement": "SlotsAvailable",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT last(\"SlotsAvailable\") FROM \"SlotsAvailable\" WHERE (\"instance\" =~  /^$Instance$/  AND \"flavor\" !~ /.*test.*/ AND \"flavor\" !~ /.*temp.*/ AND \"flavor\" =~ /g-rtx4000.*/) AND $timeFilter GROUP BY \"flavor\"",
+          "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -315,7 +325,8 @@
                 "value": 20
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": []
       },
@@ -338,10 +349,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.0.2",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "alias": "$tag_flavor",
@@ -360,6 +373,8 @@
           "measurement": "SlotsAvailable",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT last(\"SlotsAvailable\") FROM \"SlotsAvailable\" WHERE (\"instance\" =~  /^$Instance$/  AND \"flavor\" !~ /.*test.*/ AND \"flavor\" !~ /.*temp.*/ AND \"flavor\" =~ /g-a100.*/) AND $timeFilter GROUP BY \"flavor\"",
+          "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -428,7 +443,8 @@
                 "value": 20
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": []
       },
@@ -451,10 +467,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.0.2",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "alias": "$tag_flavor",
@@ -473,6 +491,8 @@
           "measurement": "SlotsAvailable",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT last(\"SlotsAvailable\") FROM \"SlotsAvailable\" WHERE (\"instance\" =~  /^$Instance$/  AND \"flavor\" !~ /.*test.*/ AND \"flavor\" !~ /.*temp.*/ AND \"flavor\" =~ /g-v100.*/) AND $timeFilter GROUP BY \"flavor\"",
+          "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -865,11 +885,38 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 39,
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "Preprod",
+          "value": "Preprod"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "Instance",
+        "options": [
+          {
+            "selected": false,
+            "text": "Prod",
+            "value": "Prod"
+          },
+          {
+            "selected": true,
+            "text": "Preprod",
+            "value": "Preprod"
+          }
+        ],
+        "query": "Prod, Preprod",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
   },
   "time": {
     "from": "now-1h",
@@ -891,6 +938,6 @@
   "timezone": "",
   "title": "OpenStack Slots Available",
   "uid": "slots_available",
-  "version": 7,
+  "version": 5,
   "weekStart": ""
 }
