@@ -34,6 +34,8 @@ As part of reviewing this PR the changes must be tested on a Grafana instance. T
 
 * [ ] Spin up a machine with the aq personality `openstack-grafana`
 
+* [ ] In `/etc/grafana/grafana.ini` under `[server]` comment out: domain, root_url, http_addr. Restart Grafana
+
 * [ ] Open Grafana and navigate to browse dashboard
 
 * [ ] You should see the dashboards which are from this repo
