@@ -18,10 +18,21 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 15,
+  "id": 11,
   "links": [],
   "liveNow": false,
   "panels": [
+    {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 791,
+      "title": "Row title",
+      "type": "row"
+    },
     {
       "datasource": {
         "type": "datasource",
@@ -31,7 +42,7 @@
         "h": 3,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 1
       },
       "id": 786,
       "options": {
@@ -43,7 +54,7 @@
         "content": "# OpenStack Hypervisor Status: Prod",
         "mode": "markdown"
       },
-      "pluginVersion": "10.0.2",
+      "pluginVersion": "10.3.3",
       "title": "Hypervisor Status",
       "type": "text"
     },
@@ -67,7 +78,8 @@
                 "value": null
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": []
       },
@@ -75,7 +87,7 @@
         "h": 5,
         "w": 8,
         "x": 0,
-        "y": 3
+        "y": 4
       },
       "id": 3,
       "options": {
@@ -90,10 +102,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.0.2",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -117,7 +131,9 @@
           "measurement": "ServiceStatus",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT sum(\"full\") FROM \"ServiceStatus\" WHERE (\"instance\"::tag =~ /^$instance$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
           "queryType": "randomWalk",
+          "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -134,7 +150,13 @@
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "instance::tag",
+              "operator": "=~",
+              "value": "/^$instance$/"
+            }
+          ]
         }
       ],
       "title": "Hypervisors full",
@@ -160,7 +182,8 @@
                 "value": null
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": []
       },
@@ -168,7 +191,7 @@
         "h": 5,
         "w": 8,
         "x": 8,
-        "y": 3
+        "y": 4
       },
       "id": 4,
       "options": {
@@ -183,10 +206,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.0.2",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -227,7 +252,13 @@
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "instance::tag",
+              "operator": "=~",
+              "value": "/^$instance$/"
+            }
+          ]
         }
       ],
       "title": "Hypervisors CPU full",
@@ -253,7 +284,8 @@
                 "value": null
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": []
       },
@@ -261,7 +293,7 @@
         "h": 5,
         "w": 8,
         "x": 16,
-        "y": 3
+        "y": 4
       },
       "id": 5,
       "options": {
@@ -276,10 +308,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.0.2",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -303,7 +337,9 @@
           "measurement": "ServiceStatus",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT sum(\"memfull\") FROM \"ServiceStatus\" WHERE (\"aggregate\"::tag =~ /^$instance$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
           "queryType": "randomWalk",
+          "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -320,7 +356,13 @@
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "instance::tag",
+              "operator": "=~",
+              "value": "/^$instance$/"
+            }
+          ]
         }
       ],
       "title": "Hypervisors Memory full",
@@ -358,7 +400,8 @@
               }
             ]
           },
-          "unit": "percent"
+          "unit": "percent",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -366,7 +409,7 @@
         "h": 5,
         "w": 8,
         "x": 0,
-        "y": 8
+        "y": 9
       },
       "id": 789,
       "options": {
@@ -381,9 +424,11 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.0.2",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -408,7 +453,7 @@
           "measurement": "ServiceStatus",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT sum(\"status\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"instance\" =~ /^Prod$/ AND \"service\" =~ /^\"hv\"$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "query": "SELECT sum(\"status\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"instance\" =~ /^$instance$/ AND \"service\" =~ /^\"hv\"$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -479,7 +524,13 @@
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "instance::tag",
+              "operator": "=~",
+              "value": "/^$instance$/"
+            }
+          ]
         },
         {
           "datasource": {
@@ -528,7 +579,8 @@
               }
             ]
           },
-          "unit": "percent"
+          "unit": "percent",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -536,7 +588,7 @@
         "h": 5,
         "w": 8,
         "x": 8,
-        "y": 8
+        "y": 9
       },
       "id": 787,
       "options": {
@@ -551,9 +603,11 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.0.2",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -578,7 +632,7 @@
           "measurement": "ServiceStatus",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT sum(\"status\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"instance\" =~ /^Prod$/ AND \"service\" =~ /^\"hv\"$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "query": "SELECT sum(\"status\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"instance\" =~ /^$instance$/ AND \"service\" =~ /^\"hv\"$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -649,7 +703,13 @@
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "instance::tag",
+              "operator": "=~",
+              "value": "/^$instance$/"
+            }
+          ]
         },
         {
           "datasource": {
@@ -698,7 +758,8 @@
               }
             ]
           },
-          "unit": "percent"
+          "unit": "percent",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -706,7 +767,7 @@
         "h": 5,
         "w": 8,
         "x": 16,
-        "y": 8
+        "y": 9
       },
       "id": 788,
       "options": {
@@ -721,9 +782,11 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.0.2",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -748,7 +811,7 @@
           "measurement": "ServiceStatus",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT sum(\"status\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"instance\" =~ /^Prod$/ AND \"service\" =~ /^\"hv\"$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "query": "SELECT sum(\"status\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"instance\" =~ /^$instance$/ AND \"service\" =~ /^\"hv\"$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -819,7 +882,13 @@
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "instance::tag",
+              "operator": "=~",
+              "value": "/^$instance$/"
+            }
+          ]
         },
         {
           "datasource": {
@@ -842,93 +911,88 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 14
       },
       "id": 790,
       "panels": [],
-      "title": "CPU Availability per Hypervisor",
+      "title": "Row title",
       "type": "row"
     },
     {
       "datasource": {
-        "uid": "openstack_grafana"
+        "type": "influxdb",
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-blue",
+                "color": "green",
                 "value": null
               },
               {
-                "color": "dark-red",
-                "value": 0
-              },
-              {
-                "color": "dark-orange",
-                "value": 8
-              },
-              {
-                "color": "green",
-                "value": 16
+                "color": "red",
+                "value": 80
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
-        "w": 6,
+        "h": 20,
+        "w": 24,
         "x": 0,
-        "y": 14
+        "y": 15
       },
-      "id": 1,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Mimic",
-          "url": "http://mimic.gridpp.rl.ac.uk/node.php?n=$host"
-        }
-      ],
-      "maxDataPoints": 100,
+      "id": 795,
       "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "center",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
           "fields": "",
-          "values": false
+          "reducer": [
+            "sum"
+          ],
+          "show": false
         },
-        "text": {},
-        "textMode": "auto"
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "last"
+          }
+        ]
       },
-      "pluginVersion": "10.0.2",
-      "repeat": "host",
-      "repeatDirection": "h",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
-          "alias": "$host",
+          "alias": "$tag_host",
           "datasource": {
-            "uid": "openstack_grafana"
+            "type": "influxdb",
+            "uid": "${datasource}"
           },
-          "dsType": "influxdb",
           "groupBy": [
             {
               "params": [
-                "1s"
+                "host::tag"
               ],
-              "type": "time"
+              "type": "tag"
             },
             {
               "params": [
@@ -937,11 +1001,14 @@
               "type": "fill"
             }
           ],
+          "hide": false,
           "measurement": "ServiceStatus",
           "orderByTime": "ASC",
-          "policy": "default",
+          "policy": "autogen",
+          "query": "SELECT last(\"cpuavailable\") FROM \"autogen\".\"ServiceStatus\" WHERE (\"instance\"::tag =~ /^$instance$/ AND \"service\"::tag = '\"hv\"' AND \"host\"::tag =~ /^$host$/) GROUP BY \"host\"::tag fill(null)",
+          "rawQuery": false,
           "refId": "A",
-          "resultFormat": "time_series",
+          "resultFormat": "table",
           "select": [
             [
               {
@@ -958,38 +1025,52 @@
           ],
           "tags": [
             {
-              "key": "service",
-              "operator": "=",
-              "value": "\"hv\""
-            },
-            {
               "condition": "AND",
-              "key": "host",
-              "operator": "=~",
-              "value": "/^\"$host\"$/"
-            },
-            {
-              "condition": "AND",
-              "key": "instance",
+              "key": "instance::tag",
               "operator": "=~",
               "value": "/^$instance$/"
             },
             {
               "condition": "AND",
-              "key": "host",
+              "key": "service::tag",
+              "operator": "=",
+              "value": "\"hv\""
+            },
+            {
+              "condition": "AND",
+              "key": "host::tag",
               "operator": "=~",
-              "value": "/^.*hv/"
+              "value": "/^$host$/"
             }
           ]
         }
       ],
-      "title": "$host",
-      "type": "stat"
+      "title": "Hypervisor CPU Available",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "host",
+                "last"
+              ]
+            }
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "last",
+            "renamePattern": "CPUs Available"
+          }
+        }
+      ],
+      "type": "table"
     }
   ],
   "refresh": "",
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": [
@@ -997,7 +1078,7 @@
         "current": {
           "selected": false,
           "text": "CloudInfluxDB",
-          "value": "CloudInfluxDB"
+          "value": "openstack_grafana"
         },
         "hide": 0,
         "includeAll": false,
@@ -1116,6 +1197,6 @@
   "timezone": "browser",
   "title": "OpenStack Hypervisor Status",
   "uid": "prod_hv_status",
-  "version": 7,
+  "version": 15,
   "weekStart": ""
 }
