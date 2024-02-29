@@ -929,7 +929,7 @@
             "mode": "thresholds"
           },
           "custom": {
-            "align": "auto",
+            "align": "center",
             "cellOptions": {
               "type": "auto"
             },
@@ -951,7 +951,24 @@
           },
           "unitScale": true
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CPUs Available"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "gauge",
+                  "valueDisplayMode": "text"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 20,
@@ -972,12 +989,7 @@
           "show": false
         },
         "showHeader": true,
-        "sortBy": [
-          {
-            "desc": false,
-            "displayName": "last"
-          }
-        ]
+        "sortBy": []
       },
       "pluginVersion": "10.3.3",
       "targets": [
