@@ -940,12 +940,12 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "dark-red",
                 "value": null
               },
               {
-                "color": "red",
-                "value": 80
+                "color": "green",
+                "value": 60
               }
             ]
           },
@@ -964,6 +964,12 @@
                   "mode": "basic",
                   "type": "gauge",
                   "valueDisplayMode": "text"
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "thresholds"
                 }
               }
             ]
