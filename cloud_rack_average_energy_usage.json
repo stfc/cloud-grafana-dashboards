@@ -5307,7 +5307,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "Cloud Rack Average Energy Usage",
-  "uid": "b27089fa-2236-43f7-8040-ef7faf6f6314",
+  "uid": "cloud_rack_average_energy_usage",
   "version": 47,
   "weekStart": ""
 }

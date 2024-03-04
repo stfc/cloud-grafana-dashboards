@@ -449,8 +449,8 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "Cloud VMs Detail",
-    "uid": "cloud_vms_detail",
+    "title": "VMs Detail",
+    "uid": "openstack_vms_detail",
     "version": 4,
     "weekStart": ""
   }
