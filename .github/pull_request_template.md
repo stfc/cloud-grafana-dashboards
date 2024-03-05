@@ -38,6 +38,8 @@ As part of reviewing this PR the changes must be tested on a Grafana instance. T
 
 * [ ] As Root change the git branch the dashboard folder (`/etc/grafana/provisioning/dashboards`) using: `git switch <branch-name>`
   
+* [ ] Restart the Grafana service: `systemctl restart grafana-server`
+
 Have you:
 
 * [ ] Checked whether the panels are clear and easy to read?
