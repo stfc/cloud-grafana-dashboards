@@ -36,11 +36,7 @@ As part of reviewing this PR the changes must be tested on a Grafana instance. T
 
 * [ ] In `/etc/grafana/grafana.ini` under `[server]` comment out: domain, root_url, http_addr. Restart Grafana
 
-* [ ] Open Grafana and navigate to browse dashboard
-
-* [ ] You should see the dashboards which are from this repo
-
-* [ ] Import any dashboards that have been added or modified in this PR to Grafana.
+* [ ] As Root change the git branch the dashboard folder (`/etc/grafana/provisioning/dashboards`) using: `git switch <branch-name>`
   
 Have you:
 
