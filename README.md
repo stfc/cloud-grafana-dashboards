@@ -1,5 +1,8 @@
 # Repository for Grafana Dashboards used by the STFC Cloud
 
+The yaml file [cloud_dashboards.yaml](cloud_dashboards.yaml) is used by Grafana to know where to pull provisioned dashboards from and set some rules with them.
+
+
 ### Current Dashboards:
 
 - Hypervisor-Status:
