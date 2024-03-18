@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 14,
+  "id": 7,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -43,14 +43,14 @@
         "content": "# Overview of VMs in Prod/PreProd",
         "mode": "markdown"
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "10.3.3",
       "title": "Cloud VMs Overview",
       "type": "text"
     },
     {
       "datasource": {
-        "type": "grafana",
-        "uid": "grafana"
+        "type": "influxdb",
+        "uid": "openstack_grafana"
       },
       "description": "",
       "fieldConfig": {
@@ -100,23 +100,61 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
+            "type": "influxdb",
+            "uid": "openstack_grafana"
           },
-          "queryType": "randomWalk",
-          "refId": "A"
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "VMStats",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "totalVM"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "instance::tag",
+              "operator": "=~",
+              "value": "/^$instance$/"
+            }
+          ]
         }
       ],
       "type": "stat"
     },
     {
       "datasource": {
-        "type": "grafana",
-        "uid": "grafana"
+        "type": "influxdb",
+        "uid": "openstack_grafana"
       },
       "description": "",
       "fieldConfig": {
@@ -166,23 +204,61 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
+            "type": "influxdb",
+            "uid": "openstack_grafana"
           },
-          "queryType": "randomWalk",
-          "refId": "A"
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "VMStats",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "activeVM"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "instance::tag",
+              "operator": "=~",
+              "value": "/^$instance$/"
+            }
+          ]
         }
       ],
       "type": "stat"
     },
     {
       "datasource": {
-        "type": "grafana",
-        "uid": "grafana"
+        "type": "influxdb",
+        "uid": "openstack_grafana"
       },
       "description": "",
       "fieldConfig": {
@@ -240,23 +316,61 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
+            "type": "influxdb",
+            "uid": "openstack_grafana"
           },
-          "queryType": "randomWalk",
-          "refId": "A"
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "VMStats",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "buildVM"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "instance::tag",
+              "operator": "=~",
+              "value": "/^$instance$/"
+            }
+          ]
         }
       ],
       "type": "stat"
     },
     {
       "datasource": {
-        "type": "grafana",
-        "uid": "grafana"
+        "type": "influxdb",
+        "uid": "openstack_grafana"
       },
       "description": "",
       "fieldConfig": {
@@ -314,23 +428,61 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
+            "type": "influxdb",
+            "uid": "openstack_grafana"
           },
-          "queryType": "randomWalk",
-          "refId": "A"
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "VMStats",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "errorVM"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "instance::tag",
+              "operator": "=~",
+              "value": "/^$instance$/"
+            }
+          ]
         }
       ],
       "type": "stat"
     },
     {
       "datasource": {
-        "type": "grafana",
-        "uid": "grafana"
+        "type": "influxdb",
+        "uid": "openstack_grafana"
       },
       "description": "",
       "fieldConfig": {
@@ -388,15 +540,53 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
+            "type": "influxdb",
+            "uid": "openstack_grafana"
           },
-          "queryType": "randomWalk",
-          "refId": "A"
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "VMStats",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "shutoffVM"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "instance::tag",
+              "operator": "=~",
+              "value": "/^$instance$/"
+            }
+          ]
         }
       ],
       "type": "stat"
@@ -406,7 +596,35 @@
   "schemaVersion": 39,
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "Prod",
+          "value": "Prod"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "instance",
+        "options": [
+          {
+            "selected": true,
+            "text": "Prod",
+            "value": "Prod"
+          },
+          {
+            "selected": false,
+            "text": "Preprod",
+            "value": "Preprod"
+          }
+        ],
+        "query": "Prod, Preprod",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
   },
   "time": {
     "from": "now-6h",
@@ -416,6 +634,6 @@
   "timezone": "",
   "title": "Cloud VMs Overview",
   "uid": "cloud_vms_overview",
-  "version": 7,
+  "version": 3,
   "weekStart": ""
 }
