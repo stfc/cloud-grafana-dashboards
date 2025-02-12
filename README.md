@@ -32,4 +32,4 @@ The yaml file [cloud_dashboards.yaml](cloud_dashboards.yaml) is used by Grafana 
 
 - Weekly Reporting (WIP):
     - Weekly Reporting KH
-    - WeeklyReports-DW
+    - Weekly Reporting DW
