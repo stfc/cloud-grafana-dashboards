@@ -44,7 +44,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -100,7 +100,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "editorMode": "code",
             "expr": "avg by(flavor) (cpu_rust_result{test_type=\"$test_type\"})",
@@ -146,7 +146,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -228,7 +228,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "disableTextWrap": false,
             "editorMode": "code",
@@ -248,7 +248,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -330,7 +330,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "disableTextWrap": false,
             "editorMode": "builder",
@@ -350,7 +350,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -432,7 +432,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "disableTextWrap": false,
             "editorMode": "builder",
@@ -452,7 +452,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -534,7 +534,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "disableTextWrap": false,
             "editorMode": "builder",
@@ -567,7 +567,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -622,7 +622,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "editorMode": "code",
             "expr": "avg by(flavor) (hepscore_run_time)",
@@ -653,7 +653,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -708,7 +708,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "editorMode": "code",
             "expr": "avg by(flavor) (hepscore_score)",
@@ -739,7 +739,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -820,7 +820,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "disableTextWrap": false,
             "editorMode": "code",
@@ -840,7 +840,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -920,7 +920,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "disableTextWrap": false,
             "editorMode": "code",

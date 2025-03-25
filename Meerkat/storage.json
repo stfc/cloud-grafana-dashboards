@@ -44,7 +44,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -127,7 +127,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "disableTextWrap": false,
             "editorMode": "code",
@@ -148,7 +148,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -231,7 +231,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "disableTextWrap": false,
             "editorMode": "builder",
@@ -252,7 +252,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -335,7 +335,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "disableTextWrap": false,
             "editorMode": "code",
@@ -369,7 +369,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -425,7 +425,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "disableTextWrap": false,
             "editorMode": "code",
@@ -447,7 +447,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -503,7 +503,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "disableTextWrap": false,
             "editorMode": "code",
@@ -525,7 +525,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -581,7 +581,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "disableTextWrap": false,
             "editorMode": "code",
@@ -603,7 +603,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -659,7 +659,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "disableTextWrap": false,
             "editorMode": "code",
@@ -681,7 +681,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -736,7 +736,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "disableTextWrap": false,
             "editorMode": "code",
@@ -758,7 +758,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -813,7 +813,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "disableTextWrap": false,
             "editorMode": "code",

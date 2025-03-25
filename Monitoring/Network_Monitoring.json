@@ -44,7 +44,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "description": "",
         "fieldConfig": {
@@ -127,7 +127,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "editorMode": "code",
             "expr": "network_monitoring_rtt_average{host_id=~\"$host_id\"}",
@@ -142,7 +142,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -224,7 +224,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "editorMode": "code",
             "expr": "network_monitoring_rtt_packet_loss{host_id=~\"$host_id\"}",
@@ -239,7 +239,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -321,7 +321,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "editorMode": "code",
             "expr": "network_monitoring_rtt_max{host_id=~\"$host_id\"}",
@@ -349,7 +349,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -431,7 +431,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "editorMode": "code",
             "expr": "network_monitoring_tcp_throughput{host_id=~\"$host_id\"}",
@@ -446,7 +446,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -528,7 +528,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "editorMode": "code",
             "expr": "network_monitoring_tcp_retries{host_id=~\"$host_id\"}",
@@ -556,7 +556,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -638,7 +638,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "editorMode": "code",
             "expr": "network_monitoring_udp_throughput{host_id=~\"$host_id\"}",
@@ -653,7 +653,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "ee4b2fvtkitxcc"
+          "uid": "meerkat-db"
         },
         "fieldConfig": {
           "defaults": {
@@ -735,7 +735,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "ee4b2fvtkitxcc"
+              "uid": "meerkat-db"
             },
             "editorMode": "code",
             "expr": "network_monitoring_udp_packet_loss{host_id=~\"$host_id\"}",
