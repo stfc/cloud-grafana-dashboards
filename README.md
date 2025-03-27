@@ -30,6 +30,6 @@ The yaml file [cloud_dashboards.yaml](cloud_dashboards.yaml) is used by Grafana 
     - OpenStack GPU usage: GPU Usage on Production across all GPU flavors
     - Openstack slots available: Shows available flavor capacity for L and GPU flavors
 
-- Weekly Reporting (WIP):
-    - Weekly Reporting KH
+- Weekly Reporting:
+    - Weekly Reporting
     - Weekly Reporting DW

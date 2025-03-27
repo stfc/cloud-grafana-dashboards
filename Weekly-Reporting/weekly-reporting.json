@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 24,
+  "id": 21,
   "links": [],
   "panels": [
     {
@@ -75,9 +75,7 @@
         "orientation": "auto",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": [],
           "fields": "",
           "values": false
         },
@@ -92,45 +90,11 @@
             "type": "influxdb",
             "uid": "weekly-reports"
           },
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"cpu\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"in_use\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"cpu\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"in_use\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n\r\nreduced = data\r\n  |> reduce(\r\n      identity: {first: 0.0, last: 0.0, dummy: \"join_key\"},\r\n      fn: (r, accumulator) => ({\r\n          first: if accumulator.first == 0.0 then r._value else accumulator.first,\r\n          last: r._value,\r\n          dummy: \"join_key\"\r\n      })\r\n  )\r\n\r\nlatest = data\r\n  |> last()\r\n  |> map(fn: (r) => ({_value: r._value, dummy: \"join_key\"})) // Add dummy column for join\r\n\r\njoined = join(\r\n  tables: {reduced: reduced, latest: latest},\r\n  on: [\"dummy\"] // Join on the dummy column\r\n)\r\n\r\njoined\r\n  |> map(fn: (r) => ({\r\n      _time: now(),\r\n      Current: r._value,\r\n      \"Difference from time range\": r.last - r.first\r\n  }))\r\n",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "weekly-reports"
-          },
-          "hide": false,
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"cpu\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"in_use\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "B"
         }
       ],
-      "timeFrom": "13d",
       "title": "CPU in use",
-      "transformations": [
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "/^(?:B)$/"
-          },
-          "id": "reduce",
-          "options": {
-            "includeTimeField": false,
-            "mode": "seriesToRows",
-            "reducers": [
-              "diff"
-            ]
-          },
-          "topic": "series"
-        },
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "(Difference)",
-            "renamePattern": "Difference from Last Week"
-          }
-        }
-      ],
       "type": "stat"
     },
     {
@@ -191,43 +155,11 @@
             "type": "influxdb",
             "uid": "weekly-reports"
           },
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"cpu\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"total\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"cpu\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"total\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n\r\nreduced = data\r\n  |> reduce(\r\n      identity: {first: 0.0, last: 0.0, dummy: \"join_key\"},\r\n      fn: (r, accumulator) => ({\r\n          first: if accumulator.first == 0.0 then r._value else accumulator.first,\r\n          last: r._value,\r\n          dummy: \"join_key\"\r\n      })\r\n  )\r\n\r\nlatest = data\r\n  |> last()\r\n  |> map(fn: (r) => ({_value: r._value, dummy: \"join_key\"})) // Add dummy column for join\r\n\r\njoined = join(\r\n  tables: {reduced: reduced, latest: latest},\r\n  on: [\"dummy\"] // Join on the dummy column\r\n)\r\n\r\njoined\r\n  |> map(fn: (r) => ({\r\n      _time: now(),\r\n      Current: r._value,\r\n      \"Difference from time range\": r.last - r.first\r\n  }))\r\n",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "weekly-reports"
-          },
-          "hide": false,
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"cpu\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"total\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "B"
         }
       ],
-      "timeFrom": "13d",
       "title": "CPU total",
-      "transformations": [
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "/^(?:B)$/"
-          },
-          "id": "reduce",
-          "options": {
-            "reducers": [
-              "diff"
-            ]
-          },
-          "topic": "series"
-        },
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "(Difference*)",
-            "renamePattern": "Difference from Last Week"
-          }
-        }
-      ],
       "type": "stat"
     },
     {
@@ -288,42 +220,11 @@
             "type": "influxdb",
             "uid": "weekly-reports"
           },
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"virtual_worker_nodes\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"active\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"virtual_worker_nodes\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"active\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n\r\nreduced = data\r\n  |> reduce(\r\n      identity: {first: 0.0, last: 0.0, dummy: \"join_key\"},\r\n      fn: (r, accumulator) => ({\r\n          first: if accumulator.first == 0.0 then r._value else accumulator.first,\r\n          last: r._value,\r\n          dummy: \"join_key\"\r\n      })\r\n  )\r\n\r\nlatest = data\r\n  |> last()\r\n  |> map(fn: (r) => ({_value: r._value, dummy: \"join_key\"})) // Add dummy column for join\r\n\r\njoined = join(\r\n  tables: {reduced: reduced, latest: latest},\r\n  on: [\"dummy\"] // Join on the dummy column\r\n)\r\n\r\njoined\r\n  |> map(fn: (r) => ({\r\n      _time: now(),\r\n      Current: r._value,\r\n      \"Difference from time range\": r.last - r.first\r\n  }))\r\n",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "weekly-reports"
-          },
-          "hide": false,
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"virtual_worker_nodes\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"active\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "B"
         }
       ],
-      "timeFrom": "13d",
       "title": "Cloud Virtual Worker Nodes",
-      "transformations": [
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "/^(?:B)$/"
-          },
-          "id": "reduce",
-          "options": {
-            "reducers": [
-              "diff"
-            ]
-          }
-        },
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "(Difference*)",
-            "renamePattern": "Difference from Last Week"
-          }
-        }
-      ],
       "type": "stat"
     },
     {
@@ -413,12 +314,202 @@
             "type": "influxdb",
             "uid": "weekly-reports"
           },
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"cpu\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"in_use\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"cpu\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"in_use\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
           "refId": "A"
         }
       ],
       "timeFrom": "30d",
       "title": "CPU in use past 30 days",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "weekly-reports"
+      },
+      "description": "CPU total of the Cloud hypervisors",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "Cores"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 8,
+        "y": 5
+      },
+      "id": 37,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "weekly-reports"
+          },
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"cpu\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"total\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": "30d",
+      "title": "CPU total past 30 days",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "weekly-reports"
+      },
+      "description": "Active Cloud Virtual Worker Nodes",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "Nodes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 16,
+        "y": 5
+      },
+      "id": 38,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "weekly-reports"
+          },
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"virtual_worker_nodes\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"active\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": "30d",
+      "title": "Active Virtual Worker Nodes past 30 days",
       "type": "timeseries"
     },
     {
@@ -492,42 +583,11 @@
             "type": "influxdb",
             "uid": "weekly-reports"
           },
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"memory\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"in_use\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"memory\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"in_use\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n\r\nreduced = data\r\n  |> reduce(\r\n      identity: {first: 0.0, last: 0.0, dummy: \"join_key\"},\r\n      fn: (r, accumulator) => ({\r\n          first: if accumulator.first == 0.0 then r._value else accumulator.first,\r\n          last: r._value,\r\n          dummy: \"join_key\"\r\n      })\r\n  )\r\n\r\nlatest = data\r\n  |> last()\r\n  |> map(fn: (r) => ({_value: r._value, dummy: \"join_key\"})) // Add dummy column for join\r\n\r\njoined = join(\r\n  tables: {reduced: reduced, latest: latest},\r\n  on: [\"dummy\"] // Join on the dummy column\r\n)\r\n\r\njoined\r\n  |> map(fn: (r) => ({\r\n      _time: now(),\r\n      Current: r._value,\r\n      \"Difference from time range\": r.last - r.first\r\n  }))\r\n",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "weekly-reports"
-          },
-          "hide": false,
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"memory\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"in_use\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "B"
         }
       ],
-      "timeFrom": "13d",
       "title": "Memory in use",
-      "transformations": [
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "/^(?:B)$/"
-          },
-          "id": "reduce",
-          "options": {
-            "reducers": [
-              "diff"
-            ]
-          }
-        },
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "(Difference*)",
-            "renamePattern": "Difference from Last Week"
-          }
-        }
-      ],
       "type": "stat"
     },
     {
@@ -588,43 +648,202 @@
             "type": "influxdb",
             "uid": "weekly-reports"
           },
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"memory\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"total\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"memory\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"total\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n\r\nreduced = data\r\n  |> reduce(\r\n      identity: {first: 0.0, last: 0.0, dummy: \"join_key\"},\r\n      fn: (r, accumulator) => ({\r\n          first: if accumulator.first == 0.0 then r._value else accumulator.first,\r\n          last: r._value,\r\n          dummy: \"join_key\"\r\n      })\r\n  )\r\n\r\nlatest = data\r\n  |> last()\r\n  |> map(fn: (r) => ({_value: r._value, dummy: \"join_key\"})) // Add dummy column for join\r\n\r\njoined = join(\r\n  tables: {reduced: reduced, latest: latest},\r\n  on: [\"dummy\"] // Join on the dummy column\r\n)\r\n\r\njoined\r\n  |> map(fn: (r) => ({\r\n      _time: now(),\r\n      Current: r._value,\r\n      \"Difference from time range\": r.last - r.first\r\n  }))\r\n",
           "refId": "A"
+        }
+      ],
+      "title": "Memory Total",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "weekly-reports"
+      },
+      "description": "Memory in use by the Cloud hypervisors",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "dectbytes"
         },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 4,
+        "y": 14
+      },
+      "id": 39,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
         {
           "datasource": {
             "type": "influxdb",
             "uid": "weekly-reports"
           },
-          "hide": false,
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"memory\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"total\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "B"
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"memory\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"in_use\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
         }
       ],
-      "timeFrom": "13d",
-      "title": "Memory Total",
-      "transformations": [
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "/^(?:B)$/"
+      "timeFrom": "30d",
+      "title": "Memory in use past 30 days",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "weekly-reports"
+      },
+      "description": "Memory total of the Cloud hypervisors",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
           },
-          "id": "reduce",
-          "options": {
-            "reducers": [
-              "diff"
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
             ]
-          }
+          },
+          "unit": "dectbytes"
         },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 12,
+        "y": 14
+      },
+      "id": 40,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
         {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "(Difference*)",
-            "renamePattern": "Difference from Last Week"
-          }
+          "datasource": {
+            "type": "influxdb",
+            "uid": "weekly-reports"
+          },
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"memory\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"total\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
         }
       ],
-      "type": "stat"
+      "timeFrom": "30d",
+      "title": "Memory total past 30 days",
+      "type": "timeseries"
     },
     {
       "collapsed": false,
@@ -632,7 +851,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 14
+        "y": 18
       },
       "id": 22,
       "panels": [],
@@ -670,7 +889,7 @@
         "h": 4,
         "w": 8,
         "x": 0,
-        "y": 15
+        "y": 19
       },
       "id": 23,
       "options": {
@@ -697,42 +916,11 @@
             "type": "influxdb",
             "uid": "weekly-reports"
           },
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hv\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"up\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hv\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"up\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n\r\nreduced = data\r\n  |> reduce(\r\n      identity: {first: 0.0, last: 0.0, dummy: \"join_key\"},\r\n      fn: (r, accumulator) => ({\r\n          first: if accumulator.first == 0.0 then r._value else accumulator.first,\r\n          last: r._value,\r\n          dummy: \"join_key\"\r\n      })\r\n  )\r\n\r\nlatest = data\r\n  |> last()\r\n  |> map(fn: (r) => ({_value: r._value, dummy: \"join_key\"})) // Add dummy column for join\r\n\r\njoined = join(\r\n  tables: {reduced: reduced, latest: latest},\r\n  on: [\"dummy\"] // Join on the dummy column\r\n)\r\n\r\njoined\r\n  |> map(fn: (r) => ({\r\n      _time: now(),\r\n      Current: r._value,\r\n      \"Difference from time range\": r.last - r.first\r\n  }))\r\n",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "weekly-reports"
-          },
-          "hide": false,
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hv\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"up\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "B"
         }
       ],
-      "timeFrom": "13d",
       "title": "HVs Active",
-      "transformations": [
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "/^(?:B)$/"
-          },
-          "id": "reduce",
-          "options": {
-            "reducers": [
-              "diff"
-            ]
-          }
-        },
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "(Difference*)",
-            "renamePattern": "Difference from Last Week"
-          }
-        }
-      ],
       "type": "stat"
     },
     {
@@ -766,7 +954,7 @@
         "h": 4,
         "w": 8,
         "x": 8,
-        "y": 15
+        "y": 19
       },
       "id": 27,
       "options": {
@@ -793,44 +981,11 @@
             "type": "influxdb",
             "uid": "weekly-reports"
           },
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hv\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"active_and_cpu_full\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hv\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"active_and_cpu_full\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n\r\nreduced = data\r\n  |> reduce(\r\n      identity: {first: 0.0, last: 0.0, dummy: \"join_key\"},\r\n      fn: (r, accumulator) => ({\r\n          first: if accumulator.first == 0.0 then r._value else accumulator.first,\r\n          last: r._value,\r\n          dummy: \"join_key\"\r\n      })\r\n  )\r\n\r\nlatest = data\r\n  |> last()\r\n  |> map(fn: (r) => ({_value: r._value, dummy: \"join_key\"})) // Add dummy column for join\r\n\r\njoined = join(\r\n  tables: {reduced: reduced, latest: latest},\r\n  on: [\"dummy\"] // Join on the dummy column\r\n)\r\n\r\njoined\r\n  |> map(fn: (r) => ({\r\n      _time: now(),\r\n      Current: r._value,\r\n      \"Difference from time range\": r.last - r.first\r\n  }))\r\n",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "weekly-reports"
-          },
-          "hide": false,
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hv\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"active_and_cpu_full\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "B"
         }
       ],
-      "timeFrom": "13d",
       "title": "HVs Active and CPU Full",
-      "transformations": [
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "/^(?:B)$/"
-          },
-          "id": "reduce",
-          "options": {
-            "includeTimeField": false,
-            "mode": "seriesToRows",
-            "reducers": [
-              "diff"
-            ]
-          }
-        },
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "(Difference*)",
-            "renamePattern": "Difference from Last Week"
-          }
-        }
-      ],
       "type": "stat"
     },
     {
@@ -864,7 +1019,7 @@
         "h": 4,
         "w": 8,
         "x": 16,
-        "y": 15
+        "y": 19
       },
       "id": 26,
       "options": {
@@ -891,43 +1046,107 @@
             "type": "influxdb",
             "uid": "weekly-reports"
           },
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hv\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"active_and_memory_full\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hv\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"active_and_memory_full\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n\r\nreduced = data\r\n  |> reduce(\r\n      identity: {first: 0.0, last: 0.0, dummy: \"join_key\"},\r\n      fn: (r, accumulator) => ({\r\n          first: if accumulator.first == 0.0 then r._value else accumulator.first,\r\n          last: r._value,\r\n          dummy: \"join_key\"\r\n      })\r\n  )\r\n\r\nlatest = data\r\n  |> last()\r\n  |> map(fn: (r) => ({_value: r._value, dummy: \"join_key\"})) // Add dummy column for join\r\n\r\njoined = join(\r\n  tables: {reduced: reduced, latest: latest},\r\n  on: [\"dummy\"] // Join on the dummy column\r\n)\r\n\r\njoined\r\n  |> map(fn: (r) => ({\r\n      _time: now(),\r\n      Current: r._value,\r\n      \"Difference from time range\": r.last - r.first\r\n  }))\r\n",
           "refId": "A"
+        }
+      ],
+      "title": "HVs Active and Memory Full",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "weekly-reports"
+      },
+      "description": "Cloud Hypervisors up",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "HVs"
         },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 0,
+        "y": 23
+      },
+      "id": 41,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
         {
           "datasource": {
             "type": "influxdb",
             "uid": "weekly-reports"
           },
-          "hide": false,
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hv\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"active_and_memory_full\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "B"
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hv\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"up\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
         }
       ],
-      "timeFrom": "13d",
-      "title": "HVs Active and Memory Full",
-      "transformations": [
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "/^(?:B)$/"
-          },
-          "id": "reduce",
-          "options": {
-            "reducers": [
-              "diff"
-            ]
-          }
-        },
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "(Difference*)",
-            "renamePattern": "Difference from Last Week"
-          }
-        }
-      ],
-      "type": "stat"
+      "timeFrom": "30d",
+      "title": "Hypervisors up past 30 days",
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -959,8 +1178,8 @@
       "gridPos": {
         "h": 4,
         "w": 8,
-        "x": 4,
-        "y": 19
+        "x": 8,
+        "y": 23
       },
       "id": 25,
       "options": {
@@ -987,42 +1206,11 @@
             "type": "influxdb",
             "uid": "weekly-reports"
           },
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hv\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"down\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hv\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"down\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n\r\nreduced = data\r\n  |> reduce(\r\n      identity: {first: 0.0, last: 0.0, dummy: \"join_key\"},\r\n      fn: (r, accumulator) => ({\r\n          first: if accumulator.first == 0.0 then r._value else accumulator.first,\r\n          last: r._value,\r\n          dummy: \"join_key\"\r\n      })\r\n  )\r\n\r\nlatest = data\r\n  |> last()\r\n  |> map(fn: (r) => ({_value: r._value, dummy: \"join_key\"})) // Add dummy column for join\r\n\r\njoined = join(\r\n  tables: {reduced: reduced, latest: latest},\r\n  on: [\"dummy\"] // Join on the dummy column\r\n)\r\n\r\njoined\r\n  |> map(fn: (r) => ({\r\n      _time: now(),\r\n      Current: r._value,\r\n      \"Difference from time range\": r.last - r.first\r\n  }))\r\n",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "weekly-reports"
-          },
-          "hide": false,
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hv\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"down\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "B"
         }
       ],
-      "timeFrom": "13d",
       "title": "HVs Down",
-      "transformations": [
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "/^(?:B)$/"
-          },
-          "id": "reduce",
-          "options": {
-            "reducers": [
-              "diff"
-            ]
-          }
-        },
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "(Difference*)",
-            "renamePattern": "Difference from Last Week"
-          }
-        }
-      ],
       "type": "stat"
     },
     {
@@ -1055,8 +1243,8 @@
       "gridPos": {
         "h": 4,
         "w": 8,
-        "x": 12,
-        "y": 19
+        "x": 16,
+        "y": 23
       },
       "id": 24,
       "options": {
@@ -1083,42 +1271,11 @@
             "type": "influxdb",
             "uid": "weekly-reports"
           },
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hv\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"disabled\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hv\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"disabled\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n\r\nreduced = data\r\n  |> reduce(\r\n      identity: {first: 0.0, last: 0.0, dummy: \"join_key\"},\r\n      fn: (r, accumulator) => ({\r\n          first: if accumulator.first == 0.0 then r._value else accumulator.first,\r\n          last: r._value,\r\n          dummy: \"join_key\"\r\n      })\r\n  )\r\n\r\nlatest = data\r\n  |> last()\r\n  |> map(fn: (r) => ({_value: r._value, dummy: \"join_key\"})) // Add dummy column for join\r\n\r\njoined = join(\r\n  tables: {reduced: reduced, latest: latest},\r\n  on: [\"dummy\"] // Join on the dummy column\r\n)\r\n\r\njoined\r\n  |> map(fn: (r) => ({\r\n      _time: now(),\r\n      Current: r._value,\r\n      \"Difference from time range\": r.last - r.first\r\n  }))\r\n",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "weekly-reports"
-          },
-          "hide": false,
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hv\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"disabled\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "B"
         }
       ],
-      "timeFrom": "13d",
       "title": "HVs Disabled",
-      "transformations": [
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "/^(?:B)$/"
-          },
-          "id": "reduce",
-          "options": {
-            "reducers": [
-              "diff"
-            ]
-          }
-        },
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "(Difference*)",
-            "renamePattern": "Difference from Last Week"
-          }
-        }
-      ],
       "type": "stat"
     },
     {
@@ -1127,7 +1284,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 23
+        "y": 27
       },
       "id": 28,
       "panels": [],
@@ -1164,8 +1321,8 @@
       "gridPos": {
         "h": 4,
         "w": 8,
-        "x": 4,
-        "y": 24
+        "x": 0,
+        "y": 28
       },
       "id": 29,
       "options": {
@@ -1192,43 +1349,107 @@
             "type": "influxdb",
             "uid": "weekly-reports"
           },
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"vm\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"active\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"vm\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"active\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n\r\nreduced = data\r\n  |> reduce(\r\n      identity: {first: 0.0, last: 0.0, dummy: \"join_key\"},\r\n      fn: (r, accumulator) => ({\r\n          first: if accumulator.first == 0.0 then r._value else accumulator.first,\r\n          last: r._value,\r\n          dummy: \"join_key\"\r\n      })\r\n  )\r\n\r\nlatest = data\r\n  |> last()\r\n  |> map(fn: (r) => ({_value: r._value, dummy: \"join_key\"})) // Add dummy column for join\r\n\r\njoined = join(\r\n  tables: {reduced: reduced, latest: latest},\r\n  on: [\"dummy\"] // Join on the dummy column\r\n)\r\n\r\njoined\r\n  |> map(fn: (r) => ({\r\n      _time: now(),\r\n      Current: r._value,\r\n      \"Difference from time range\": r.last - r.first\r\n  }))\r\n",
           "refId": "A"
+        }
+      ],
+      "title": "VMs Active",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "weekly-reports"
+      },
+      "description": "Virtual Machines active",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "VMs"
         },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 8,
+        "y": 28
+      },
+      "id": 42,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
         {
           "datasource": {
             "type": "influxdb",
             "uid": "weekly-reports"
           },
-          "hide": false,
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"vm\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"active\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "B"
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"vm\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"active\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
         }
       ],
-      "timeFrom": "13d",
-      "title": "VMs Active",
-      "transformations": [
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "/^(?:B)$/"
-          },
-          "id": "reduce",
-          "options": {
-            "reducers": [
-              "diff"
-            ]
-          }
-        },
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "(Difference*)",
-            "renamePattern": "Difference from Last Week"
-          }
-        }
-      ],
-      "type": "stat"
+      "timeFrom": "30d",
+      "title": "VMs active past 30 days",
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -1260,8 +1481,8 @@
       "gridPos": {
         "h": 4,
         "w": 8,
-        "x": 12,
-        "y": 24
+        "x": 16,
+        "y": 28
       },
       "id": 31,
       "options": {
@@ -1288,42 +1509,11 @@
             "type": "influxdb",
             "uid": "weekly-reports"
           },
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"vm\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"error\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"vm\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"error\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n\r\nreduced = data\r\n  |> reduce(\r\n      identity: {first: 0.0, last: 0.0, dummy: \"join_key\"},\r\n      fn: (r, accumulator) => ({\r\n          first: if accumulator.first == 0.0 then r._value else accumulator.first,\r\n          last: r._value,\r\n          dummy: \"join_key\"\r\n      })\r\n  )\r\n\r\nlatest = data\r\n  |> last()\r\n  |> map(fn: (r) => ({_value: r._value, dummy: \"join_key\"})) // Add dummy column for join\r\n\r\njoined = join(\r\n  tables: {reduced: reduced, latest: latest},\r\n  on: [\"dummy\"] // Join on the dummy column\r\n)\r\n\r\njoined\r\n  |> map(fn: (r) => ({\r\n      _time: now(),\r\n      Current: r._value,\r\n      \"Difference from time range\": r.last - r.first\r\n  }))\r\n",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "weekly-reports"
-          },
-          "hide": false,
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"vm\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"error\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "B"
         }
       ],
-      "timeFrom": "13d",
       "title": "VMs Errored",
-      "transformations": [
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "/^(?:B)$/"
-          },
-          "id": "reduce",
-          "options": {
-            "reducers": [
-              "diff"
-            ]
-          }
-        },
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "(Difference*)",
-            "renamePattern": "Difference from Last Week"
-          }
-        }
-      ],
       "type": "stat"
     },
     {
@@ -1357,7 +1547,7 @@
         "h": 4,
         "w": 8,
         "x": 4,
-        "y": 28
+        "y": 32
       },
       "id": 32,
       "options": {
@@ -1384,42 +1574,11 @@
             "type": "influxdb",
             "uid": "weekly-reports"
           },
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"vm\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"shutoff\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"vm\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"shutoff\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n\r\nreduced = data\r\n  |> reduce(\r\n      identity: {first: 0.0, last: 0.0, dummy: \"join_key\"},\r\n      fn: (r, accumulator) => ({\r\n          first: if accumulator.first == 0.0 then r._value else accumulator.first,\r\n          last: r._value,\r\n          dummy: \"join_key\"\r\n      })\r\n  )\r\n\r\nlatest = data\r\n  |> last()\r\n  |> map(fn: (r) => ({_value: r._value, dummy: \"join_key\"})) // Add dummy column for join\r\n\r\njoined = join(\r\n  tables: {reduced: reduced, latest: latest},\r\n  on: [\"dummy\"] // Join on the dummy column\r\n)\r\n\r\njoined\r\n  |> map(fn: (r) => ({\r\n      _time: now(),\r\n      Current: r._value,\r\n      \"Difference from time range\": r.last - r.first\r\n  }))\r\n",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "weekly-reports"
-          },
-          "hide": false,
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"vm\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"shutoff\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "B"
         }
       ],
-      "timeFrom": "13d",
       "title": "VMs Shutoff",
-      "transformations": [
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "/^(?:B)$/"
-          },
-          "id": "reduce",
-          "options": {
-            "reducers": [
-              "diff"
-            ]
-          }
-        },
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "(Difference*)",
-            "renamePattern": "Difference from Last Week"
-          }
-        }
-      ],
       "type": "stat"
     },
     {
@@ -1453,7 +1612,7 @@
         "h": 4,
         "w": 8,
         "x": 12,
-        "y": 28
+        "y": 32
       },
       "id": 30,
       "options": {
@@ -1480,42 +1639,11 @@
             "type": "influxdb",
             "uid": "weekly-reports"
           },
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"vm\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"build\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"vm\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"build\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n\r\nreduced = data\r\n  |> reduce(\r\n      identity: {first: 0.0, last: 0.0, dummy: \"join_key\"},\r\n      fn: (r, accumulator) => ({\r\n          first: if accumulator.first == 0.0 then r._value else accumulator.first,\r\n          last: r._value,\r\n          dummy: \"join_key\"\r\n      })\r\n  )\r\n\r\nlatest = data\r\n  |> last()\r\n  |> map(fn: (r) => ({_value: r._value, dummy: \"join_key\"})) // Add dummy column for join\r\n\r\njoined = join(\r\n  tables: {reduced: reduced, latest: latest},\r\n  on: [\"dummy\"] // Join on the dummy column\r\n)\r\n\r\njoined\r\n  |> map(fn: (r) => ({\r\n      _time: now(),\r\n      Current: r._value,\r\n      \"Difference from time range\": r.last - r.first\r\n  }))\r\n",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "weekly-reports"
-          },
-          "hide": false,
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"vm\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"build\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "B"
         }
       ],
-      "timeFrom": "13d",
       "title": "VMs Building",
-      "transformations": [
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "/^(?:B)$/"
-          },
-          "id": "reduce",
-          "options": {
-            "reducers": [
-              "diff"
-            ]
-          }
-        },
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "(Difference*)",
-            "renamePattern": "Difference from Last Week"
-          }
-        }
-      ],
       "type": "stat"
     },
     {
@@ -1524,7 +1652,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 32
+        "y": 36
       },
       "id": 33,
       "panels": [],
@@ -1562,7 +1690,7 @@
         "h": 4,
         "w": 8,
         "x": 3,
-        "y": 33
+        "y": 37
       },
       "id": 34,
       "options": {
@@ -1589,42 +1717,11 @@
             "type": "influxdb",
             "uid": "weekly-reports"
           },
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"floating_ip\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"in_use\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"floating_ip\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"in_use\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n\r\nreduced = data\r\n  |> reduce(\r\n      identity: {first: 0.0, last: 0.0, dummy: \"join_key\"},\r\n      fn: (r, accumulator) => ({\r\n          first: if accumulator.first == 0.0 then r._value else accumulator.first,\r\n          last: r._value,\r\n          dummy: \"join_key\"\r\n      })\r\n  )\r\n\r\nlatest = data\r\n  |> last()\r\n  |> map(fn: (r) => ({_value: r._value, dummy: \"join_key\"})) // Add dummy column for join\r\n\r\njoined = join(\r\n  tables: {reduced: reduced, latest: latest},\r\n  on: [\"dummy\"] // Join on the dummy column\r\n)\r\n\r\njoined\r\n  |> map(fn: (r) => ({\r\n      _time: now(),\r\n      Current: r._value,\r\n      \"Difference from time range\": r.last - r.first\r\n  }))\r\n",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "weekly-reports"
-          },
-          "hide": false,
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"floating_ip\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"in_use\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "B"
         }
       ],
-      "timeFrom": "13d",
       "title": "Floating IPs consumed",
-      "transformations": [
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "/^(?:B)$/"
-          },
-          "id": "reduce",
-          "options": {
-            "reducers": [
-              "diff"
-            ]
-          }
-        },
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "(Difference*)",
-            "renamePattern": "Difference from Last Week"
-          }
-        }
-      ],
       "type": "stat"
     },
     {
@@ -1658,7 +1755,7 @@
         "h": 4,
         "w": 8,
         "x": 11,
-        "y": 33
+        "y": 37
       },
       "id": 35,
       "options": {
@@ -1685,43 +1782,107 @@
             "type": "influxdb",
             "uid": "weekly-reports"
           },
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"floating_ip\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"total\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"floating_ip\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"total\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n\r\nreduced = data\r\n  |> reduce(\r\n      identity: {first: 0.0, last: 0.0, dummy: \"join_key\"},\r\n      fn: (r, accumulator) => ({\r\n          first: if accumulator.first == 0.0 then r._value else accumulator.first,\r\n          last: r._value,\r\n          dummy: \"join_key\"\r\n      })\r\n  )\r\n\r\nlatest = data\r\n  |> last()\r\n  |> map(fn: (r) => ({_value: r._value, dummy: \"join_key\"})) // Add dummy column for join\r\n\r\njoined = join(\r\n  tables: {reduced: reduced, latest: latest},\r\n  on: [\"dummy\"] // Join on the dummy column\r\n)\r\n\r\njoined\r\n  |> map(fn: (r) => ({\r\n      _time: now(),\r\n      Current: r._value,\r\n      \"Difference from time range\": r.last - r.first\r\n  }))\r\n",
           "refId": "A"
+        }
+      ],
+      "title": "Floating IPs total",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "weekly-reports"
+      },
+      "description": "Floating IPs in use",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "FIPs"
         },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 7,
+        "y": 41
+      },
+      "id": 43,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
         {
           "datasource": {
             "type": "influxdb",
             "uid": "weekly-reports"
           },
-          "hide": false,
-          "query": "from(bucket: \"weekly-reporting-bucket\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"floating_ip\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"total\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
-          "refId": "B"
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"floating_ip\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"in_use\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
         }
       ],
-      "timeFrom": "13d",
-      "title": "Floating IPs total",
-      "transformations": [
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "/^(?:B)$/"
-          },
-          "id": "reduce",
-          "options": {
-            "reducers": [
-              "diff"
-            ]
-          }
-        },
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "(Difference*)",
-            "renamePattern": "Difference from Last Week"
-          }
-        }
-      ],
-      "type": "stat"
+      "timeFrom": "30d",
+      "title": "FIPs in use past 30 days",
+      "type": "timeseries"
     },
     {
       "collapsed": true,
@@ -1729,7 +1890,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 37
+        "y": 45
       },
       "id": 19,
       "panels": [
@@ -1751,8 +1912,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -1847,8 +2007,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -1943,8 +2102,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -2031,7 +2189,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 38
+        "y": 46
       },
       "id": 21,
       "panels": [
@@ -2053,8 +2211,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -2149,8 +2306,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -2237,7 +2393,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 39
+        "y": 47
       },
       "id": 20,
       "panels": [
@@ -2259,8 +2415,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -2355,8 +2510,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -2443,16 +2597,41 @@
   "schemaVersion": 40,
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": "prod",
+          "value": "prod"
+        },
+        "description": "Production or Development Cloud bucket",
+        "label": "Cloud Instance",
+        "name": "environment",
+        "options": [
+          {
+            "selected": true,
+            "text": "prod",
+            "value": "prod"
+          },
+          {
+            "selected": false,
+            "text": "dev",
+            "value": "dev"
+          }
+        ],
+        "query": "prod, dev",
+        "type": "custom"
+      }
+    ]
   },
   "time": {
-    "from": "now-13d",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Weekly Reporting KH",
+  "title": "Weekly Reporting",
   "uid": "aebnp23l1qhhcbdsd",
-  "version": 23,
+  "version": 9,
   "weekStart": ""
 }
