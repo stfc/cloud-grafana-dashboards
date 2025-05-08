@@ -18,9 +18,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 9,
+  "id": 20,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "collapsed": false,
@@ -38,7 +37,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "openstack_grafana"
+        "uid": "${Environment}"
       },
       "fieldConfig": {
         "defaults": {
@@ -47,8 +46,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-blue",
-                "value": null
+                "color": "dark-blue"
               },
               {
                 "color": "dark-red",
@@ -63,8 +61,7 @@
                 "value": 20
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": []
       },
@@ -80,6 +77,7 @@
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "mean"
@@ -92,13 +90,13 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.3.3",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "alias": "$tag_flavor",
           "datasource": {
             "type": "influxdb",
-            "uid": "openstack_grafana"
+            "uid": "${Environment}"
           },
           "groupBy": [
             {
@@ -111,7 +109,7 @@
           "measurement": "SlotsAvailable",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT last(\"SlotsAvailable\") FROM \"SlotsAvailable\" WHERE (\"instance\" =~  /^$Instance$/  AND \"flavor\" !~ /.*test.*/ AND \"flavor\" !~ /.*temp.*/ AND \"flavor\" =~ /^l.*/) AND $timeFilter GROUP BY \"flavor\"",
+          "query": "SELECT last(\"SlotsAvailable\") FROM \"SlotsAvailable\" WHERE (\"instance\" =~  /^${Instance:text}$/  AND \"flavor\" !~ /.*test.*/ AND \"flavor\" !~ /.*temp.*/ AND \"flavor\" =~ /^l.*/) AND $timeFilter GROUP BY \"flavor\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -169,7 +167,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "openstack_grafana"
+        "uid": "${Environment}"
       },
       "fieldConfig": {
         "defaults": {
@@ -178,8 +176,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-blue",
-                "value": null
+                "color": "dark-blue"
               },
               {
                 "color": "dark-red",
@@ -194,8 +191,7 @@
                 "value": 20
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": []
       },
@@ -211,6 +207,7 @@
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "mean"
@@ -223,13 +220,13 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.3.3",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "alias": "$tag_flavor",
           "datasource": {
             "type": "influxdb",
-            "uid": "openstack_grafana"
+            "uid": "${Environment}"
           },
           "groupBy": [
             {
@@ -242,7 +239,7 @@
           "measurement": "SlotsAvailable",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT last(\"SlotsAvailable\") FROM \"SlotsAvailable\" WHERE (\"instance\" =~  /^$Instance$/  AND \"flavor\" !~ /.*test.*/ AND \"flavor\" !~ /.*temp.*/ AND \"flavor\" =~ /g-rtx4000.*/) AND $timeFilter GROUP BY \"flavor\"",
+          "query": "SELECT last(\"SlotsAvailable\") FROM \"SlotsAvailable\" WHERE (\"instance\" =~  /^${Instance:text}$/  AND \"flavor\" !~ /.*test.*/ AND \"flavor\" !~ /.*temp.*/ AND \"flavor\" =~ /g-rtx4000.*/) AND $timeFilter GROUP BY \"flavor\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -300,7 +297,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "openstack_grafana"
+        "uid": "${Environment}"
       },
       "fieldConfig": {
         "defaults": {
@@ -309,8 +306,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-blue",
-                "value": null
+                "color": "dark-blue"
               },
               {
                 "color": "dark-red",
@@ -325,8 +321,7 @@
                 "value": 20
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": []
       },
@@ -342,6 +337,7 @@
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "mean"
@@ -354,13 +350,13 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.3.3",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "alias": "$tag_flavor",
           "datasource": {
             "type": "influxdb",
-            "uid": "openstack_grafana"
+            "uid": "${Environment}"
           },
           "groupBy": [
             {
@@ -373,7 +369,7 @@
           "measurement": "SlotsAvailable",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT last(\"SlotsAvailable\") FROM \"SlotsAvailable\" WHERE (\"instance\" =~  /^$Instance$/  AND \"flavor\" !~ /.*test.*/ AND \"flavor\" !~ /.*temp.*/ AND \"flavor\" =~ /g-a100.*/) AND $timeFilter GROUP BY \"flavor\"",
+          "query": "SELECT last(\"SlotsAvailable\") FROM \"SlotsAvailable\" WHERE (\"instance\" =~  /^${Instance:text}$/  AND \"flavor\" !~ /.*test.*/ AND \"flavor\" !~ /.*temp.*/ AND \"flavor\" =~ /g-a100.*/) AND $timeFilter GROUP BY \"flavor\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -418,7 +414,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "openstack_grafana"
+        "uid": "${Environment}"
       },
       "fieldConfig": {
         "defaults": {
@@ -427,8 +423,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-blue",
-                "value": null
+                "color": "dark-blue"
               },
               {
                 "color": "dark-red",
@@ -443,8 +438,7 @@
                 "value": 20
               }
             ]
-          },
-          "unitScale": true
+          }
         },
         "overrides": []
       },
@@ -460,6 +454,7 @@
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "mean"
@@ -472,13 +467,13 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.3.3",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "alias": "$tag_flavor",
           "datasource": {
             "type": "influxdb",
-            "uid": "openstack_grafana"
+            "uid": "${Environment}"
           },
           "groupBy": [
             {
@@ -491,7 +486,7 @@
           "measurement": "SlotsAvailable",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT last(\"SlotsAvailable\") FROM \"SlotsAvailable\" WHERE (\"instance\" =~  /^$Instance$/  AND \"flavor\" !~ /.*test.*/ AND \"flavor\" !~ /.*temp.*/ AND \"flavor\" =~ /g-v100.*/) AND $timeFilter GROUP BY \"flavor\"",
+          "query": "SELECT last(\"SlotsAvailable\") FROM \"SlotsAvailable\" WHERE (\"instance\" =~  /^${Instance:text}$/  AND \"flavor\" !~ /.*test.*/ AND \"flavor\" !~ /.*temp.*/ AND \"flavor\" =~ /g-v100.*/) AND $timeFilter GROUP BY \"flavor\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -534,7 +529,7 @@
       "type": "stat"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -542,379 +537,400 @@
         "y": 33
       },
       "id": 20,
-      "panels": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "openstack_grafana"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "dark-blue"
-                  },
-                  {
-                    "color": "dark-red",
-                    "value": 0
-                  },
-                  {
-                    "color": "dark-yellow",
-                    "value": 1
-                  },
-                  {
-                    "color": "dark-green",
-                    "value": 20
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 24,
-            "x": 0,
-            "y": 35
-          },
-          "id": 2,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "mean"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "text": {},
-            "textMode": "auto"
-          },
-          "pluginVersion": "10.0.2",
-          "targets": [
-            {
-              "alias": "$tag_flavor",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "openstack_grafana"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "flavor"
-                  ],
-                  "type": "tag"
-                }
-              ],
-              "measurement": "SlotsAvailable",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "SlotsAvailable"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "last"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "flavor",
-                  "operator": "!~",
-                  "value": "/.*test.*/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "flavor",
-                  "operator": "!~",
-                  "value": "/.*temp.*/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "flavor",
-                  "operator": "=~",
-                  "value": "/^c.*/"
-                }
-              ]
-            }
-          ],
-          "title": "C* flavors",
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "openstack_grafana"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "dark-blue"
-                  },
-                  {
-                    "color": "dark-red",
-                    "value": 0
-                  },
-                  {
-                    "color": "dark-yellow",
-                    "value": 10
-                  },
-                  {
-                    "color": "dark-green",
-                    "value": 20
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 11,
-            "x": 0,
-            "y": 42
-          },
-          "id": 7,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "mean"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "text": {},
-            "textMode": "auto"
-          },
-          "pluginVersion": "10.0.2",
-          "targets": [
-            {
-              "alias": "$tag_flavor",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "openstack_grafana"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "flavor"
-                  ],
-                  "type": "tag"
-                }
-              ],
-              "measurement": "SlotsAvailable",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "SlotsAvailable"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "last"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "flavor",
-                  "operator": "!~",
-                  "value": "/.*test.*/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "flavor",
-                  "operator": "!~",
-                  "value": "/.*temp.*/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "flavor",
-                  "operator": "=~",
-                  "value": "/g-p100.*/"
-                }
-              ]
-            }
-          ],
-          "title": "P100 flavors",
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "openstack_grafana"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "dark-blue"
-                  },
-                  {
-                    "color": "dark-red",
-                    "value": 0
-                  },
-                  {
-                    "color": "dark-yellow",
-                    "value": 10
-                  },
-                  {
-                    "color": "dark-green",
-                    "value": 20
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 13,
-            "x": 11,
-            "y": 42
-          },
-          "id": 3,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "mean"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "text": {},
-            "textMode": "auto"
-          },
-          "pluginVersion": "10.0.2",
-          "targets": [
-            {
-              "alias": "$tag_flavor",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "openstack_grafana"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "flavor"
-                  ],
-                  "type": "tag"
-                }
-              ],
-              "measurement": "SlotsAvailable",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "SlotsAvailable"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "last"
-                  }
-                ]
-              ],
-              "tags": [
-                {
-                  "key": "flavor",
-                  "operator": "!~",
-                  "value": "/.*test.*/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "flavor",
-                  "operator": "!~",
-                  "value": "/.*temp.*/"
-                },
-                {
-                  "condition": "AND",
-                  "key": "flavor",
-                  "operator": "=~",
-                  "value": "/g-p4000.*/"
-                }
-              ]
-            }
-          ],
-          "title": "P4000* flavors",
-          "type": "stat"
-        }
-      ],
+      "panels": [],
       "title": "Decommissioned Flavors",
       "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${Environment}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-blue"
+              },
+              {
+                "color": "dark-red",
+                "value": 0
+              },
+              {
+                "color": "dark-yellow",
+                "value": 1
+              },
+              {
+                "color": "dark-green",
+                "value": 20
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 34
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "alias": "$tag_flavor",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${Environment}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "flavor"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "SlotsAvailable",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT last(\"SlotsAvailable\") FROM \"SlotsAvailable\" WHERE (\"flavor\" !~ /.*test.*/ AND \"flavor\" !~ /.*temp.*/ AND \"flavor\" =~ /^c.*/) AND $timeFilter GROUP BY \"flavor\"",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "SlotsAvailable"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "flavor",
+              "operator": "!~",
+              "value": "/.*test.*/"
+            },
+            {
+              "condition": "AND",
+              "key": "flavor",
+              "operator": "!~",
+              "value": "/.*temp.*/"
+            },
+            {
+              "condition": "AND",
+              "key": "flavor",
+              "operator": "=~",
+              "value": "/^c.*/"
+            }
+          ]
+        }
+      ],
+      "title": "C* flavors",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${Environment}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-blue"
+              },
+              {
+                "color": "dark-red",
+                "value": 0
+              },
+              {
+                "color": "dark-yellow",
+                "value": 10
+              },
+              {
+                "color": "dark-green",
+                "value": 20
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 11,
+        "x": 0,
+        "y": 41
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "alias": "$tag_flavor",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${Environment}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "flavor"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "SlotsAvailable",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "SlotsAvailable"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "flavor",
+              "operator": "!~",
+              "value": "/.*test.*/"
+            },
+            {
+              "condition": "AND",
+              "key": "flavor",
+              "operator": "!~",
+              "value": "/.*temp.*/"
+            },
+            {
+              "condition": "AND",
+              "key": "flavor",
+              "operator": "=~",
+              "value": "/g-p100.*/"
+            }
+          ]
+        }
+      ],
+      "title": "P100 flavors",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${Environment}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-blue"
+              },
+              {
+                "color": "dark-red",
+                "value": 0
+              },
+              {
+                "color": "dark-yellow",
+                "value": 10
+              },
+              {
+                "color": "dark-green",
+                "value": 20
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 13,
+        "x": 11,
+        "y": 41
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "alias": "$tag_flavor",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${Environment}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "flavor"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "SlotsAvailable",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "SlotsAvailable"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "flavor",
+              "operator": "!~",
+              "value": "/.*test.*/"
+            },
+            {
+              "condition": "AND",
+              "key": "flavor",
+              "operator": "!~",
+              "value": "/.*temp.*/"
+            },
+            {
+              "condition": "AND",
+              "key": "flavor",
+              "operator": "=~",
+              "value": "/g-p4000.*/"
+            }
+          ]
+        }
+      ],
+      "title": "P4000* flavors",
+      "type": "stat"
     }
   ],
+  "preload": false,
   "refresh": "",
-  "schemaVersion": 39,
+  "schemaVersion": 41,
   "tags": [],
   "templating": {
     "list": [
       {
+        "allowCustomValue": false,
         "current": {
-          "selected": true,
-          "text": "Preprod",
-          "value": "Preprod"
+          "text": "CloudInfluxDB",
+          "value": "CloudInfluxDB"
         },
-        "hide": 0,
         "includeAll": false,
-        "multi": false,
         "name": "Instance",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "Prod",
-            "value": "Prod"
+            "value": "CloudInfluxDB"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Preprod",
-            "value": "Preprod"
+            "value": "DevCloudInfluxDB"
           }
         ],
-        "query": "Prod, Preprod",
-        "queryValue": "",
-        "skipUrlSync": false,
+        "query": "Prod : CloudInfluxDB, Preprod : DevCloudInfluxDB",
         "type": "custom"
+      },
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": "CloudInfluxDB",
+          "value": "openstack_grafana"
+        },
+        "description": "Production or Development cloud data",
+        "name": "Environment",
+        "options": [],
+        "query": "influxdb",
+        "refresh": 1,
+        "regex": "${Instance:value}",
+        "type": "datasource"
       }
     ]
   },
@@ -938,6 +954,5 @@
   "timezone": "",
   "title": "OpenStack Slots Available",
   "uid": "slots_available",
-  "version": 5,
-  "weekStart": ""
+  "version": 6
 }
