@@ -1,0 +1,646 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 25,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "meerkat-db"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "MiBs"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 12,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 1,
+        "options": {
+          "legend": {
+            "calcs": [
+              "mean",
+              "stdDev",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "meerkat-db"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "ram_read_speed{image=~\"$Image\", flavor=~\"$Flavor\", block_size=~\"$Block_size\"}",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{image}} | {{flavor}} | {{block_size}}",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "Read speed",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "meerkat-db"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "MiBs"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 12,
+          "w": 24,
+          "x": 0,
+          "y": 12
+        },
+        "id": 2,
+        "options": {
+          "legend": {
+            "calcs": [
+              "mean",
+              "stdDev",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "meerkat-db"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "ram_write_speed{image=~\"$Image\", flavor=~\"$Flavor\", block_size=~\"$Block_size\"}",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{image}} | {{flavor}} | {{block_size}}",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "Write speed",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "meerkat-db"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "ms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 12,
+          "w": 24,
+          "x": 0,
+          "y": 24
+        },
+        "id": 4,
+        "options": {
+          "legend": {
+            "calcs": [
+              "mean",
+              "stdDev",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "meerkat-db"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "ram_read_latency{image=~\"$Image\", flavor=~\"$Flavor\", block_size=~\"$Block_size\"}",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{image}} | {{flavor}} | {{block_size}}",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "Read latency",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "meerkat-db"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "ms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 12,
+          "w": 24,
+          "x": 0,
+          "y": 36
+        },
+        "id": 5,
+        "options": {
+          "legend": {
+            "calcs": [
+              "mean",
+              "stdDev",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "meerkat-db"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "expr": "ram_write_latency{image=~\"$Image\", flavor=~\"$Flavor\", block_size=~\"$Block_size\"}",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{image}} | {{flavor}} | {{block_size}}",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "Write latency",
+        "type": "timeseries"
+      }
+    ],
+    "schemaVersion": 37,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "selected": false,
+            "text": "ubuntu-focal-20.04-nogui",
+            "value": "ubuntu-focal-20.04-nogui"
+          },
+          "hide": 0,
+          "includeAll": false,
+          "label": "Image",
+          "multi": true,
+          "name": "Image",
+          "options": [
+            {
+              "selected": true,
+              "text": "ubuntu-focal-20.04-nogui",
+              "value": "ubuntu-focal-20.04-nogui"
+            },
+            {
+              "selected": false,
+              "text": "rocky-8-nogui",
+              "value": "rocky-8-nogui"
+            },
+            {
+              "selected": false,
+              "text": "ubuntu-focal-20.04-gui",
+              "value": "ubuntu-focal-20.04-gui"
+            },
+            {
+              "selected": false,
+              "text": "rocky-9-nogui",
+              "value": "rocky-9-nogui"
+            }
+          ],
+          "query": "ubuntu-focal-20.04-nogui, rocky-8-nogui, ubuntu-focal-20.04-gui, rocky-9-nogui",
+          "queryValue": "",
+          "skipUrlSync": false,
+          "type": "custom"
+        },
+        {
+          "current": {
+            "selected": false,
+            "text": "l6.c2",
+            "value": "l6.c2"
+          },
+          "hide": 0,
+          "includeAll": false,
+          "label": "Flavor",
+          "multi": true,
+          "name": "Flavor",
+          "options": [
+            {
+              "selected": true,
+              "text": "l6.c2",
+              "value": "l6.c2"
+            },
+            {
+              "selected": false,
+              "text": "l6.c4",
+              "value": "l6.c4"
+            },
+            {
+              "selected": false,
+              "text": "l6.c8",
+              "value": "l6.c8"
+            },
+            {
+              "selected": false,
+              "text": "l6.c16",
+              "value": "l6.c16"
+            },
+            {
+              "selected": false,
+              "text": "l6.c32",
+              "value": "l6.c32"
+            },
+            {
+              "selected": false,
+              "text": "l6.c64",
+              "value": "l6.c64"
+            },
+            {
+              "selected": false,
+              "text": "l6.124",
+              "value": "l6.124"
+            },
+            {
+              "selected": false,
+              "text": "l3.nano",
+              "value": "l3.nano"
+            },
+            {
+              "selected": false,
+              "text": "l3.micro",
+              "value": "l3.micro"
+            },
+            {
+              "selected": false,
+              "text": "l3.tiny",
+              "value": "l3.tiny"
+            },
+            {
+              "selected": false,
+              "text": "l3.xsmall",
+              "value": "l3.xsmall"
+            },
+            {
+              "selected": false,
+              "text": "l3.small",
+              "value": "l3.small"
+            },
+            {
+              "selected": false,
+              "text": "l5.c2",
+              "value": "l5.c2"
+            },
+            {
+              "selected": false,
+              "text": "l5.c4",
+              "value": "l5.c4"
+            },
+            {
+              "selected": false,
+              "text": "l5.c8",
+              "value": "l5.c8"
+            },
+            {
+              "selected": false,
+              "text": "l5.c16",
+              "value": "l5.c16"
+            },
+            {
+              "selected": false,
+              "text": "l5.c32",
+              "value": "l5.c32"
+            },
+            {
+              "selected": false,
+              "text": "l5.c64",
+              "value": "l5.c64"
+            },
+            {
+              "selected": false,
+              "text": "l5.c124",
+              "value": "l5.c124"
+            }
+          ],
+          "query": "l6.c2, l6.c4, l6.c8, l6.c16, l6.c32, l6.c64, l6.124, l3.nano, l3.micro, l3.tiny, l3.xsmall, l3.small, l5.c2, l5.c4, l5.c8, l5.c16, l5.c32, l5.c64, l5.c124",
+          "queryValue": "",
+          "skipUrlSync": false,
+          "type": "custom"
+        },
+        {
+          "current": {
+            "selected": false,
+            "text": "1K",
+            "value": "1K"
+          },
+          "hide": 0,
+          "includeAll": false,
+          "label": "Block_size",
+          "multi": true,
+          "name": "Block_size",
+          "options": [
+            {
+              "selected": true,
+              "text": "1K",
+              "value": "1K"
+            },
+            {
+              "selected": false,
+              "text": "1M",
+              "value": "1M"
+            },
+            {
+              "selected": false,
+              "text": "1G",
+              "value": "1G"
+            }
+          ],
+          "query": "1K, 1M, 1G",
+          "queryValue": "",
+          "skipUrlSync": false,
+          "type": "custom"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "Ram benchmarking",
+    "uid": "adxdme7otatc0d",
+    "version": 10,
+    "weekStart": ""
+  }
