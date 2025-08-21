@@ -33,3 +33,9 @@ The yaml file [cloud_dashboards.yaml](cloud_dashboards.yaml) is used by Grafana 
 - Weekly Reporting:
     - Weekly Reporting
     - Weekly Reporting DW
+
+- ChatOps:
+    - Docker Monitoring: Shows usage information about containers from cAdvisor. [Grafana Community Made](https://grafana.com/grafana/dashboards/15798-docker-monitoring/)
+    - HAProxy: HAProxy traffic information. [Grafana Community Made](https://github.com/rfmoz/grafana-dashboards)
+    - Node Exporter: System usage information. [Grafana Community Made](https://github.com/rfmoz/grafana-dashboards)
+    - Service Status: Service systemctl status information.
