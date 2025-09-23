@@ -25,6 +25,7 @@ The yaml file [cloud_dashboards.yaml](cloud_dashboards.yaml) is used by Grafana 
     - OpenStack service status Breakdown: Breakdown of service statuses
     - OpenStack availability over time: Shows the average availability over a set time period
     - OpenStack Service Graphs: Shows the graphs for OpenStack Components
+    - Harbor Node Exporter: Shows host resource usage
 
 - Slots Available:
     - OpenStack GPU usage: GPU Usage on Production across all GPU flavors
