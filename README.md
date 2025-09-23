@@ -25,14 +25,14 @@ The yaml file [cloud_dashboards.yaml](cloud_dashboards.yaml) is used by Grafana 
     - OpenStack service status Breakdown: Breakdown of service statuses
     - OpenStack availability over time: Shows the average availability over a set time period
     - OpenStack Service Graphs: Shows the graphs for OpenStack Components
+    - Harbor Node Exporter: Shows host resource usage
 
 - Slots Available:
     - OpenStack GPU usage: GPU Usage on Production across all GPU flavors
     - Openstack slots available: Shows available flavor capacity for L and GPU flavors
 
 - Weekly Reporting:
-    - Weekly Reporting
-    - Weekly Reporting DW
+    - Weekly Reporting: Cloud weekly reporting statistics
 
 - ChatOps:
     - Docker Monitoring: Shows usage information about containers from cAdvisor. [Grafana Community Made](https://grafana.com/grafana/dashboards/15798-docker-monitoring/)
