@@ -31,8 +31,7 @@ The yaml file [cloud_dashboards.yaml](cloud_dashboards.yaml) is used by Grafana 
     - Openstack slots available: Shows available flavor capacity for L and GPU flavors
 
 - Weekly Reporting:
-    - Weekly Reporting
-    - Weekly Reporting DW
+    - Weekly Reporting: Cloud weekly reporting statistics
 
 - ChatOps:
     - Docker Monitoring: Shows usage information about containers from cAdvisor. [Grafana Community Made](https://grafana.com/grafana/dashboards/15798-docker-monitoring/)
