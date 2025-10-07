@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 21,
+  "id": 24,
   "links": [],
   "panels": [
     {
@@ -53,7 +53,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -83,7 +83,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -116,7 +116,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -148,7 +148,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -181,7 +181,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -213,7 +213,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -279,7 +279,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -288,7 +288,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 8,
         "w": 8,
         "x": 0,
         "y": 5
@@ -307,7 +307,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -318,8 +318,7 @@
           "refId": "A"
         }
       ],
-      "timeFrom": "30d",
-      "title": "CPU in use past 30 days",
+      "title": "CPU in use",
       "type": "timeseries"
     },
     {
@@ -374,7 +373,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -383,7 +382,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 8,
         "w": 8,
         "x": 8,
         "y": 5
@@ -402,7 +401,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -413,8 +412,7 @@
           "refId": "A"
         }
       ],
-      "timeFrom": "30d",
-      "title": "CPU total past 30 days",
+      "title": "CPU total",
       "type": "timeseries"
     },
     {
@@ -469,7 +467,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -478,7 +476,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 8,
         "w": 8,
         "x": 16,
         "y": 5
@@ -497,7 +495,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -508,8 +506,7 @@
           "refId": "A"
         }
       ],
-      "timeFrom": "30d",
-      "title": "Active Virtual Worker Nodes past 30 days",
+      "title": "Active Virtual Worker Nodes",
       "type": "timeseries"
     },
     {
@@ -518,7 +515,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 9
+        "y": 13
       },
       "id": 18,
       "panels": [],
@@ -544,7 +541,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -556,7 +553,7 @@
         "h": 4,
         "w": 8,
         "x": 4,
-        "y": 10
+        "y": 14
       },
       "id": 4,
       "options": {
@@ -576,7 +573,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -609,7 +606,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -621,7 +618,7 @@
         "h": 4,
         "w": 8,
         "x": 12,
-        "y": 10
+        "y": 14
       },
       "id": 6,
       "options": {
@@ -641,7 +638,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -707,7 +704,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -716,10 +713,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 8,
         "w": 8,
         "x": 4,
-        "y": 14
+        "y": 18
       },
       "id": 39,
       "options": {
@@ -735,7 +732,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -746,8 +743,7 @@
           "refId": "A"
         }
       ],
-      "timeFrom": "30d",
-      "title": "Memory in use past 30 days",
+      "title": "Memory in use",
       "type": "timeseries"
     },
     {
@@ -802,7 +798,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -811,10 +807,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 8,
         "w": 8,
         "x": 12,
-        "y": 14
+        "y": 18
       },
       "id": 40,
       "options": {
@@ -830,7 +826,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -841,8 +837,7 @@
           "refId": "A"
         }
       ],
-      "timeFrom": "30d",
-      "title": "Memory total past 30 days",
+      "title": "Memory total",
       "type": "timeseries"
     },
     {
@@ -851,7 +846,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 18
+        "y": 26
       },
       "id": 22,
       "panels": [],
@@ -877,7 +872,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -889,7 +884,7 @@
         "h": 4,
         "w": 8,
         "x": 0,
-        "y": 19
+        "y": 27
       },
       "id": 23,
       "options": {
@@ -909,7 +904,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -942,7 +937,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -954,7 +949,7 @@
         "h": 4,
         "w": 8,
         "x": 8,
-        "y": 19
+        "y": 27
       },
       "id": 27,
       "options": {
@@ -974,7 +969,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -1007,7 +1002,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -1019,7 +1014,7 @@
         "h": 4,
         "w": 8,
         "x": 16,
-        "y": 19
+        "y": 27
       },
       "id": 26,
       "options": {
@@ -1039,7 +1034,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -1051,6 +1046,71 @@
         }
       ],
       "title": "HVs Active and Memory Full",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "weekly-reports"
+      },
+      "description": "Cloud hypervisors down",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "HVs"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 0,
+        "y": 31
+      },
+      "id": 25,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "weekly-reports"
+          },
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hv\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"down\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n\r\nreduced = data\r\n  |> reduce(\r\n      identity: {first: 0.0, last: 0.0, dummy: \"join_key\"},\r\n      fn: (r, accumulator) => ({\r\n          first: if accumulator.first == 0.0 then r._value else accumulator.first,\r\n          last: r._value,\r\n          dummy: \"join_key\"\r\n      })\r\n  )\r\n\r\nlatest = data\r\n  |> last()\r\n  |> map(fn: (r) => ({_value: r._value, dummy: \"join_key\"})) // Add dummy column for join\r\n\r\njoined = join(\r\n  tables: {reduced: reduced, latest: latest},\r\n  on: [\"dummy\"] // Join on the dummy column\r\n)\r\n\r\njoined\r\n  |> map(fn: (r) => ({\r\n      _time: now(),\r\n      Current: r._value,\r\n      \"Difference from time range\": r.last - r.first\r\n  }))\r\n",
+          "refId": "A"
+        }
+      ],
+      "title": "HVs Down",
       "type": "stat"
     },
     {
@@ -1105,7 +1165,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -1114,10 +1174,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 8,
         "w": 8,
-        "x": 0,
-        "y": 23
+        "x": 8,
+        "y": 31
       },
       "id": 41,
       "options": {
@@ -1133,7 +1193,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -1144,74 +1204,8 @@
           "refId": "A"
         }
       ],
-      "timeFrom": "30d",
-      "title": "Hypervisors up past 30 days",
+      "title": "Hypervisors up",
       "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "weekly-reports"
-      },
-      "description": "Cloud hypervisors down",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "fieldMinMax": false,
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "HVs"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 8,
-        "x": 8,
-        "y": 23
-      },
-      "id": 25,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.5.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "weekly-reports"
-          },
-          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hv\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"down\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n\r\nreduced = data\r\n  |> reduce(\r\n      identity: {first: 0.0, last: 0.0, dummy: \"join_key\"},\r\n      fn: (r, accumulator) => ({\r\n          first: if accumulator.first == 0.0 then r._value else accumulator.first,\r\n          last: r._value,\r\n          dummy: \"join_key\"\r\n      })\r\n  )\r\n\r\nlatest = data\r\n  |> last()\r\n  |> map(fn: (r) => ({_value: r._value, dummy: \"join_key\"})) // Add dummy column for join\r\n\r\njoined = join(\r\n  tables: {reduced: reduced, latest: latest},\r\n  on: [\"dummy\"] // Join on the dummy column\r\n)\r\n\r\njoined\r\n  |> map(fn: (r) => ({\r\n      _time: now(),\r\n      Current: r._value,\r\n      \"Difference from time range\": r.last - r.first\r\n  }))\r\n",
-          "refId": "A"
-        }
-      ],
-      "title": "HVs Down",
-      "type": "stat"
     },
     {
       "datasource": {
@@ -1232,7 +1226,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -1244,7 +1238,7 @@
         "h": 4,
         "w": 8,
         "x": 16,
-        "y": 23
+        "y": 31
       },
       "id": 24,
       "options": {
@@ -1264,7 +1258,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -1284,7 +1278,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 27
+        "y": 39
       },
       "id": 28,
       "panels": [],
@@ -1310,7 +1304,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -1322,7 +1316,7 @@
         "h": 4,
         "w": 8,
         "x": 0,
-        "y": 28
+        "y": 40
       },
       "id": 29,
       "options": {
@@ -1342,7 +1336,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -1408,7 +1402,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -1417,10 +1411,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 8,
         "w": 8,
         "x": 8,
-        "y": 28
+        "y": 40
       },
       "id": 42,
       "options": {
@@ -1436,7 +1430,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -1447,8 +1441,7 @@
           "refId": "A"
         }
       ],
-      "timeFrom": "30d",
-      "title": "VMs active past 30 days",
+      "title": "VMs active",
       "type": "timeseries"
     },
     {
@@ -1470,7 +1463,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -1482,7 +1475,7 @@
         "h": 4,
         "w": 8,
         "x": 16,
-        "y": 28
+        "y": 40
       },
       "id": 31,
       "options": {
@@ -1502,7 +1495,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -1535,7 +1528,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -1546,8 +1539,8 @@
       "gridPos": {
         "h": 4,
         "w": 8,
-        "x": 4,
-        "y": 32
+        "x": 0,
+        "y": 44
       },
       "id": 32,
       "options": {
@@ -1567,7 +1560,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -1600,7 +1593,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -1611,8 +1604,8 @@
       "gridPos": {
         "h": 4,
         "w": 8,
-        "x": 12,
-        "y": 32
+        "x": 16,
+        "y": 44
       },
       "id": 30,
       "options": {
@@ -1632,7 +1625,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -1652,7 +1645,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 36
+        "y": 48
       },
       "id": 33,
       "panels": [],
@@ -1678,7 +1671,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -1689,8 +1682,8 @@
       "gridPos": {
         "h": 4,
         "w": 8,
-        "x": 3,
-        "y": 37
+        "x": 0,
+        "y": 49
       },
       "id": 34,
       "options": {
@@ -1710,7 +1703,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -1722,71 +1715,6 @@
         }
       ],
       "title": "Floating IPs consumed",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "weekly-reports"
-      },
-      "description": "Floating IP addresses total in the Cloud",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "fieldMinMax": false,
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "FIPs"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 8,
-        "x": 11,
-        "y": 37
-      },
-      "id": 35,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.5.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "weekly-reports"
-          },
-          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"floating_ip\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"total\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n\r\nreduced = data\r\n  |> reduce(\r\n      identity: {first: 0.0, last: 0.0, dummy: \"join_key\"},\r\n      fn: (r, accumulator) => ({\r\n          first: if accumulator.first == 0.0 then r._value else accumulator.first,\r\n          last: r._value,\r\n          dummy: \"join_key\"\r\n      })\r\n  )\r\n\r\nlatest = data\r\n  |> last()\r\n  |> map(fn: (r) => ({_value: r._value, dummy: \"join_key\"})) // Add dummy column for join\r\n\r\njoined = join(\r\n  tables: {reduced: reduced, latest: latest},\r\n  on: [\"dummy\"] // Join on the dummy column\r\n)\r\n\r\njoined\r\n  |> map(fn: (r) => ({\r\n      _time: now(),\r\n      Current: r._value,\r\n      \"Difference from time range\": r.last - r.first\r\n  }))\r\n",
-          "refId": "A"
-        }
-      ],
-      "title": "Floating IPs total",
       "type": "stat"
     },
     {
@@ -1841,7 +1769,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -1850,10 +1778,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 8,
         "w": 8,
-        "x": 7,
-        "y": 41
+        "x": 8,
+        "y": 49
       },
       "id": 43,
       "options": {
@@ -1869,7 +1797,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -1880,9 +1808,73 @@
           "refId": "A"
         }
       ],
-      "timeFrom": "30d",
-      "title": "FIPs in use past 30 days",
+      "title": "FIPs in use",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "weekly-reports"
+      },
+      "description": "Floating IP addresses total in the Cloud",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "FIPs"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 16,
+        "y": 49
+      },
+      "id": 35,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "weekly-reports"
+          },
+          "query": "bucket = if string(v: \"${environment}\") == \"prod\" then \"weekly-reporting-bucket\" else \"weekly-reporting-dev\"\r\n\r\ndata = from(bucket: bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"floating_ip\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"total\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n\r\nreduced = data\r\n  |> reduce(\r\n      identity: {first: 0.0, last: 0.0, dummy: \"join_key\"},\r\n      fn: (r, accumulator) => ({\r\n          first: if accumulator.first == 0.0 then r._value else accumulator.first,\r\n          last: r._value,\r\n          dummy: \"join_key\"\r\n      })\r\n  )\r\n\r\nlatest = data\r\n  |> last()\r\n  |> map(fn: (r) => ({_value: r._value, dummy: \"join_key\"})) // Add dummy column for join\r\n\r\njoined = join(\r\n  tables: {reduced: reduced, latest: latest},\r\n  on: [\"dummy\"] // Join on the dummy column\r\n)\r\n\r\njoined\r\n  |> map(fn: (r) => ({\r\n      _time: now(),\r\n      Current: r._value,\r\n      \"Difference from time range\": r.last - r.first\r\n  }))\r\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Floating IPs total",
+      "type": "stat"
     },
     {
       "collapsed": true,
@@ -1890,7 +1882,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 45
+        "y": 57
       },
       "id": 19,
       "panels": [
@@ -2189,7 +2181,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 46
+        "y": 58
       },
       "id": 21,
       "panels": [
@@ -2393,7 +2385,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 47
+        "y": 59
       },
       "id": 20,
       "panels": [
@@ -2594,7 +2586,7 @@
   ],
   "preload": false,
   "refresh": "",
-  "schemaVersion": 40,
+  "schemaVersion": 41,
   "tags": [],
   "templating": {
     "list": [
@@ -2625,13 +2617,12 @@
     ]
   },
   "time": {
-    "from": "now-7d",
+    "from": "now-1y",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Weekly Reporting",
   "uid": "aebnp23l1qhhcbdsd",
-  "version": 9,
-  "weekStart": ""
+  "version": 4
 }
