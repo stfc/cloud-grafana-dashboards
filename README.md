@@ -12,6 +12,7 @@ The yaml file [cloud_dashboards.yaml](cloud_dashboards.yaml) is used by Grafana 
 - Power Metrics:
     - Cloud power metrics: Shows the energy usage across a variety of machines along with cumulative measurements
     - Cloud rack average energy usage: Shows the energy usage across each rack
+    - Cloud Energy Overview by Aggregate: Shows the total power of the cloud by aggregate.
 
 - Service Status:
     - Harbor Node Exporter: Shows host resource usage
