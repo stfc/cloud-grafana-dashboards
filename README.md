@@ -14,6 +14,11 @@ The yaml file [cloud_dashboards.yaml](cloud_dashboards.yaml) is used by Grafana 
     - Cloud rack average energy usage: Shows the energy usage across each rack
     - Cloud Energy Overview by Aggregate: Shows the total power of the cloud by aggregate.
 
+- Virtual Machines:
+    Two dashboards estimate the power consumption and carbon emissions of Virtual Machines (VMs) over a selected time period, each using a different methodology:
+    - Virtual Machine Power & Carbon Emissions Dashboard - Method 1
+    - Virtual Machine Power & Carbon Emissions Dashboard - Method 2
+    
 - Service Status:
     - Harbor Node Exporter: Shows host resource usage
 
