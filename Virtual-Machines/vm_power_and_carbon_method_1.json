@@ -246,7 +246,7 @@
               }
             }
           },
-          "version": "13.0.1+security-01"
+          "version": "13.0.2"
         }
       }
     },
@@ -1497,7 +1497,7 @@
               "wideLayout": true
             }
           },
-          "version": "13.0.1+security-01"
+          "version": "13.0.2"
         }
       }
     },
@@ -1736,7 +1736,7 @@
               "wideLayout": true
             }
           },
-          "version": "13.0.1+security-01"
+          "version": "13.0.2"
         }
       }
     },
@@ -2058,7 +2058,7 @@
               "wideLayout": true
             }
           },
-          "version": "13.0.1+security-01"
+          "version": "13.0.2"
         }
       }
     },
@@ -2326,7 +2326,7 @@
               "wideLayout": true
             }
           },
-          "version": "13.0.1+security-01"
+          "version": "13.0.2"
         }
       }
     },
@@ -2581,7 +2581,7 @@
                       "operator": "*",
                       "right": {
                         "fixed": "0.21"
-                     }
+                      }
                     },
                     "mode": "binary",
                     "reduce": {
@@ -2594,7 +2594,7 @@
             ]
           }
         },
-        "description": "As of 17th March 2026 <br>\nAverage electricity cost report by HPC Operation Costing Report is £0.21 per kWh. <br>\nElectricity Cost = Total Energy * 0.21 <br>\nSource: <br>\nhttp://caci-master-virt.di.stfc.ac.uk/Information/CostingForm.php",
+        "description": "As of 17th March 2026 <br>\nAverage electricity cost report by HPC Operation Costing Report is £0.21 per kWh. <br>\nElectricity Cost = Total Energy * 0.21 <br>\nSource: <br>\nhttp://cacti-master-virt.di.stfc.ac.uk/Information/CostingForm.php",
         "id": 25,
         "links": [],
         "title": "⚡ VM Energy Cost",
@@ -2610,7 +2610,7 @@
                 "fieldMinMax": false,
                 "thresholds": {
                   "mode": "absolute",
-                  "steps"[
+                  "steps": [
                     {
                       "color": "green",
                       "value": 0
@@ -2643,7 +2643,7 @@
               "wideLayout": true
             }
           },
-          "version": "13.0.1+security-01"
+          "version": "13.0.2"
         }
       }
     },
@@ -2946,7 +2946,7 @@
           "spec": {
             "fieldConfig": {
               "defaults": {
-                "coor": {
+                "color": {
                   "mode": "thresholds"
                 },
                 "decimals": 2,
@@ -2986,7 +2986,7 @@
               "wideLayout": true
             }
           },
-          "version": "13.0.1+security-01"
+          "version": "13.0.2"
         }
       }
     },
@@ -3286,7 +3286,7 @@
         "vizConfig": {
           "group": "stat",
           "kind": "VizConfig",
-          pec": {
+          "spec": {
             "fieldConfig": {
               "defaults": {
                 "color": {
@@ -3329,7 +3329,7 @@
               "wideLayout": true
             }
           },
-          "version": "13.0.1+security-01"
+          "version": "13.0.2"
         }
       }
     },
@@ -3415,7 +3415,7 @@
               "wideLayout": true
             }
           },
-          "version": "13.0.1+security-01"
+          "version": "13.0.2"
         }
       }
     },
@@ -3448,11 +3448,11 @@
                 "showLineNumbers": false,
                 "showMiniMap": false
               },
-              "content": "# ⚡Virtual Machine Power & Carbon Emissions Dashboard Method 1\nThis dashboard estimates the **power consumption** and **carbon emissions** of an OpenStack Viual Machine (VM) over a selected time period.<br>\nThe calculation is based on the **VM CPU usage relative to the total CPU usage of the hypervisor host.**\n> ⚠️ The results represent an **approximation**, not an exact measurement of VM energy usage.<br>\n> ⚠️ This dashboard supports Compute (CPU) flavours only.<br>\n`GPU flavours are not supported and may produce incorrect estimates.`\n\n## 🧭 How to Use This Dashboard\n\n1. **Select your VM Instance Name:**<br>\nUse the Instance Name dropdown atf the dashboard to select your VM.<br>\n2. **Handle duplicate VM names (if applicable):**<br>\n-If multiple VMs share the same name:<br>\n-Go to: https://openstack.stfc.ac.uk<br>\n-Navigate to: Project → Instances<br>\n-Find the correct VM and copy its Instance ID (UUID)<br>\n-In Grafana, after selecting the instance name, choose the corresponding VM UUID from the UUID variable dropdown<br>\n5. **Select the time range:**<br>\nChoose the time period you want to analyse using the time picker.<br>\n6. **Viewhe Results, the dashboard will display:**<br>\nEstimated VM power consumption<br>\nEstimated carbon emissions\n\n## 🧮 Calculation Method\nThe VM power consumption is estimated using proportional CPU utilisation:<br>\n      `VM Power ≈ Hypervisor Power × (VM CPU Usage / Hypervisor CPU Usage)`<br>\nThis method attributes a share of the physical server's power consumption to each VM based on its relative CPU activity.\n\n\n## ⚠️ Important Limitations\nThe VM power attribution is calculated only from rces and does not include:<br>\n- Memory (RAM) usage\n- Disk storage and I/O activity\n- Network traffic\n- GPU or accelerator usage<br>\n\nWorkloads that rely heavily on these resources may therefore have their actual energy usage under- or over-estimated.<br>\nTherefore, this dashboard currently supports only Compute (CPU) flavours.<br>\nGPU flavours are not supported and will not produce accurate power or carbon estimates.\n## 🌱 Purpose of This Dashboard:\nThis dashboard helps users:\n- Understand thenergy footprint of their virtual machines.\n- Estimate carbon emissions of workloads\n- Support sustainability and energy awareness in using STFC Cloud",
+              "content": "# ⚡Virtual Machine Power & Carbon Emissions Dashboard Method 1\nThis dashboard estimates the **power consumption** and **carbon emissions** of an OpenStack Virtual Machine (VM) over a selected time period.<br>\nThe calculation is based on the **VM CPU usage relative to the total CPU usage of the hypervisor host.**\n> ⚠️ The results represent an **approximation**, not an exact measurement of VM energy usage.<br>\n> ⚠️ This dashboard supports Compute (CPU) flavours only.<br>\n`GPU flavours are not supported and may produce incorrect estimates.`\n\n## 🧭 How to Use This Dashboard\n\n1. **Select your VM Instance Name:**<br>\nUse the Instance Name dropdown at the top of the dashboard to select your VM.<br>\n2. **Handle duplicate VM names (if applicable):**<br>\n-If multiple VMs share the same name:<br>\n-Go to: https://openstack.stfc.ac.uk<br>\n-Navigate to: Project → Instances<br>\n-Find the correct VM and copy its Instance ID (UUID)<br>\n-In Grafana, after selecting the instance name, choose the corresponding VM UUID from the UUID variable dropdown<br>\n5. **Select the time range:**<br>\nChoose the time period you want to analyse using the time picker.<br>\n6. **View the Results, the dashboard will display:**<br>\nEstimated VM power consumption<br>\nEstimated carbon emissions\n\n## 🧮 Calculation Method\nThe VM power consumption is estimated using proportional CPU utilisation:<br>\n      `VM Power ≈ Hypervisor Power × (VM CPU Usage / Hypervisor CPU Usage)`<br>\nThis method attributes a share of the physical server's power consumption to each VM based on its relative CPU activity.\n\n\n## ⚠️ Important Limitations\nThe VM power attribution is calculated only from CPU resources and does not include:<br>\n- Memory (RAM) usage\n- Disk storage and I/O activity\n- Network traffic\n- GPU or accelerator usage<br>\n\nWorkloads that rely heavily on these resources may therefore have their actual energy usage under- or over-estimated.<br>\nTherefore, this dashboard currently supports only Compute (CPU) flavours.<br>\nGPU flavours are not supported and will not produce accurate power or carbon estimates.\n## 🌱 Purpose of This Dashboard:\nThis dashboard helps users:\n- Understand the energy footprint of their virtual machines.\n- Estimate carbon emissions of workloads\n- Support sustainability and energy awareness in using STFC Cloud",
               "mode": "markdown"
             }
           },
-          "version": "13.0.1+security-01"
+          "version": "13.0.2"
         }
       }
     }
@@ -3812,8 +3812,8 @@
       "spec": {
         "allowCustomValue": true,
         "current": {
-          "text": "ALMA PL Snapshot Building",
-          "value": "ALMA PL Snapshot Building"
+          "text": "AI4S",
+          "value": "AI4S"
         },
         "definition": "label_values(libvirt_domain_info_meta,instance_name)",
         "description": "Name of your Virtual Machine instance as created on STFC Cloud OpenStack",
@@ -3848,8 +3848,8 @@
       "spec": {
         "allowCustomValue": true,
         "current": {
-          "text": "1e563114-8e87-42c7-b181-7b4413a53405",
-          "value": "1e563114-8e87-42c7-b181-7b4413a53405"
+          "text": "c3d23176-236b-4165-8aa4-33232ce21118",
+          "value": "c3d23176-236b-4165-8aa4-33232ce21118"
         },
         "definition": "label_values(libvirt_domain_info_meta{job=\"libvirt_exporter\", instance_name=~\"$instance_name\"},uuid)",
         "description": "Virtual Machine UUID from STFC Cloud OpenStack",
@@ -3884,8 +3884,8 @@
       "spec": {
         "allowCustomValue": true,
         "current": {
-          "text": "hv603.nubes.rl.ac.uk",
-          "value": "hv603.nubes.rl.ac.uk"
+          "text": "hv-a100x8-6.nubes.rl.ac.uk",
+          "value": "hv-a100x8-6.nubes.rl.ac.uk"
         },
         "definition": "label_values(libvirt_domain_info_meta{job=\"libvirt_exporter\", uuid=~\"$uuid\"},instance)",
         "hide": "dontHide",
