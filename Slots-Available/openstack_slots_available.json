@@ -4,25 +4,24 @@
   "metadata": {
     "name": "slots_available",
     "namespace": "default",
-    "uid": "rDD8XOc5P0MBbpl90RX7XnDSyMd5tWFyUL3X6nuB5VMX",
-    "resourceVersion": "1776852270002988",
-    "generation": 3,
-    "creationTimestamp": "2025-11-24T10:11:50Z",
+    "uid": "1d0ea8ff-9ef0-410a-8ef4-ff333518f3a8",
+    "resourceVersion": "1788422409611991",
+    "generation": 7,
+    "creationTimestamp": "2026-09-03T07:50:54Z",
     "labels": {
-      "grafana.app/deprecatedInternalID": "19"
+      "grafana.app/deprecatedInternalID": "1245423277363200"
     },
     "annotations": {
-      "grafana.app/createdBy": "provisioning:",
-      "grafana.app/folder": "",
+      "grafana.app/createdBy": "access-policy:service",
       "grafana.app/managedBy": "classic-file-provisioning",
       "grafana.app/managerAllowsEdits": "true",
       "grafana.app/managerId": "default",
-      "grafana.app/saved-from-ui": "Grafana v13.0.1 (a100054f)",
-      "grafana.app/sourceChecksum": "ca5a9dbf9338a50c538ce8f6ffdbeaf0",
-      "grafana.app/sourcePath": "/etc/grafana/provisioning/dashboards/openstack_slots_available.json",
-      "grafana.app/sourceTimestamp": "1776851161000",
-      "grafana.app/updatedBy": "user:ef52vu9o4f2tcf",
-      "grafana.app/updatedTimestamp": "2026-04-22T10:04:29Z"
+      "grafana.app/saved-from-ui": "Grafana v13.2.1 (56cd3e9288)",
+      "grafana.app/sourceChecksum": "89a393a5769872c6e4c0c70945e64823",
+      "grafana.app/sourcePath": "/etc/grafana/provisioning/dashboards/Public/openstack_slots_available.json",
+      "grafana.app/sourceTimestamp": "1788422214000",
+      "grafana.app/updatedBy": "user:bfx4cew7iton4a",
+      "grafana.app/updatedTimestamp": "2026-09-03T08:00:09Z"
     }
   },
   "spec": {
@@ -50,272 +49,6 @@
     "cursorSync": "Off",
     "editable": true,
     "elements": {
-      "panel-2": {
-        "kind": "Panel",
-        "spec": {
-          "id": 2,
-          "title": "C* flavors",
-          "description": "",
-          "links": [],
-          "data": {
-            "kind": "QueryGroup",
-            "spec": {
-              "queries": [
-                {
-                  "kind": "PanelQuery",
-                  "spec": {
-                    "query": {
-                      "kind": "DataQuery",
-                      "group": "influxdb",
-                      "version": "v0",
-                      "datasource": {
-                        "name": "${Environment}"
-                      },
-                      "spec": {
-                        "alias": "$tag_flavor",
-                        "groupBy": [
-                          {
-                            "params": [
-                              "flavor"
-                            ],
-                            "type": "tag"
-                          }
-                        ],
-                        "measurement": "SlotsAvailable",
-                        "orderByTime": "ASC",
-                        "policy": "default",
-                        "query": "SELECT last(\"SlotsAvailable\") FROM \"SlotsAvailable\" WHERE (\"flavor\" !~ /.*test.*/ AND \"flavor\" !~ /.*temp.*/ AND \"flavor\" =~ /^c.*/) AND $timeFilter GROUP BY \"flavor\"",
-                        "rawQuery": true,
-                        "resultFormat": "time_series",
-                        "select": [
-                          [
-                            {
-                              "params": [
-                                "SlotsAvailable"
-                              ],
-                              "type": "field"
-                            },
-                            {
-                              "params": [],
-                              "type": "last"
-                            }
-                          ]
-                        ],
-                        "tags": [
-                          {
-                            "key": "flavor",
-                            "operator": "!~",
-                            "value": "/.*test.*/"
-                          },
-                          {
-                            "condition": "AND",
-                            "key": "flavor",
-                            "operator": "!~",
-                            "value": "/.*temp.*/"
-                          },
-                          {
-                            "condition": "AND",
-                            "key": "flavor",
-                            "operator": "=~",
-                            "value": "/^c.*/"
-                          }
-                        ]
-                      }
-                    },
-                    "refId": "A",
-                    "hidden": false
-                  }
-                }
-              ],
-              "transformations": [],
-              "queryOptions": {}
-            }
-          },
-          "vizConfig": {
-            "kind": "VizConfig",
-            "group": "stat",
-            "version": "13.0.1",
-            "spec": {
-              "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "auto",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                  "calcs": [
-                    "mean"
-                  ],
-                  "fields": "",
-                  "values": false
-                },
-                "showPercentChange": false,
-                "text": {},
-                "textMode": "auto",
-                "wideLayout": true
-              },
-              "fieldConfig": {
-                "defaults": {
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "value": 0,
-                        "color": "dark-blue"
-                      },
-                      {
-                        "value": 0,
-                        "color": "dark-red"
-                      },
-                      {
-                        "value": 1,
-                        "color": "dark-yellow"
-                      },
-                      {
-                        "value": 20,
-                        "color": "dark-green"
-                      }
-                    ]
-                  }
-                },
-                "overrides": []
-              }
-            }
-          }
-        }
-      },
-      "panel-3": {
-        "kind": "Panel",
-        "spec": {
-          "id": 3,
-          "title": "P4000* flavors",
-          "description": "",
-          "links": [],
-          "data": {
-            "kind": "QueryGroup",
-            "spec": {
-              "queries": [
-                {
-                  "kind": "PanelQuery",
-                  "spec": {
-                    "query": {
-                      "kind": "DataQuery",
-                      "group": "influxdb",
-                      "version": "v0",
-                      "datasource": {
-                        "name": "${Environment}"
-                      },
-                      "spec": {
-                        "alias": "$tag_flavor",
-                        "groupBy": [
-                          {
-                            "params": [
-                              "flavor"
-                            ],
-                            "type": "tag"
-                          }
-                        ],
-                        "measurement": "SlotsAvailable",
-                        "orderByTime": "ASC",
-                        "policy": "default",
-                        "resultFormat": "time_series",
-                        "select": [
-                          [
-                            {
-                              "params": [
-                                "SlotsAvailable"
-                              ],
-                              "type": "field"
-                            },
-                            {
-                              "params": [],
-                              "type": "last"
-                            }
-                          ]
-                        ],
-                        "tags": [
-                          {
-                            "key": "flavor",
-                            "operator": "!~",
-                            "value": "/.*test.*/"
-                          },
-                          {
-                            "condition": "AND",
-                            "key": "flavor",
-                            "operator": "!~",
-                            "value": "/.*temp.*/"
-                          },
-                          {
-                            "condition": "AND",
-                            "key": "flavor",
-                            "operator": "=~",
-                            "value": "/g-p4000.*/"
-                          }
-                        ]
-                      }
-                    },
-                    "refId": "A",
-                    "hidden": false
-                  }
-                }
-              ],
-              "transformations": [],
-              "queryOptions": {}
-            }
-          },
-          "vizConfig": {
-            "kind": "VizConfig",
-            "group": "stat",
-            "version": "13.0.1",
-            "spec": {
-              "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "auto",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                  "calcs": [
-                    "mean"
-                  ],
-                  "fields": "",
-                  "values": false
-                },
-                "showPercentChange": false,
-                "text": {},
-                "textMode": "auto",
-                "wideLayout": true
-              },
-              "fieldConfig": {
-                "defaults": {
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "value": 0,
-                        "color": "dark-blue"
-                      },
-                      {
-                        "value": 0,
-                        "color": "dark-red"
-                      },
-                      {
-                        "value": 10,
-                        "color": "dark-yellow"
-                      },
-                      {
-                        "value": 20,
-                        "color": "dark-green"
-                      }
-                    ]
-                  }
-                },
-                "overrides": []
-              }
-            }
-          }
-        }
-      },
       "panel-4": {
         "kind": "Panel",
         "spec": {
@@ -335,7 +68,7 @@
                       "group": "influxdb",
                       "version": "v0",
                       "datasource": {
-                        "name": "${Environment}"
+                        "name": "prod_cloud_influx"
                       },
                       "spec": {
                         "alias": "$tag_flavor",
@@ -400,7 +133,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.0.1",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "colorMode": "value",
@@ -469,7 +202,7 @@
                       "group": "influxdb",
                       "version": "v0",
                       "datasource": {
-                        "name": "${Environment}"
+                        "name": "prod_cloud_influx"
                       },
                       "spec": {
                         "alias": "$tag_flavor",
@@ -534,7 +267,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.0.1",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "colorMode": "value",
@@ -603,7 +336,7 @@
                       "group": "influxdb",
                       "version": "v0",
                       "datasource": {
-                        "name": "${Environment}"
+                        "name": "prod_cloud_influx"
                       },
                       "spec": {
                         "alias": "$tag_flavor",
@@ -668,7 +401,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.0.1",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "colorMode": "value",
@@ -718,138 +451,6 @@
           }
         }
       },
-      "panel-7": {
-        "kind": "Panel",
-        "spec": {
-          "id": 7,
-          "title": "P100 flavors",
-          "description": "",
-          "links": [],
-          "data": {
-            "kind": "QueryGroup",
-            "spec": {
-              "queries": [
-                {
-                  "kind": "PanelQuery",
-                  "spec": {
-                    "query": {
-                      "kind": "DataQuery",
-                      "group": "influxdb",
-                      "version": "v0",
-                      "datasource": {
-                        "name": "${Environment}"
-                      },
-                      "spec": {
-                        "alias": "$tag_flavor",
-                        "groupBy": [
-                          {
-                            "params": [
-                              "flavor"
-                            ],
-                            "type": "tag"
-                          }
-                        ],
-                        "measurement": "SlotsAvailable",
-                        "orderByTime": "ASC",
-                        "policy": "default",
-                        "resultFormat": "time_series",
-                        "select": [
-                          [
-                            {
-                              "params": [
-                                "SlotsAvailable"
-                              ],
-                              "type": "field"
-                            },
-                            {
-                              "params": [],
-                              "type": "last"
-                            }
-                          ]
-                        ],
-                        "tags": [
-                          {
-                            "key": "flavor",
-                            "operator": "!~",
-                            "value": "/.*test.*/"
-                          },
-                          {
-                            "condition": "AND",
-                            "key": "flavor",
-                            "operator": "!~",
-                            "value": "/.*temp.*/"
-                          },
-                          {
-                            "condition": "AND",
-                            "key": "flavor",
-                            "operator": "=~",
-                            "value": "/g-p100.*/"
-                          }
-                        ]
-                      }
-                    },
-                    "refId": "A",
-                    "hidden": false
-                  }
-                }
-              ],
-              "transformations": [],
-              "queryOptions": {}
-            }
-          },
-          "vizConfig": {
-            "kind": "VizConfig",
-            "group": "stat",
-            "version": "13.0.1",
-            "spec": {
-              "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "auto",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                  "calcs": [
-                    "mean"
-                  ],
-                  "fields": "",
-                  "values": false
-                },
-                "showPercentChange": false,
-                "text": {},
-                "textMode": "auto",
-                "wideLayout": true
-              },
-              "fieldConfig": {
-                "defaults": {
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "value": 0,
-                        "color": "dark-blue"
-                      },
-                      {
-                        "value": 0,
-                        "color": "dark-red"
-                      },
-                      {
-                        "value": 10,
-                        "color": "dark-yellow"
-                      },
-                      {
-                        "value": 20,
-                        "color": "dark-green"
-                      }
-                    ]
-                  }
-                },
-                "overrides": []
-              }
-            }
-          }
-        }
-      },
       "panel-8": {
         "kind": "Panel",
         "spec": {
@@ -869,7 +470,7 @@
                       "group": "influxdb",
                       "version": "v0",
                       "datasource": {
-                        "name": "${Environment}"
+                        "name": "prod_cloud_influx"
                       },
                       "spec": {
                         "alias": "$tag_flavor",
@@ -934,7 +535,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.0.1",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "colorMode": "value",
@@ -1082,59 +683,6 @@
                 }
               }
             }
-          },
-          {
-            "kind": "RowsLayoutRow",
-            "spec": {
-              "title": "Decommissioned Flavors",
-              "collapse": true,
-              "layout": {
-                "kind": "GridLayout",
-                "spec": {
-                  "items": [
-                    {
-                      "kind": "GridLayoutItem",
-                      "spec": {
-                        "x": 0,
-                        "y": 0,
-                        "width": 24,
-                        "height": 7,
-                        "element": {
-                          "kind": "ElementReference",
-                          "name": "panel-2"
-                        }
-                      }
-                    },
-                    {
-                      "kind": "GridLayoutItem",
-                      "spec": {
-                        "x": 0,
-                        "y": 7,
-                        "width": 11,
-                        "height": 6,
-                        "element": {
-                          "kind": "ElementReference",
-                          "name": "panel-7"
-                        }
-                      }
-                    },
-                    {
-                      "kind": "GridLayoutItem",
-                      "spec": {
-                        "x": 11,
-                        "y": 7,
-                        "width": 13,
-                        "height": 6,
-                        "element": {
-                          "kind": "ElementReference",
-                          "name": "panel-3"
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
           }
         ]
       }
@@ -1145,7 +693,7 @@
     "tags": [],
     "timeSettings": {
       "timezone": "browser",
-      "from": "now-1h",
+      "from": "now-24h",
       "to": "now",
       "autoRefresh": "",
       "autoRefreshIntervals": [
@@ -1168,49 +716,18 @@
         "kind": "CustomVariable",
         "spec": {
           "name": "Instance",
-          "query": "Prod : CloudInfluxDB, Preprod : DevCloudInfluxDB",
+          "query": "Prod, Preprod",
           "current": {
-            "text": "CloudInfluxDB",
-            "value": "CloudInfluxDB"
-          },
-          "options": [
-            {
-              "selected": true,
-              "text": "Prod",
-              "value": "CloudInfluxDB"
-            },
-            {
-              "selected": false,
-              "text": "Preprod",
-              "value": "DevCloudInfluxDB"
-            }
-          ],
-          "multi": false,
-          "includeAll": false,
-          "hide": "dontHide",
-          "skipUrlSync": false,
-          "allowCustomValue": false,
-          "valuesFormat": "csv"
-        }
-      },
-      {
-        "kind": "DatasourceVariable",
-        "spec": {
-          "name": "Environment",
-          "pluginId": "influxdb",
-          "refresh": "onDashboardLoad",
-          "regex": "DevCloudInfluxDB",
-          "current": {
-            "text": "CloudInfluxDB",
-            "value": "openstack_grafana"
+            "text": "Prod",
+            "value": "Prod"
           },
           "options": [],
           "multi": false,
           "includeAll": false,
           "hide": "dontHide",
           "skipUrlSync": false,
-          "description": "Production or Development cloud data",
-          "allowCustomValue": false
+          "allowCustomValue": false,
+          "valuesFormat": "csv"
         }
       }
     ]
